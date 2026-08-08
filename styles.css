@@ -12,6 +12,8 @@
   --pink:#F2CCC0;   /* illustration panel */
   --dim:#5A5A55;
   --line:2px solid var(--ink);
+  --measure-prose:68ch;
+  --measure-card:50ch;
 }
 
 *{box-sizing:border-box;}
@@ -26,6 +28,8 @@ body{
   -webkit-font-smoothing:antialiased;
 }
 a{color:inherit;}
+h1,h2,h3,h4{text-wrap:balance;}
+p,li,figcaption{text-wrap:pretty;}
 a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offset:2px;}
 img{max-width:100%;display:block;}
 
@@ -45,7 +49,7 @@ img{max-width:100%;display:block;}
 }
 .row{display:grid;border-bottom:var(--line);}
 .row:last-child{border-bottom:0;}
-.cell{border-right:var(--line);padding:1.5rem 1.4rem;min-width:0;}
+.cell{border-right:var(--line);padding:1.5rem;min-width:0;}
 .cell:last-child{border-right:0;}
 
 /* ---- masthead ---- */
@@ -158,7 +162,7 @@ a.vent{display:flex;text-decoration:none;}
   font-family:"Archivo",sans-serif;font-weight:700;
   font-size:1.5rem;letter-spacing:-.025em;margin:0;
 }
-.vent p{margin:0;font-size:.95rem;line-height:1.5;}
+.vent p{margin:0;font-size:.95rem;line-height:1.5;max-width:var(--measure-card);}
 .vent .go{
   font-family:"Space Mono",monospace;font-size:.68rem;
   letter-spacing:.12em;text-transform:uppercase;
@@ -177,7 +181,7 @@ a.job{display:block;text-decoration:none;}
 .job .mono{color:var(--dim);display:block;margin-bottom:.9rem;}
 .job h3{font-family:"Archivo",sans-serif;font-weight:700;font-size:1.35rem;letter-spacing:-.02em;margin:0 0 .2rem;}
 .job .role{display:block;font-size:.9rem;font-weight:500;color:var(--dim);margin-bottom:.7rem;}
-.job p{margin:0;font-size:.95rem;}
+.job p{margin:0;font-size:.95rem;max-width:var(--measure-card);}
 .job .go{
   font-family:"Space Mono",monospace;font-size:.68rem;
   letter-spacing:.12em;text-transform:uppercase;
@@ -186,10 +190,10 @@ a.job{display:block;text-decoration:none;}
 a.job:hover .go{text-decoration:underline;}
 
 /* ---- notes ---- */
-.note{padding:1.6rem 1.4rem;}
+.note{padding:1.6rem 1.5rem;}
 .note .mono{color:var(--dim);}
 .note h3{font-family:"Archivo",sans-serif;font-weight:700;font-size:1.1rem;letter-spacing:-.015em;margin:.6rem 0 .45rem;}
-.note p{margin:0;font-size:.92rem;color:var(--dim);}
+.note p{margin:0;font-size:.92rem;color:var(--dim);max-width:var(--measure-card);}
 
 /* ---- numbered feature list (detail pages) ---- */
 .feat{grid-template-columns:auto 1fr;align-items:start;}
@@ -197,12 +201,12 @@ a.job:hover .go{text-decoration:underline;}
   padding:1.3rem 1.2rem;color:var(--dim);
   font-family:"Space Mono",monospace;font-size:.68rem;letter-spacing:.14em;
 }
-.feat .body{padding:1.3rem 1.4rem;}
+.feat .body{padding:1.3rem 1.5rem;}
 .feat h3{font-family:"Archivo",sans-serif;font-weight:700;font-size:1.05rem;letter-spacing:-.015em;margin:0 0 .3rem;}
-.feat p{margin:0;font-size:.93rem;color:var(--dim);}
+.feat p{margin:0;font-size:.93rem;color:var(--dim);max-width:var(--measure-prose);}
 
 /* ---- prose block ---- */
-.prose{padding:2rem 1.8rem;max-width:72ch;}
+.prose{padding:2rem 1.5rem;max-width:var(--measure-prose);}
 .prose p{margin:0 0 1rem;font-size:1.02rem;}
 .prose p:last-child{margin-bottom:0;}
 .prose .mono{color:var(--dim);display:block;margin-bottom:1rem;}
