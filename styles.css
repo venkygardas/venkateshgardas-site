@@ -294,7 +294,26 @@ a.job:hover .go{text-decoration:underline;}
 .wm.kpmg{background:#00338D;color:#FFFFFF;}
 .wm.bajaj{background:#0066B3;color:#FFFFFF;}
 .wm.akasa{background:#FF6300;color:#FFFFFF;}
+.wm.hira{background:#6D4A1B;color:#FFFFFF;}
 .wm.plain{background:var(--white);}
+
+/* ---- career timeline ---- */
+.timeline{background:var(--white);}
+.timeline .tl-wrap{padding:2rem 1.5rem 1.4rem;}
+.timeline svg{width:100%;height:auto;display:block;}
+.tl-mobile{display:none;}
+@media (max-width:860px){
+  .timeline .tl-desktop{display:none;}
+  .tl-mobile{display:block;}
+  .tl-mobile .trow{
+    display:grid;grid-template-columns:auto 1fr;gap:.9rem;align-items:baseline;
+    padding:.8rem 0;border-bottom:1px solid rgba(18,18,18,.15);
+  }
+  .tl-mobile .trow:last-child{border-bottom:0;}
+  .tl-mobile .trow i{width:12px;height:12px;background:var(--blue);border:2px solid var(--ink);display:block;position:relative;top:1px;}
+  .tl-mobile .trow b{font-family:"Archivo",sans-serif;font-weight:700;font-size:1rem;letter-spacing:-.01em;display:block;}
+  .tl-mobile .trow span{font-family:"Space Mono",monospace;font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);}
+}
 
 /* ---- toolkit chips ---- */
 .tools{background:var(--white);}
