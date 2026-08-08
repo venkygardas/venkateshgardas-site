@@ -324,6 +324,34 @@ a.job:hover .go{text-decoration:underline;}
   border:var(--line);padding:.5rem .85rem;background:var(--paper);
 }
 
+/* ---- big numbers ---- */
+.grid4{grid-template-columns:repeat(4,1fr);}
+.bignum{padding:1.5rem 1.4rem;}
+.bignum b{
+  font-family:"Archivo",sans-serif;font-weight:800;
+  font-size:clamp(1.8rem,3.4vw,2.6rem);letter-spacing:-.03em;
+  display:block;line-height:1;margin-bottom:.45rem;
+}
+.bignum span{
+  font-family:"Space Mono",monospace;font-size:.62rem;
+  letter-spacing:.13em;text-transform:uppercase;color:var(--dim);
+}
+
+/* ---- now strip ---- */
+.now{grid-template-columns:auto 1fr;align-items:baseline;background:var(--white);}
+.now .lbl{padding:1rem 1.4rem;color:var(--ink);font-weight:700;}
+.now p{margin:0;padding:1rem 1.4rem;font-size:.95rem;}
+
+/* ---- photo gallery ---- */
+.gallery{padding:1.6rem;}
+.gallery .cols{columns:3;column-gap:1.2rem;}
+.gallery img{
+  width:100%;height:auto;border:var(--line);
+  margin:0 0 1.2rem;break-inside:avoid;background:var(--paper);
+}
+@media (max-width:1000px){.gallery .cols{columns:2;}}
+@media (max-width:640px){.gallery .cols{columns:1;}}
+
 /* ---- colophon ---- */
 .colophon{background:var(--paper);padding:1.8rem 1.8rem;}
 .colophon p{margin:0;max-width:64ch;font-size:.92rem;color:var(--dim);}
