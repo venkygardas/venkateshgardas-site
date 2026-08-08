@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Roko · Venkatesh Gardas</title>
+<meta name="description" content="Roko is home security hardware for the Indian market. An alarm panel, sensors and an app, priced for a family that has never bought a security system before.">
+<meta property="og:title" content="Roko · home security for first time buyers">
+<meta property="og:description" content="An alarm panel, sensors and an app, priced for a family that has never bought a security system before.">
+<meta property="og:url" content="https://venkateshgardas.com/roko.html">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://venkateshgardas.com/og.png">
+<link rel="canonical" href="https://venkateshgardas.com/roko.html">
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800&family=Instrument+Sans:wght@400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+
+<div class="frame">
+
+  <header class="row masthead">
+    <a class="cell mark" href="/">VG</a>
+    <nav class="cell nav mono">
+      <a href="/#building" aria-current="page">Building</a>
+      <a href="/#work">Work</a>
+      <a href="/#contact">Contact</a>
+    </nav>
+    <a class="cv" href="/venkatesh-gardas-cv.pdf" download>Download CV</a>
+  </header>
+
+  <div class="row crumb"><a href="/">&larr; Back to home</a></div>
+
+  <section class="row phero">
+    <div class="cell lead on-green">
+      <span class="mono">Venture · 03</span>
+      <h1>Roko</h1>
+      <p class="say">Home security for families who have never bought a security system before.</p>
+    </div>
+    <div class="cell plate">
+      <div class="phead mono">Spec</div>
+      <dl>
+        <div class="prow"><dt class="mono">Status</dt><dd><span class="on">Prototype, hardware in hand</span></dd></div>
+        <div class="prow"><dt class="mono">Kit</dt><dd>Alarm panel, door and window sensors, app</dd></div>
+        <div class="prow"><dt class="mono">Platform</dt><dd>Tuya ecosystem, sourced and rebranded</dd></div>
+        <div class="prow"><dt class="mono">Market</dt><dd>Indian households, first purchase</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <div class="row shead">
+    <div class="cell n mono">01</div>
+    <div class="cell"><h2>The idea</h2></div>
+  </div>
+
+  <section class="row">
+    <div class="cell prose">
+      <p>Home security in India is either a chowkidar or a full CCTV install with wiring, a technician and a monthly contract. There is nothing in the middle: a box a family buys once, sticks to the door frame themselves, and connects to their phone in ten minutes.</p>
+      <p>Roko is that box. The hardware is proven Tuya-platform equipment, sourced directly and rebranded, so the engineering risk is low and the work is what a PM is for: picking the right kit, making setup effortless in Indian homes, and pricing it so the decision takes one evening, not one committee.</p>
+    </div>
+  </section>
+
+  <div class="row shead">
+    <div class="cell n mono">02</div>
+    <div class="cell"><h2>Where it stands</h2></div>
+  </div>
+
+  <div class="row feat rv"><div class="cell n">01</div><div class="cell body"><h3>Hardware evaluation</h3><p>Panels and sensors from shortlisted suppliers are on my desk, being tested for false alarm rates, battery life and how they survive an Indian summer.</p></div></div>
+  <div class="row feat rv"><div class="cell n">02</div><div class="cell body"><h3>Defining the v1 kit</h3><p>One panel, four sensors, one siren. The discipline is what to leave out: no cameras in v1, because cameras multiply cost, privacy questions and support calls.</p></div></div>
+  <div class="row feat rv"><div class="cell n">03</div><div class="cell body"><h3>The unboxing is the product</h3><p>If a family cannot install it themselves before dinner, the product has failed. The manual is being designed before the logo is.</p></div></div>
+
+  <section class="row" id="contact">
+    <div class="cell contact">
+      <span class="mono">Early days</span>
+      <h2>Watch this space.</h2>
+      <p>If you know Indian hardware distribution, or you have opinions about door sensors, I would genuinely love to talk.</p>
+      <a class="mail" href="mailto:venkatesh@venkateshgardas.com">venkatesh@venkateshgardas.com</a>
+    </div>
+  </section>
+
+  <footer class="row foot">
+    <span class="who mono">Venkatesh Gardas · 2026</span>
+    <div class="links mono">
+      <a href="/">Home</a>
+      <a href="/pitstop.html">PitStop</a>
+      <a href="/saathi.html">Saathi</a>
+    </div>
+  </footer>
+
+</div>
+
+<script>
+(function(){
+  var els=document.querySelectorAll('.rv');
+  if(!('IntersectionObserver' in window)||window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+    els.forEach(function(e){e.classList.add('in');});return;
+  }
+  var io=new IntersectionObserver(function(en){
+    en.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});
+  },{threshold:.1,rootMargin:'0px 0px -30px 0px'});
+  els.forEach(function(e){io.observe(e);});
+})();
+</script>
+
+</body>
+</html>

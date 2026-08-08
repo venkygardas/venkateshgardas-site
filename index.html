@@ -42,225 +42,20 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800&family=Instrument+Sans:wght@400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
-
-<style>
-:root{
-  --paper:#EFEDE4;
-  --white:#FBFAF6;
-  --ink:#15140F;
-  --blue:#0E639C;
-  --ochre:#E3A83C;
-  --sand:#DCD3C2;
-  --dim:#5E5A4E;
-}
-
-*{box-sizing:border-box;}
-html{-webkit-text-size-adjust:100%;}
-body{
-  margin:0;
-  background:var(--paper);
-  color:var(--ink);
-  font-family:"Instrument Sans",system-ui,sans-serif;
-  font-size:1rem;
-  line-height:1.55;
-  -webkit-font-smoothing:antialiased;
-}
-a{color:inherit;}
-a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offset:2px;}
-
-.mono{
-  font-family:"Space Mono",ui-monospace,monospace;
-  font-size:.68rem;
-  letter-spacing:.16em;
-  text-transform:uppercase;
-}
-
-/* ---- the frame: one continuous hairline grid ---- */
-.frame{
-  width:min(1140px,94vw);
-  margin:2.2rem auto 3.5rem;
-  border:1px solid var(--ink);
-  background:var(--white);
-}
-.row{
-  display:grid;
-  border-bottom:1px solid var(--ink);
-}
-.row:last-child{border-bottom:0;}
-.cell{
-  border-right:1px solid var(--ink);
-  padding:1.5rem 1.4rem;
-  min-width:0;
-}
-.cell:last-child{border-right:0;}
-
-/* ---- masthead ---- */
-.masthead{grid-template-columns:auto 1fr;align-items:stretch;}
-.masthead .mark{
-  display:flex;align-items:center;
-  font-family:"Archivo",sans-serif;
-  font-weight:800;font-size:1.3rem;letter-spacing:-.03em;
-  padding:.9rem 1.3rem;
-}
-.masthead .nav{
-  display:flex;align-items:center;justify-content:flex-end;
-  gap:1.6rem;padding:.9rem 1.3rem;flex-wrap:wrap;
-}
-.masthead .nav a{
-  text-decoration:none;color:var(--dim);
-  padding-bottom:2px;border-bottom:1px solid transparent;
-  transition:color .15s,border-color .15s;
-}
-.masthead .nav a:hover{color:var(--ink);border-bottom-color:var(--ink);}
-
-/* ---- hero ---- */
-.hero{grid-template-columns:1.15fr 1fr;}
-.hero .lead{background:var(--blue);color:var(--paper);padding:2.6rem 1.8rem 2.2rem;}
-.hero .lead .mono{color:rgba(239,237,228,.88);display:block;margin-bottom:1.6rem;}
-.hero h1{
-  font-family:"Archivo",sans-serif;
-  font-weight:800;
-  font-size:clamp(2.7rem,7.4vw,4.6rem);
-  line-height:.92;letter-spacing:-.04em;
-  margin:0 0 1.3rem;
-}
-.hero .say{font-size:clamp(1.05rem,2vw,1.3rem);line-height:1.35;max-width:26ch;margin:0;}
-
-/* spec plate: the signature */
-.plate{padding:0;display:flex;flex-direction:column;}
-.plate .phead{
-  border-bottom:1px solid var(--ink);
-  padding:.7rem 1.2rem;background:var(--sand);color:var(--dim);
-}
-.plate dl{margin:0;flex:1;display:flex;flex-direction:column;}
-.plate .prow{
-  display:grid;grid-template-columns:7.2rem 1fr;
-  gap:.9rem;align-items:baseline;
-  padding:.85rem 1.2rem;
-  border-bottom:1px solid rgba(21,20,15,.16);
-}
-.plate .prow:last-child{border-bottom:0;}
-.plate dt{color:var(--dim);}
-.plate dd{margin:0;font-size:.94rem;font-weight:500;}
-.on{display:inline-flex;align-items:center;gap:.45rem;color:var(--blue);font-weight:500;}
-.on::before{content:"";width:7px;height:7px;border-radius:50%;background:currentColor;animation:blink 2.6s ease-in-out infinite;}
-@keyframes blink{0%,100%{opacity:1}50%{opacity:.25}}
-
-/* ---- action strip ---- */
-.strip{
-  grid-template-columns:1fr auto;
-  align-items:center;background:var(--sand);
-}
-.strip .lbl{color:var(--dim);padding:1rem 1.4rem;}
-.strip .acts{display:flex;gap:.6rem;padding:.85rem 1.1rem;flex-wrap:wrap;}
-.btn{
-  font-family:"Space Mono",monospace;font-size:.68rem;
-  letter-spacing:.14em;text-transform:uppercase;
-  text-decoration:none;padding:.65rem 1.05rem;
-  border:1px solid var(--ink);background:transparent;
-  transition:background .15s,color .15s;
-}
-.btn.fill{background:var(--ink);color:var(--paper);}
-.btn.fill:hover{background:var(--blue);border-color:var(--blue);}
-.btn.line:hover{background:var(--ink);color:var(--paper);}
-
-/* ---- section headers ---- */
-.shead{grid-template-columns:auto 1fr;align-items:center;background:var(--paper);}
-.shead .n{padding:.75rem 1.2rem;color:var(--dim);}
-.shead h2{
-  font-family:"Archivo",sans-serif;font-weight:700;
-  font-size:1.15rem;letter-spacing:-.015em;
-  margin:0;padding:.75rem 1.2rem;
-}
-
-/* ---- ventures ---- */
-.grid2{grid-template-columns:1fr 1fr;}
-.vent{display:flex;flex-direction:column;gap:.5rem;padding:1.7rem 1.5rem;}
-.vent .top{display:flex;justify-content:space-between;align-items:baseline;gap:1rem;}
-.vent h3{
-  font-family:"Archivo",sans-serif;font-weight:700;
-  font-size:1.45rem;letter-spacing:-.025em;margin:0;
-}
-.vent p{margin:0;font-size:.95rem;line-height:1.5;}
-.vent .lnk{
-  font-family:"Space Mono",monospace;font-size:.68rem;
-  letter-spacing:.1em;margin-top:.5rem;display:inline-block;
-}
-.tag{
-  font-family:"Space Mono",monospace;font-size:.62rem;
-  letter-spacing:.14em;text-transform:uppercase;
-  border:1px solid currentColor;padding:.22rem .5rem;white-space:nowrap;
-}
-.v-ochre{background:var(--ochre);}
-.v-sand{background:var(--sand);}
-.v-white{background:var(--white);}
-.v-blue{background:var(--blue);color:var(--paper);}
-.v-blue .lnk{color:rgba(239,237,228,.92);}
-
-/* ---- work ---- */
-.job{padding:1.7rem 1.5rem;}
-.job .mono{color:var(--dim);display:block;margin-bottom:.9rem;}
-.job h3{font-family:"Archivo",sans-serif;font-weight:700;font-size:1.3rem;letter-spacing:-.02em;margin:0 0 .2rem;}
-.job .role{display:block;font-size:.9rem;font-weight:500;color:var(--dim);margin-bottom:.7rem;}
-.job p{margin:0;font-size:.95rem;}
-
-/* ---- notes ---- */
-.grid3{grid-template-columns:repeat(3,1fr);}
-.note{padding:1.6rem 1.4rem;}
-.note .mono{color:var(--dim);}
-.note h3{font-family:"Archivo",sans-serif;font-weight:700;font-size:1.1rem;letter-spacing:-.015em;margin:.6rem 0 .45rem;}
-.note p{margin:0;font-size:.92rem;color:var(--dim);}
-
-/* ---- contact ---- */
-.contact{background:var(--ochre);padding:3rem 1.8rem;text-align:center;}
-.contact .mono{color:rgba(21,20,15,.78);}
-.contact h2{
-  font-family:"Archivo",sans-serif;font-weight:800;
-  font-size:clamp(1.9rem,5.5vw,3rem);letter-spacing:-.035em;
-  margin:.7rem 0 .7rem;line-height:1;
-}
-.contact p{margin:0 auto 1.5rem;max-width:44ch;font-size:1rem;}
-.contact .mail{
-  font-family:"Space Mono",monospace;
-  font-size:clamp(.9rem,3vw,1.35rem);
-  text-decoration:none;border-bottom:2px solid var(--ink);
-  padding-bottom:3px;word-break:break-word;
-}
-
-.foot{grid-template-columns:1fr auto;background:var(--paper);}
-.foot span,.foot a{padding:.85rem 1.3rem;color:var(--dim);text-decoration:none;}
-.foot a:hover{color:var(--ink);}
-
-/* ---- reveal ---- */
-.rv{opacity:0;transform:translateY(10px);transition:opacity .5s ease,transform .5s ease;}
-.rv.in{opacity:1;transform:none;}
-
-@media (max-width:820px){
-  .hero,.grid2,.grid3,.strip,.foot{grid-template-columns:1fr;}
-  .cell{border-right:0;border-bottom:1px solid var(--ink);}
-  .row > .cell:last-child{border-bottom:0;}
-  .masthead{grid-template-columns:1fr;}
-  .masthead .nav{justify-content:flex-start;gap:1.2rem;}
-  .strip .acts{padding:1rem 1.4rem;}
-  .frame{width:100%;margin:0;border-left:0;border-right:0;}
-}
-@media (prefers-reduced-motion:reduce){
-  *{animation:none!important;transition:none!important;}
-  .rv{opacity:1;transform:none;}
-}
-</style>
+<link rel="stylesheet" href="/styles.css">
 </head>
 <body>
 
 <div class="frame">
 
   <header class="row masthead">
-    <div class="cell mark">VG</div>
-    <div class="cell nav mono">
+    <a class="cell mark" href="/">VG</a>
+    <nav class="cell nav mono">
       <a href="#building">Building</a>
       <a href="#work">Work</a>
       <a href="#contact">Contact</a>
-    </div>
+    </nav>
+    <a class="cv" href="/venkatesh-gardas-cv.pdf" download>Download CV</a>
   </header>
 
   <section class="row hero">
@@ -268,16 +63,99 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offse
       <span class="mono">Product Manager · Fairfax, Virginia</span>
       <h1>Venkatesh<br>Gardas</h1>
       <p class="say">I turn messy operational work into software people open on a Monday morning.</p>
+      <p class="say sub">By day I ship AI risk analytics at KPMG. The rest of the time I build products for people software forgot: garage owners, grandparents, families buying their first alarm.</p>
     </div>
-    <div class="cell plate">
-      <div class="phead mono">Current</div>
-      <dl>
-        <div class="prow"><dt class="mono">Status</dt><dd><span class="on">Open to roles</span></dd></div>
-        <div class="prow"><dt class="mono">Role</dt><dd>Product Manager, AI risk analytics</dd></div>
-        <div class="prow"><dt class="mono">Domains</dt><dd>Vertical SaaS, fintech, procurement</dd></div>
-        <div class="prow"><dt class="mono">Markets</dt><dd>India, Gulf, United States</dd></div>
-        <div class="prow"><dt class="mono">Shipping</dt><dd>PitStop · Saathi · Roko</dd></div>
-      </dl>
+    <div class="cell art" aria-hidden="true">
+      <svg viewBox="0 0 800 640" xmlns="http://www.w3.org/2000/svg" role="img" preserveAspectRatio="xMidYMid slice">
+        <!-- ink plus marks on the pink field -->
+        <g stroke="#121212" stroke-width="5" stroke-linecap="round">
+          <path d="M60 88 v28 M46 102 h28"/>
+          <path d="M742 118 v24 M730 130 h24"/>
+          <path d="M76 548 v24 M64 560 h24"/>
+        </g>
+
+        <!-- the worktable -->
+        <circle cx="400" cy="330" r="238" fill="#0DAEE9"/>
+
+        <!-- car, top view -->
+        <g transform="translate(320,310) rotate(-14)">
+          <rect x="-46" y="-92" width="92" height="184" rx="30" fill="#FFC845" stroke="#121212" stroke-width="5"/>
+          <rect x="-32" y="-48" width="64" height="30" rx="9" fill="#FFFFFF" stroke="#121212" stroke-width="4"/>
+          <rect x="-32" y="24" width="64" height="26" rx="9" fill="#FFFFFF" stroke="#121212" stroke-width="4"/>
+          <circle cx="-50" cy="-58" r="7" fill="#121212"/>
+          <circle cx="50" cy="-58" r="7" fill="#121212"/>
+        </g>
+
+        <!-- phone with voice arcs -->
+        <g transform="translate(505,300) rotate(9)">
+          <rect x="-30" y="-56" width="60" height="112" rx="12" fill="#FFFFFF" stroke="#121212" stroke-width="5"/>
+          <circle cx="0" cy="34" r="8" fill="#121212"/>
+          <path d="M40 -66 a34 34 0 0 1 18 30" fill="none" stroke="#121212" stroke-width="5" stroke-linecap="round"/>
+          <path d="M52 -84 a52 52 0 0 1 27 46" fill="none" stroke="#121212" stroke-width="5" stroke-linecap="round"/>
+        </g>
+
+        <!-- house -->
+        <g transform="translate(455,445)">
+          <rect x="-27" y="-16" width="54" height="42" fill="#FFFFFF" stroke="#121212" stroke-width="5"/>
+          <path d="M-36 -14 L0 -46 L36 -14 Z" fill="#2E9E63" stroke="#121212" stroke-width="5" stroke-linejoin="round"/>
+          <rect x="-8" y="4" width="16" height="22" fill="#121212"/>
+        </g>
+
+        <!-- wrench -->
+        <g transform="translate(295,455) rotate(38)" stroke="#121212" stroke-width="5" fill="#FFFFFF">
+          <rect x="-8" y="-44" width="16" height="88" rx="8"/>
+          <circle cx="0" cy="-50" r="16"/>
+          <circle cx="0" cy="50" r="16"/>
+        </g>
+
+        <!-- receipt -->
+        <g transform="translate(560,412) rotate(-8)">
+          <path d="M-24 -34 h48 v60 l-8 8 -8 -8 -8 8 -8 -8 -8 8 -8 -8 Z" fill="#FFFFFF" stroke="#121212" stroke-width="4" stroke-linejoin="round"/>
+          <g stroke="#121212" stroke-width="3" stroke-linecap="round">
+            <path d="M-14 -20 h28 M-14 -8 h28 M-14 4 h18"/>
+          </g>
+        </g>
+
+        <!-- white sparkles on the table -->
+        <g fill="#FFFFFF">
+          <g transform="translate(258,212)"><ellipse rx="6" ry="14"/><ellipse rx="14" ry="6"/></g>
+          <g transform="translate(548,196)"><ellipse rx="5" ry="12"/><ellipse rx="12" ry="5"/></g>
+          <g transform="translate(420,528)"><ellipse rx="5" ry="12"/><ellipse rx="12" ry="5"/></g>
+          <g transform="translate(232,398)"><ellipse rx="4" ry="10"/><ellipse rx="10" ry="4"/></g>
+        </g>
+
+        <!-- hands reaching in -->
+        <!-- top left, yellow sleeve -->
+        <g transform="rotate(-42 400 330)">
+          <rect x="372" y="-40" width="56" height="150" rx="28" fill="#FFC845" stroke="#121212" stroke-width="5"/>
+          <ellipse cx="400" cy="128" rx="32" ry="36" fill="#8A5A3B" stroke="#121212" stroke-width="5"/>
+          <ellipse cx="372" cy="112" rx="11" ry="17" transform="rotate(-28 372 112)" fill="#8A5A3B" stroke="#121212" stroke-width="4"/>
+        </g>
+        <!-- top right, white sleeve -->
+        <g transform="rotate(34 400 330)">
+          <rect x="372" y="-52" width="56" height="150" rx="28" fill="#FFFFFF" stroke="#121212" stroke-width="5"/>
+          <ellipse cx="400" cy="116" rx="32" ry="36" fill="#C08552" stroke="#121212" stroke-width="5"/>
+          <ellipse cx="428" cy="100" rx="11" ry="17" transform="rotate(28 428 100)" fill="#C08552" stroke="#121212" stroke-width="4"/>
+        </g>
+        <!-- right, green sleeve -->
+        <g transform="rotate(105 400 330)">
+          <rect x="372" y="-46" width="56" height="140" rx="28" fill="#2E9E63" stroke="#121212" stroke-width="5"/>
+          <ellipse cx="400" cy="112" rx="32" ry="36" fill="#6E4529" stroke="#121212" stroke-width="5"/>
+          <ellipse cx="372" cy="96" rx="11" ry="17" transform="rotate(-28 372 96)" fill="#6E4529" stroke="#121212" stroke-width="4"/>
+        </g>
+        <!-- bottom, ink sleeve -->
+        <g transform="rotate(178 400 330)">
+          <rect x="372" y="-48" width="56" height="146" rx="28" fill="#121212"/>
+          <ellipse cx="400" cy="116" rx="32" ry="36" fill="#A96C3F" stroke="#121212" stroke-width="5"/>
+          <ellipse cx="428" cy="100" rx="11" ry="17" transform="rotate(28 428 100)" fill="#A96C3F" stroke="#121212" stroke-width="4"/>
+        </g>
+        <!-- left, paper sleeve -->
+        <g transform="rotate(-115 400 330)">
+          <rect x="372" y="-44" width="56" height="142" rx="28" fill="#F7F5F0" stroke="#121212" stroke-width="5"/>
+          <ellipse cx="400" cy="116" rx="32" ry="36" fill="#4A332A" stroke="#121212" stroke-width="5"/>
+          <ellipse cx="372" cy="100" rx="11" ry="17" transform="rotate(-28 372 100)" fill="#4A332A" stroke="#121212" stroke-width="4"/>
+        </g>
+      </svg>
     </div>
   </section>
 
@@ -287,6 +165,8 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offse
       <a class="btn fill" href="/venkatesh-gardas-cv.pdf" download>Download CV</a>
       <a class="btn line" href="mailto:venkatesh@venkateshgardas.com">Email me</a>
       <a class="btn line" href="https://www.linkedin.com/in/venkateshgardas" target="_blank" rel="noopener">LinkedIn</a>
+      <a class="btn line" href="https://www.instagram.com/YOUR-INSTAGRAM" target="_blank" rel="noopener">Instagram</a>
+      <a class="btn line" href="https://github.com/venkygardas" target="_blank" rel="noopener">GitHub</a>
     </div>
   </div>
 
@@ -295,24 +175,22 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offse
     <div class="cell"><h2>Things I am building</h2></div>
   </div>
 
-  <section class="row grid2 rv">
-    <div class="cell vent v-ochre">
+  <section class="row grid3 rv">
+    <a class="cell vent on-blue" href="/pitstop.html">
       <div class="top"><h3>PitStop</h3><span class="tag">Building</span></div>
-      <p>Garage management software for Indian workshops. Job cards, estimates, GST invoicing and parts inventory, built for a service advisor with oily hands and a queue at the counter.</p>
-    </div>
-    <div class="cell vent v-white">
+      <p>Garage management for Indian workshops. Job cards, customer approvals, GST invoicing and UPI, built for a service advisor with oily hands and a queue at the counter.</p>
+      <span class="go">See inside &rarr;</span>
+    </a>
+    <a class="cell vent on-yellow" href="/saathi.html">
       <div class="top"><h3>Saathi</h3><span class="tag">Live beta</span></div>
-      <p>A voice-first AI companion for elderly Indian users. Designed around large type, spoken input and the accessibility needs of people who have never used an app before.</p>
-      <a class="lnk" href="https://heysaathi.vercel.app" target="_blank" rel="noopener">heysaathi.vercel.app &rarr;</a>
-    </div>
-    <div class="cell vent v-white">
+      <p>A voice companion for elderly Indian users. It speaks Malayalam and Telugu, the type is enormous, and the family sets it up from another continent.</p>
+      <span class="go">See inside &rarr;</span>
+    </a>
+    <a class="cell vent on-green" href="/roko.html">
       <div class="top"><h3>Roko</h3><span class="tag">Prototype</span></div>
-      <p>Home security hardware for the Indian market. Alarm panel, sensors and an app, priced for a family that has never bought a security system before.</p>
-    </div>
-    <div class="cell vent v-blue">
-      <div class="top"><h3>5-12 Mart</h3><span class="tag">Live</span></div>
-      <p>A convenience store in Fredericksburg, Virginia. The best product research I have done, because the feedback loop is a customer standing in front of you.</p>
-    </div>
+      <p>Home security hardware for the Indian market. An alarm panel, sensors and an app, priced for a family that has never bought a security system before.</p>
+      <span class="go">See inside &rarr;</span>
+    </a>
   </section>
 
   <div class="row shead" id="work">
@@ -321,18 +199,20 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offse
   </div>
 
   <section class="row grid2 rv">
-    <div class="cell job">
+    <a class="cell job" href="/kpmg.html">
       <span class="mono">Present</span>
       <h3>KPMG</h3>
       <span class="role">Product Manager, AI risk analytics</span>
-      <p>Shipped an analytics platform used by risk teams, working across data science, engineering and the partners who had to trust the output. A lot of the job was translation, and a lot of it was getting people to change how they already worked.</p>
-    </div>
-    <div class="cell job">
+      <p>Shipping an analytics platform used by risk teams, sitting between data science, engineering and the partners who have to trust the output.</p>
+      <span class="go">What I do there &rarr;</span>
+    </a>
+    <a class="cell job" href="/expenzing.html">
       <span class="mono">Earlier</span>
       <h3>Expenzing</h3>
       <span class="role">Product, procure to pay and loan origination</span>
-      <p>Enterprise workflow software where the approval chain is the product. Learned how much of fintech is really modelling somebody's policy document correctly the first time.</p>
-    </div>
+      <p>Enterprise workflow software where the approval chain is the product. Most of fintech is modelling somebody's policy document correctly the first time.</p>
+      <span class="go">What I did there &rarr;</span>
+    </a>
   </section>
 
   <div class="row shead">
@@ -364,12 +244,21 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offse
       <h2>Let's talk.</h2>
       <p>Product roles in India, the Gulf and the US, or anything vertical SaaS shaped. Also happy to talk about garages, alarm panels or Malayalam cinema.</p>
       <a class="mail" href="mailto:venkatesh@venkateshgardas.com">venkatesh@venkateshgardas.com</a>
+      <div class="socials">
+        <a href="https://www.linkedin.com/in/venkateshgardas" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://www.instagram.com/YOUR-INSTAGRAM" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://github.com/venkygardas" target="_blank" rel="noopener">GitHub</a>
+      </div>
     </div>
   </section>
 
   <footer class="row foot">
-    <span class="mono">Venkatesh Gardas · 2026</span>
-    <a class="mono" href="https://www.linkedin.com/in/venkateshgardas" target="_blank" rel="noopener">LinkedIn &rarr;</a>
+    <span class="who mono">Venkatesh Gardas · 2026</span>
+    <div class="links mono">
+      <a href="https://www.linkedin.com/in/venkateshgardas" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://www.instagram.com/YOUR-INSTAGRAM" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://github.com/venkygardas" target="_blank" rel="noopener">GitHub</a>
+    </div>
   </footer>
 
 </div>

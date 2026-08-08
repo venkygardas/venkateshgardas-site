@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Expenzing · Venkatesh Gardas</title>
+<meta name="description" content="What Venkatesh Gardas built at Expenzing: procure to pay and loan origination workflows where the approval chain is the product.">
+<meta property="og:title" content="Expenzing · procure to pay and loan origination">
+<meta property="og:description" content="Enterprise workflow software where the approval chain is the product.">
+<meta property="og:url" content="https://venkateshgardas.com/expenzing.html">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://venkateshgardas.com/og.png">
+<link rel="canonical" href="https://venkateshgardas.com/expenzing.html">
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800&family=Instrument+Sans:wght@400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+
+<div class="frame">
+
+  <header class="row masthead">
+    <a class="cell mark" href="/">VG</a>
+    <nav class="cell nav mono">
+      <a href="/#building">Building</a>
+      <a href="/#work" aria-current="page">Work</a>
+      <a href="/#contact">Contact</a>
+    </nav>
+    <a class="cv" href="/venkatesh-gardas-cv.pdf" download>Download CV</a>
+  </header>
+
+  <div class="row crumb"><a href="/">&larr; Back to home</a></div>
+
+  <section class="row phero">
+    <div class="cell lead on-yellow">
+      <span class="mono">Work · Earlier</span>
+      <h1>Expenzing</h1>
+      <p class="say">Procure to pay and loan origination workflows. Enterprise software where the approval chain is the product.</p>
+    </div>
+    <div class="cell plate">
+      <div class="phead mono">Spec</div>
+      <dl>
+        <div class="prow"><dt class="mono">Role</dt><dd>Product</dd></div>
+        <div class="prow"><dt class="mono">Domain</dt><dd>Procure to pay, loan origination</dd></div>
+        <div class="prow"><dt class="mono">Users</dt><dd>Finance teams, buyers, credit officers</dd></div>
+        <div class="prow"><dt class="mono">Market</dt><dd>Indian enterprises and banks</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <div class="row shead">
+    <div class="cell n mono">01</div>
+    <div class="cell"><h2>The work</h2></div>
+  </div>
+
+  <section class="row">
+    <div class="cell prose">
+      <p>Expenzing builds spend management and lending workflow software for Indian enterprises. My ground was the unglamorous middle of fintech: purchase requisitions, approval matrices, invoice matching, and the journey a loan application takes from a branch officer's desk to a sanction letter.</p>
+      <p>What the work actually taught me is that most of fintech is modelling somebody's policy document correctly the first time. A delegation of authority matrix looks simple in a PDF and becomes forty edge cases in production. Who approves when the amount crosses a band mid-flow? What happens when the approver is on leave and their delegate resigns? The product wins or loses on those questions, not on the dashboard.</p>
+    </div>
+  </section>
+
+  <div class="row shead">
+    <div class="cell n mono">02</div>
+    <div class="cell"><h2>What I took from it</h2></div>
+  </div>
+
+  <div class="row feat rv"><div class="cell n">01</div><div class="cell body"><h3>The approval chain is the product</h3><p>Users tolerate an ugly screen. They do not tolerate a purchase order stuck with no explanation. State, ownership and escalation were where all the real design happened.</p></div></div>
+  <div class="row feat rv"><div class="cell n">02</div><div class="cell body"><h3>Configuration beats customisation</h3><p>Every enterprise believes its process is unique. Ninety percent of it is the same eight patterns wearing different names. Building the patterns once, configurable, was the difference between a product and a services shop.</p></div></div>
+  <div class="row feat rv"><div class="cell n">03</div><div class="cell body"><h3>Where PitStop comes from</h3><p>Years of watching big companies buy workflow software made the gap obvious: the small business that needs it most can afford none of it. PitStop is that lesson, applied.</p></div></div>
+
+  <section class="row" id="contact">
+    <div class="cell contact">
+      <span class="mono">Talk shop</span>
+      <h2>Fintech workflows on your mind?</h2>
+      <p>Approval matrices, invoice matching, loan journeys. I have scars and opinions.</p>
+      <a class="mail" href="mailto:venkatesh@venkateshgardas.com">venkatesh@venkateshgardas.com</a>
+    </div>
+  </section>
+
+  <footer class="row foot">
+    <span class="who mono">Venkatesh Gardas · 2026</span>
+    <div class="links mono">
+      <a href="/">Home</a>
+      <a href="/kpmg.html">KPMG</a>
+    </div>
+  </footer>
+
+</div>
+
+<script>
+(function(){
+  var els=document.querySelectorAll('.rv');
+  if(!('IntersectionObserver' in window)||window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+    els.forEach(function(e){e.classList.add('in');});return;
+  }
+  var io=new IntersectionObserver(function(en){
+    en.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});
+  },{threshold:.1,rootMargin:'0px 0px -30px 0px'});
+  els.forEach(function(e){io.observe(e);});
+})();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PitStop · Venkatesh Gardas</title>
+<meta name="description" content="PitStop is garage management software for Indian workshops. Job cards, customer approvals, GST invoicing, UPI collection and a workshop chat, built phone first.">
+<meta property="og:title" content="PitStop · garage management for Indian workshops">
+<meta property="og:description" content="Job cards, customer approvals, GST invoicing and UPI, built for a service advisor with oily hands and a queue at the counter.">
+<meta property="og:url" content="https://venkateshgardas.com/pitstop.html">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://venkateshgardas.com/og.png">
+<link rel="canonical" href="https://venkateshgardas.com/pitstop.html">
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800&family=Instrument+Sans:wght@400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+
+<div class="frame">
+
+  <header class="row masthead">
+    <a class="cell mark" href="/">VG</a>
+    <nav class="cell nav mono">
+      <a href="/#building" aria-current="page">Building</a>
+      <a href="/#work">Work</a>
+      <a href="/#contact">Contact</a>
+    </nav>
+    <a class="cv" href="/venkatesh-gardas-cv.pdf" download>Download CV</a>
+  </header>
+
+  <div class="row crumb"><a href="/">&larr; Back to home</a></div>
+
+  <section class="row phero">
+    <div class="cell lead on-blue">
+      <span class="mono">Venture · 01</span>
+      <h1>PitStop</h1>
+      <p class="say">Garage management for Indian workshops, built for a service advisor with oily hands and a queue at the counter.</p>
+    </div>
+    <div class="cell plate">
+      <div class="phead mono">Spec</div>
+      <dl>
+        <div class="prow"><dt class="mono">Status</dt><dd><span class="on">Building, live at a working garage</span></dd></div>
+        <div class="prow"><dt class="mono">Stack</dt><dd>Next.js, Postgres, Supabase, PWA</dd></div>
+        <div class="prow"><dt class="mono">Markets</dt><dd>India GST and US sales tax, same product</dd></div>
+        <div class="prow"><dt class="mono">Role</dt><dd>Everything. Product, design, build, rollout</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <div class="row shead">
+    <div class="cell n mono">01</div>
+    <div class="cell"><h2>The problem</h2></div>
+  </div>
+
+  <section class="row">
+    <div class="cell prose">
+      <p>An Indian workshop runs on a paper diary, WhatsApp forwards and the owner's memory. Estimates get argued at the counter, the customer cannot see what they are paying for, and the GST invoice comes from a typist shop two streets away. Software for garages exists, but it is built for dealership chains with a back office, not for one owner running the floor from a phone.</p>
+      <p>PitStop covers the full loop of a repair: intake, job card, mechanic assignment, customer approval, GST invoice, payment. Nothing more, and every screen assumes a phone, a hurry and grease.</p>
+    </div>
+  </section>
+
+  <div class="row shead">
+    <div class="cell n mono">02</div>
+    <div class="cell"><h2>What it does</h2></div>
+  </div>
+
+  <div class="row feat rv"><div class="cell n">01</div><div class="cell body"><h3>Job cards, intake to gate pass</h3><p>Eight statuses from received to delivered, a mechanic on every card, and a chase list that surfaces whatever is stuck so the owner does not have to remember.</p></div></div>
+  <div class="row feat rv"><div class="cell n">02</div><div class="cell body"><h3>Customer approval by link</h3><p>The customer gets a link, not an app. They see every line with a price and approve or decline from their own phone. The link is the credential, and it is built to be safe in hostile hands.</p></div></div>
+  <div class="row feat rv"><div class="cell n">03</div><div class="cell body"><h3>GST invoicing done properly</h3><p>CGST and SGST against IGST decided by place of supply, rate wise summaries, gapless invoice serials and the amount in words. The tax document is correct, not approximately correct.</p></div></div>
+  <div class="row feat rv"><div class="cell n">04</div><div class="cell body"><h3>UPI on the invoice</h3><p>A QR on every invoice sends money straight into the garage's own bank account. No gateway, no KYC paperwork, no cut. The owner watches it land in their banking app and marks it collected.</p></div></div>
+  <div class="row feat rv"><div class="cell n">05</div><div class="cell body"><h3>Old parts returned</h3><p>The scrap goes back to the customer and the job card records it. A small feature, but it is the difference between a garage a customer trusts and one they don't.</p></div></div>
+  <div class="row feat rv"><div class="cell n">06</div><div class="cell body"><h3>Workshop chat with voice notes</h3><p>Every job card is a thread tied to a vehicle. Mechanics send voice notes instead of typing, broadcasts reach the whole floor, and delivered cars leave the inbox on their own.</p></div></div>
+  <div class="row feat rv"><div class="cell n">07</div><div class="cell body"><h3>Purchase requests with guardrails</h3><p>Anyone can ask for a part. The owner approves with an amount cap, a supplier and an expiry, and the system re-checks all three at ordering time. Trust, but verified in a trigger.</p></div></div>
+  <div class="row feat rv"><div class="cell n">08</div><div class="cell body"><h3>Reads the bills customers bring in</h3><p>A customer photographs an old bill from any garage. PitStop reads it once, and when that car comes back the mechanic sees prior work matched against the new complaint. Pads three weeks ago is a comeback. Pads three years ago is wear.</p></div></div>
+  <div class="row feat rv"><div class="cell n">09</div><div class="cell body"><h3>Two markets, one product</h3><p>A single flag switches a garage between Indian GST and US sales tax, and it reaches all the way down: the maths, the invoice serials, the currency, the dates, even whether the odometer is in kilometres or miles.</p></div></div>
+  <div class="row feat rv"><div class="cell n">10</div><div class="cell body"><h3>Installs from the browser</h3><p>A PWA with an offline shell, not an app store listing. Zoom is deliberately left on, because a mechanic reading a part number in bad light needs to pinch.</p></div></div>
+
+  <div class="row shead">
+    <div class="cell n mono">03</div>
+    <div class="cell"><h2>Screens</h2></div>
+  </div>
+
+  <section class="row screens rv">
+    <div class="cell shot">
+      <div class="mockwin">
+        <div class="bar"><i></i><i></i><i></i></div>
+        <div class="mock-pad">
+          <p class="mock-h">Today</p>
+          <div class="mstats">
+            <div class="mstat"><b>&#8377;18,420</b><span>Billed</span></div>
+            <div class="mstat"><b>7</b><span>In shop</span></div>
+            <div class="mstat"><b>3</b><span>Approvals</span></div>
+          </div>
+          <div class="mbars"><i style="height:40%"></i><i style="height:65%"></i><i style="height:30%"></i><i style="height:80%"></i><i style="height:55%"></i><i style="height:95%"></i><i style="height:70%"></i></div>
+          <div class="mrow"><span>Ready for pickup</span><span class="money">2 cars</span></div>
+          <div class="mrow"><span>Unpaid this week</span><span class="money">&#8377;9,340</span></div>
+        </div>
+      </div>
+      <span class="cap mono">The owner's morning, one screen</span>
+    </div>
+    <div class="cell shot">
+      <div class="mockwin">
+        <div class="bar"><i></i><i></i><i></i></div>
+        <div class="mock-pad">
+          <p class="mock-h">JC-0412 · Swift Dzire <span class="chip y">In progress</span></p>
+          <div class="mrow"><span>Front brake pads</span><span class="money">&#8377;1,850</span></div>
+          <div class="mrow"><span>Brake fluid flush</span><span class="money">&#8377;600</span></div>
+          <div class="mrow"><span>Labour</span><span class="money">&#8377;750</span></div>
+          <div class="mrow"><span>Mechanic</span><span class="money">Ramesh</span></div>
+          <div class="mrow"><span>Old parts return</span><span class="chip b">Yes</span></div>
+        </div>
+      </div>
+      <span class="cap mono">A job card, nothing hidden</span>
+    </div>
+    <div class="cell shot">
+      <div class="mockwin" style="max-width:200px;margin:0 auto;">
+        <div class="bar"><i></i><i></i><i></i></div>
+        <div class="mock-pad">
+          <p class="mock-h">Estimate for your Swift</p>
+          <div class="mrow"><span>Brake pads</span><span class="money">&#8377;1,850</span></div>
+          <div class="mrow"><span>Fluid flush</span><span class="money">&#8377;600</span></div>
+          <div class="mrow"><span>Total</span><span class="money">&#8377;3,200</span></div>
+          <span class="mbtn">Approve work</span>
+          <div class="mqr">
+            <i></i><i class="o"></i><i></i><i></i><i class="o"></i><i></i><i></i>
+            <i class="o"></i><i></i><i class="o"></i><i></i><i class="o"></i><i></i><i class="o"></i>
+            <i></i><i class="o"></i><i></i><i class="o"></i><i></i><i></i><i class="o"></i>
+            <i></i><i></i><i class="o"></i><i></i><i class="o"></i><i></i><i></i>
+            <i class="o"></i><i></i><i></i><i class="o"></i><i></i><i class="o"></i><i></i>
+            <i></i><i class="o"></i><i></i><i></i><i class="o"></i><i></i><i class="o"></i>
+            <i></i><i></i><i class="o"></i><i></i><i></i><i class="o"></i><i></i>
+          </div>
+        </div>
+      </div>
+      <span class="cap mono">What the customer sees. A link, not an app</span>
+    </div>
+  </section>
+
+  <div class="row shead">
+    <div class="cell n mono">04</div>
+    <div class="cell"><h2>Why it is built this way</h2></div>
+  </div>
+
+  <section class="row grid3 rv">
+    <div class="cell note">
+      <span class="mono">Constraint</span>
+      <h3>The phone is the office</h3>
+      <p>The owner runs the shop from a phone at the counter. Every feature is designed there first, and the desktop version is the afterthought.</p>
+    </div>
+    <div class="cell note">
+      <span class="mono">Trade</span>
+      <h3>UPI without a gateway</h3>
+      <p>A payment gateway needs merchant KYC and takes a cut. A UPI QR needs neither. Ninety percent of the value for none of the paperwork.</p>
+    </div>
+    <div class="cell note">
+      <span class="mono">Belief</span>
+      <h3>Trust is the product</h3>
+      <p>Scrap returned, every line priced before work starts, an invoice that stands up to a tax officer. The software just makes honesty cheap.</p>
+    </div>
+  </section>
+
+  <section class="row" id="contact">
+    <div class="cell contact">
+      <span class="mono">Curious about PitStop?</span>
+      <h2>Ask me anything.</h2>
+      <p>Happy to walk through the product, the multi-tenant design or what a real garage taught me about software.</p>
+      <a class="mail" href="mailto:venkatesh@venkateshgardas.com">venkatesh@venkateshgardas.com</a>
+    </div>
+  </section>
+
+  <footer class="row foot">
+    <span class="who mono">Venkatesh Gardas · 2026</span>
+    <div class="links mono">
+      <a href="/">Home</a>
+      <a href="/saathi.html">Saathi</a>
+      <a href="/roko.html">Roko</a>
+    </div>
+  </footer>
+
+</div>
+
+<script>
+(function(){
+  var els=document.querySelectorAll('.rv');
+  if(!('IntersectionObserver' in window)||window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+    els.forEach(function(e){e.classList.add('in');});return;
+  }
+  var io=new IntersectionObserver(function(en){
+    en.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});
+  },{threshold:.1,rootMargin:'0px 0px -30px 0px'});
+  els.forEach(function(e){io.observe(e);});
+})();
+</script>
+
+</body>
+</html>
