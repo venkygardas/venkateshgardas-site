@@ -8,7 +8,7 @@
   --ink:#121212;
   --blue:#0DAEE9;   /* primary sky blue: hero, contact, PitStop */
   --yellow:#FFC845; /* Saathi */
-  --green:#2E9E63;  /* Roko */
+  --green:#1F7A49;  /* Roko. Darkened from #2E9E63 for AA contrast with paper text */
   --pink:#F2CCC0;   /* illustration panel */
   --dim:#5A5A55;
   --line:2px solid var(--ink);
@@ -28,6 +28,14 @@ body{
   -webkit-font-smoothing:antialiased;
 }
 a{color:inherit;}
+.skip{
+  position:absolute;left:-9999px;top:0;z-index:10;
+  background:var(--ink);color:var(--white);
+  font-family:"Space Mono",ui-monospace,monospace;font-size:.75rem;
+  letter-spacing:.1em;text-transform:uppercase;
+  padding:.8rem 1.2rem;text-decoration:none;
+}
+.skip:focus{left:0;}
 h1,h2,h3,h4{text-wrap:balance;}
 p,li,figcaption{text-wrap:pretty;}
 a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offset:2px;}
