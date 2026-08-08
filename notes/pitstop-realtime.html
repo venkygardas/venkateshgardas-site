@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The feature I measured, walked back and shipped smaller · Venkatesh Gardas</title>
+<meta name="description" content="A product case study from PitStop: realtime chat needed push, the obvious design put message bodies on the wire, and the measurement said no.">
+<meta property="og:title" content="The feature I measured, walked back and shipped smaller">
+<meta property="og:description" content="A case study from PitStop: the realtime design that failed its own probe, and the smaller one that shipped the same day.">
+<meta property="og:url" content="https://venkateshgardas.com/notes/pitstop-realtime">
+<meta property="og:type" content="article">
+<meta property="og:image" content="https://venkateshgardas.com/og-pitstop.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://venkateshgardas.com/notes/pitstop-realtime">
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800&family=Instrument+Sans:wght@400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styles.css?v=7">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<div class="frame">
+
+  <header class="row masthead">
+    <a class="cell mark" href="/">VG</a>
+    <nav class="cell nav mono">
+      <a href="/#building">Building</a>
+      <a href="/#work">Work</a>
+      <a href="/#contact">Contact</a>
+    </nav>
+    <a class="cv" href="/venkatesh-gardas-cv.pdf" download>Download CV</a>
+  </header>
+
+  <div class="row crumb"><a href="/pitstop">&larr; Back to PitStop</a></div>
+
+  <section class="row phero" id="main">
+    <div class="cell lead on-blue">
+      <span class="mono">Field note · PitStop</span>
+      <h1>The feature I measured, walked back and shipped smaller</h1>
+      <p class="say">A case study in naming a risk before building on it, and being wrong fast instead of wrong in production.</p>
+    </div>
+    <div class="cell plate">
+      <div class="phead mono">The short version</div>
+      <dl>
+        <div class="prow"><dt class="mono">Feature</dt><dd>Realtime push for workshop chat</dd></div>
+        <div class="prow"><dt class="mono">The bet</dt><dd>Publish message rows, let row security filter them</dd></div>
+        <div class="prow"><dt class="mono">The result</dt><dd>Failed its own probe before anything was built on it</dd></div>
+        <div class="prow"><dt class="mono">The fix</dt><dd>A content-free signal. Bodies never touch the wire</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <div class="row shead">
+    <div class="cell n mono">01</div>
+    <div class="cell"><h2>The setup</h2></div>
+  </div>
+
+  <section class="row">
+    <div class="cell prose">
+      <p>PitStop is garage management software, and one of its features is a workshop chat: every job card is a message thread tied to a vehicle, mechanics send voice notes instead of typing, and the owner can broadcast to the whole floor. Chat is only useful if it feels alive, so it needed realtime push. When a mechanic sends "the brake pads arrived," the service advisor's phone should know within a second, not on the next page refresh.</p>
+      <p>PitStop is also multi-tenant. Every table carries a garage id, and row level security means a query from one garage can never see another garage's rows. That guarantee is the foundation the whole product stands on. Two garages can run on the same database and each behaves as if it were alone.</p>
+      <p>The obvious realtime design, the one in every tutorial, is to publish the messages table to the realtime layer. A client subscribes, the database broadcasts inserted rows, and the same row security that guards queries is supposed to guard the broadcasts. Each subscriber receives only the messages they could have read anyway. Elegant, minimal, and it puts message bodies on the wire on the strength of one assumption: that the realtime layer enforces the read policy exactly the way the database does.</p>
+    </div>
+  </section>
+
+  <div class="row shead">
+    <div class="cell n mono">02</div>
+    <div class="cell"><h2>Naming the risk before writing the code</h2></div>
+  </div>
+
+  <section class="row">
+    <div class="cell prose">
+      <p>That assumption bothered me enough to write it down before building anything. The design note for the chat feature has a risk register, and the first entry says the realtime layer's policy enforcement "is asserted everywhere that it does; that is not the same as having watched it refuse." The note set a rule for the feature: if realtime authorization could not be proven over a real websocket, chat would ship on polling. Slower is not the same as wrong.</p>
+      <p>So the probe came first. Not a unit test, because the thing under suspicion was not my code. The probe opens two real websocket connections as two real users in two different garages, sends messages, and records who hears what. The migration that published the messages table said, in its own header, that enabling it without that probe "would be shipping a guess about somebody else's server."</p>
+    </div>
+  </section>
+
+  <div class="row shead">
+    <div class="cell n mono">03</div>
+    <div class="cell"><h2>The measurement</h2></div>
+  </div>
+
+  <section class="row">
+    <div class="cell prose">
+      <p>The probe ran four cases. Three passed. The one that failed was the one the feature exists for.</p>
+    </div>
+  </section>
+
+  <div class="row">
+    <div class="cell" style="padding:0;">
+      <div class="plate">
+        <div class="phead mono">What the websocket actually delivered</div>
+        <dl>
+          <div class="prow"><dt class="mono">Case 1</dt><dd>A member of a private conversation hears their own messages. <strong>Failed. They heard nothing.</strong></dd></div>
+          <div class="prow"><dt class="mono">Case 2</dt><dd>A non-member in the same garage hears nothing. Passed</dd></div>
+          <div class="prow"><dt class="mono">Case 3</dt><dd>The other garage hears nothing at all. Passed</dd></div>
+          <div class="prow"><dt class="mono">Case 4</dt><dd>The same non-member does hear a broadcast message. Passed</dd></div>
+        </dl>
+      </div>
+    </div>
+  </div>
+
+  <section class="row">
+    <div class="cell prose">
+      <p>The diagnosis took a while, and it is the interesting part. The read policy on messages checks the message kind first: broadcasts are readable by the whole garage, so the policy short-circuits before it ever calls the membership function. That is why broadcasts worked. For private conversations, the policy calls a function that checks membership, and that function calls another function underneath. Under a normal database session, the chain evaluates correctly. Under the realtime layer's own policy evaluation, the nested call came back false. Same policy, same data, different evaluator, different answer.</p>
+      <p>Note the direction of the failure. The realtime layer refused too much rather than too little. No garage ever saw another garage's messages, so this was never a security incident waiting to happen. But a chat where you do not receive your own conversations is not a chat. A feature that fails safe is still a feature that does not work.</p>
+    </div>
+  </section>
+
+  <div class="row shead">
+    <div class="cell n mono">04</div>
+    <div class="cell"><h2>The walk-back</h2></div>
+  </div>
+
+  <section class="row">
+    <div class="cell prose">
+      <p>The tempting path at this point is to debug the evaluator. Restructure the policy, inline the membership check, add special cases, and re-run the probe until all four lines pass. I had a working chat on polling and a realtime design that depended on the fine print of somebody else's policy engine. Every hour spent making the clever design work was an hour spent deepening a dependency I could not see into.</p>
+      <p>The fix was to send less. The messages table came off the wire the same day it went on, and a new table went up in its place: one row per conversation, holding a conversation id, a garage id and a timestamp. No content. When a message lands, a trigger bumps the row. Clients subscribe to the bump, and when it arrives they refetch through the normal API, where row security runs in the boring, well-understood, provable way. The realtime policy shrank to a single comparison on the garage id, which is precisely the predicate the probe had shown the realtime layer evaluating correctly.</p>
+      <p>Then the design generalized. A few days later purchase requests needed push too, and the ping table gained a topic column instead of the publication gaining a second table. One published table means one policy that has to be right. Anything else that needs a push in the future is a new value in a column, not a new thing to audit.</p>
+    </div>
+  </section>
+
+  <div class="row shead">
+    <div class="cell n mono">05</div>
+    <div class="cell"><h2>What it cost, and what I keep from it</h2></div>
+  </div>
+
+  <section class="row">
+    <div class="cell prose">
+      <p>The direct cost was small: one design, one day, discarded. That is the point. The walk-back was cheap because the risk was priced before the feature was built on top of it. The probe existed before the publication did, the fallback was named in the design note, and so being wrong was a scheduled possibility rather than an emergency. The same discovery two months later, underneath a shipped chat feature with users on it, would have been a rewrite under pressure and an awkward conversation about why messages were on the wire at all.</p>
+      <p>Three things I keep from it. First, an asserted guarantee is not a measured one, and the difference matters most exactly where the stakes are highest. Everyone repeats that the realtime layer respects row security. It does, mostly, in the common cases. My case was one function call too deep. Second, when a dependency behaves strangely, shrinking the surface you expose to it beats getting cleverer against it. The ping design is not a workaround, it is a better design: less data in flight, one policy instead of a policy per published table, and the sensitive read path stays on the road most traveled. Third, the failure direction is part of the result. I got to walk back calmly because the system failed closed. If the probe had shown the opposite, messages leaking across garages, the correct response would not have been a redesign but a halt.</p>
+      <p>The chat has run on the ping signal ever since. Nobody using it knows any of this happened, which is what shipping the boring version instead of the clever one buys you.</p>
+    </div>
+  </section>
+
+  <section class="row" id="contact">
+    <div class="cell contact">
+      <span class="mono">Talk shop</span>
+      <h2>Got a walk-back story of your own?</h2>
+      <p>Those are my favorite interview questions to be asked, and my favorite ones to ask back.</p>
+      <!--email_off--><a class="mail" href="mailto:venkatesh@venkateshgardas.com">venkatesh@venkateshgardas.com</a><!--/email_off-->
+    </div>
+  </section>
+
+  <footer class="row foot">
+    <span class="who mono">Venkatesh Gardas · 2026</span>
+    <div class="links mono">
+      <a href="/">Home</a>
+      <a href="/pitstop">PitStop</a>
+    </div>
+  </footer>
+
+</div>
+
+</body>
+</html>
