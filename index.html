@@ -50,7 +50,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800&family=Instrument+Sans:wght@400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/styles.css?v=9">
+<link rel="stylesheet" href="/styles.css?v=10">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -189,7 +189,7 @@
     <div class="cell"><h2>Things I am building</h2></div>
   </div>
 
-  <section class="row grid2 rv">
+  <section class="row grid2">
     <a class="cell vent on-blue" href="/pitstop">
       <div class="top"><h3>PitStop</h3><span class="tag">Building</span></div>
       <p>Garage management for Indian workshops. Job cards, customer approvals, GST invoicing and UPI, built for a service advisor with oily hands and a queue at the counter.</p>
@@ -227,7 +227,7 @@
     <p class="cell">Five jobs, one direction. I started fixing other people's code and ended up deciding what gets written.</p>
   </div>
 
-  <section class="row grid2 rv">
+  <section class="row grid2">
     <a class="cell job" href="/kpmg">
       <span class="mono">2025 · Present</span>
       <h3>KPMG</h3>
@@ -345,9 +345,7 @@
       <span class="tchip">Figma</span>
       <span class="tchip">SQL</span>
       <span class="tchip">Python</span>
-      <span class="tchip">Excel</span>
       <span class="tchip">Power BI</span>
-      <span class="tchip">Mixpanel</span>
       <span class="tchip">PostHog</span>
       <span class="tchip">Dynamics 365</span>
       <span class="tchip">Azure DevOps</span>
@@ -384,7 +382,7 @@
     </div>
   </section>
 
-  <section class="row rv" id="contact">
+  <section class="row" id="contact">
     <div class="cell contact">
       <span class="mono">Open to work</span>
       <h2>Let's talk.</h2>
@@ -410,18 +408,6 @@
 
 </div>
 
-<script>
-(function(){
-  var els=document.querySelectorAll('.rv');
-  if(!('IntersectionObserver' in window)||window.matchMedia('(prefers-reduced-motion: reduce)').matches){
-    els.forEach(function(e){e.classList.add('in');});return;
-  }
-  var io=new IntersectionObserver(function(en){
-    en.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});
-  },{threshold:.1,rootMargin:'0px 0px -30px 0px'});
-  els.forEach(function(e){io.observe(e);});
-})();
-</script>
 
 </body>
 </html>

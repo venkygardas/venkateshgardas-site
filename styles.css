@@ -398,10 +398,6 @@ a.note:hover .go{text-decoration:underline;}
 }
 .crumb a:hover{color:var(--ink);}
 
-/* ---- reveal ---- */
-.rv{opacity:0;transform:translateY(10px);transition:opacity .5s ease,transform .5s ease;}
-.rv.in{opacity:1;transform:none;}
-
 @media (max-width:860px){
   .hero,.phero,.grid2,.grid3,.strip,.foot,.screens,.screens.two{grid-template-columns:1fr;}
   .masthead{grid-template-columns:1fr auto;}
@@ -423,5 +419,4 @@ a.note:hover .go{text-decoration:underline;}
 }
 @media (prefers-reduced-motion:reduce){
   *{animation:none!important;transition:none!important;}
-  .rv{opacity:1;transform:none;}
 }
