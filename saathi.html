@@ -19,7 +19,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800&family=Instrument+Sans:wght@400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/styles.css?v=7">
+<link rel="stylesheet" href="/styles.css?v=8">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -72,17 +72,17 @@
     <div class="cell"><h2>What I sweat over</h2></div>
   </div>
 
-  <div class="row feat rv"><div class="cell n">01</div><div class="cell body"><h3>Voice first, screen second</h3><p>The whole interface is a conversation. The screen exists to reassure, not to navigate. Anything that needs a tap is a large, obvious button with one job.</p></div></div>
-  <div class="row feat rv"><div class="cell n">02</div><div class="cell body"><h3>Understanding grandma, not transcribing her</h3><p>Speech recognition for elderly regional voices is hard, so I benchmarked five providers on real elderly Kerala speech. The metric that matters is not word error rate, it is whether the system caught medicine, temple and grandson. Keyword recall over transcription vanity.</p></div></div>
-  <div class="row feat rv"><div class="cell n">03</div><div class="cell body"><h3>Setup happens an ocean away</h3><p>The elder never onboards. Three screens: pick a language, read a pairing code to your child on the phone, done. The family configures everything else remotely.</p></div></div>
-  <div class="row feat rv"><div class="cell n">04</div><div class="cell body"><h3>Type you can read from across the room</h3><p>Every screen is designed for seventy year old eyes. If a line of text cannot be read at arm's length without glasses, it does not ship.</p></div></div>
+  <div class="row feat"><div class="cell n">01</div><div class="cell body"><h3>Voice first, screen second</h3><p>The whole interface is a conversation. The screen exists to reassure, not to navigate. Anything that needs a tap is a large, obvious button with one job.</p></div></div>
+  <div class="row feat"><div class="cell n">02</div><div class="cell body"><h3>Understanding grandma, not transcribing her</h3><p>Speech recognition for elderly regional voices is hard, so I benchmarked five providers on real elderly Kerala speech. The metric that matters is not word error rate, it is whether the system caught medicine, temple and grandson. Keyword recall over transcription vanity.</p></div></div>
+  <div class="row feat"><div class="cell n">03</div><div class="cell body"><h3>Setup happens an ocean away</h3><p>The elder never onboards. Three screens: pick a language, read a pairing code to your child on the phone, done. The family configures everything else remotely.</p></div></div>
+  <div class="row feat"><div class="cell n">04</div><div class="cell body"><h3>Type you can read from across the room</h3><p>Every screen is designed for seventy year old eyes. If a line of text cannot be read at arm's length without glasses, it does not ship.</p></div></div>
 
   <div class="row shead">
     <div class="cell n mono">03</div>
     <div class="cell"><h2>Screens</h2></div>
   </div>
 
-  <section class="row screens two rv">
+  <section class="row screens two">
     <figure class="cell shot">
       <div class="phone"><img src="/shots/saathi-language.jpg" alt="Saathi language selection screen with large buttons for Telugu, Malayalam, Hindi and English" loading="lazy" width="1170" height="2532"></div>
       <figcaption class="cap mono">Four scripts, four buttons, no menu</figcaption>
@@ -113,18 +113,6 @@
 
 </div>
 
-<script>
-(function(){
-  var els=document.querySelectorAll('.rv');
-  if(!('IntersectionObserver' in window)||window.matchMedia('(prefers-reduced-motion: reduce)').matches){
-    els.forEach(function(e){e.classList.add('in');});return;
-  }
-  var io=new IntersectionObserver(function(en){
-    en.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});
-  },{threshold:.1,rootMargin:'0px 0px -30px 0px'});
-  els.forEach(function(e){io.observe(e);});
-})();
-</script>
 
 </body>
 </html>

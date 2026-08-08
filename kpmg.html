@@ -19,7 +19,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800&family=Instrument+Sans:wght@400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/styles.css?v=7">
+<link rel="stylesheet" href="/styles.css?v=8">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -55,7 +55,7 @@
     </div>
   </section>
 
-  <div class="row rv">
+  <div class="row">
     <div class="cell wall">
       <span class="lbl mono">Working at</span>
       <span class="wm kpmg">KPMG</span>
@@ -74,7 +74,7 @@
     </div>
   </section>
 
-  <section class="row grid4 rv">
+  <section class="row grid4">
     <div class="cell bignum"><b>40+</b><span>Automated risk decision flows</span></div>
     <div class="cell bignum"><b>16%</b><span>Faster decision cycles</span></div>
     <div class="cell bignum"><b>28%</b><span>Better reporting accuracy</span></div>
@@ -86,9 +86,9 @@
     <div class="cell"><h2>What the job actually is</h2></div>
   </div>
 
-  <div class="row feat rv"><div class="cell n">01</div><div class="cell body"><h3>Translation</h3><p>Data scientists speak in precision and recall. Partners speak in exposure and defensibility. The product exists in the space between those two vocabularies, and so do I.</p></div></div>
-  <div class="row feat rv"><div class="cell n">02</div><div class="cell body"><h3>Changing how people already work</h3><p>The users are experts with twenty years of habit. Shipping the feature is a third of the job. Getting a risk team to trust it with a live engagement is the other two thirds.</p></div></div>
-  <div class="row feat rv"><div class="cell n">03</div><div class="cell body"><h3>AI with a paper trail</h3><p>In a regulated environment, an answer without provenance is a liability. I spend real roadmap on lineage, audit trails and explainability, the unglamorous parts that decide whether the platform is allowed in the room.</p></div></div>
+  <div class="row feat"><div class="cell n">01</div><div class="cell body"><h3>Translation</h3><p>Data scientists speak in precision and recall. Partners speak in exposure and defensibility. The product exists in the space between those two vocabularies, and so do I.</p></div></div>
+  <div class="row feat"><div class="cell n">02</div><div class="cell body"><h3>Changing how people already work</h3><p>The users are experts with twenty years of habit. Shipping the feature is a third of the job. Getting a risk team to trust it with a live engagement is the other two thirds.</p></div></div>
+  <div class="row feat"><div class="cell n">03</div><div class="cell body"><h3>AI with a paper trail</h3><p>In a regulated environment, an answer without provenance is a liability. I spend real roadmap on lineage, audit trails and explainability, the unglamorous parts that decide whether the platform is allowed in the room.</p></div></div>
 
   <section class="row" id="contact">
     <div class="cell contact">
@@ -109,18 +109,6 @@
 
 </div>
 
-<script>
-(function(){
-  var els=document.querySelectorAll('.rv');
-  if(!('IntersectionObserver' in window)||window.matchMedia('(prefers-reduced-motion: reduce)').matches){
-    els.forEach(function(e){e.classList.add('in');});return;
-  }
-  var io=new IntersectionObserver(function(en){
-    en.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});
-  },{threshold:.1,rootMargin:'0px 0px -30px 0px'});
-  els.forEach(function(e){io.observe(e);});
-})();
-</script>
 
 </body>
 </html>
