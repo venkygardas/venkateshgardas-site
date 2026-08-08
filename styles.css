@@ -1,3 +1,22 @@
+/* Self-hosted fonts. Latin subsets pulled from Google Fonts once and
+   served from /fonts/. No third-party request, no render-blocking CSS. */
+@font-face{
+  font-family:"Archivo";font-style:normal;font-weight:100 900;
+  font-display:swap;src:url("/fonts/archivo-var.woff2") format("woff2");
+}
+@font-face{
+  font-family:"Instrument Sans";font-style:normal;font-weight:400 700;
+  font-display:swap;src:url("/fonts/instrument-sans-var.woff2") format("woff2");
+}
+@font-face{
+  font-family:"Space Mono";font-style:normal;font-weight:400;
+  font-display:swap;src:url("/fonts/space-mono-400.woff2") format("woff2");
+}
+@font-face{
+  font-family:"Space Mono";font-style:normal;font-weight:700;
+  font-display:swap;src:url("/fonts/space-mono-700.woff2") format("woff2");
+}
+
 /* venkateshgardas.com · shared styles
    Design language: boxed grid, bold hairlines, flat saturated panels.
    Reference is C40's layout logic. All colours come from the tokens below. */
