@@ -19,12 +19,12 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800&family=Instrument+Sans:wght@400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/styles.css?v=8">
+<link rel="stylesheet" href="/styles.css?v=9">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
 
-<div class="frame">
+<div class="frame reading">
 
   <header class="row masthead">
     <a class="cell mark" href="/">VG</a>
@@ -60,7 +60,8 @@
     <div class="cell"><h2>The setup</h2></div>
   </div>
 
-  <section class="row">
+  <section class="row gutter">
+    <div class="cell gcell" aria-hidden="true"><span class="glabel">setup</span></div>
     <div class="cell prose">
       <p>PitStop is garage management software, and one of its features is a workshop chat: every job card is a message thread tied to a vehicle, mechanics send voice notes instead of typing, and the owner can broadcast to the whole floor. Chat is only useful if it feels alive, so it needed realtime push. When a mechanic sends "the brake pads arrived," the service advisor's phone should know within a second, not on the next page refresh.</p>
       <p>PitStop is also multi-tenant. Every table carries a garage id, and row level security means a query from one garage can never see another garage's rows. That guarantee is the foundation the whole product stands on. Two garages can run on the same database and each behaves as if it were alone.</p>
@@ -73,7 +74,8 @@
     <div class="cell"><h2>Naming the risk before writing the code</h2></div>
   </div>
 
-  <section class="row">
+  <section class="row gutter">
+    <div class="cell gcell" aria-hidden="true"><span class="glabel">risk</span></div>
     <div class="cell prose">
       <p>That assumption bothered me enough to write it down before building anything. The design note for the chat feature has a risk register, and the first entry says the realtime layer's policy enforcement "is asserted everywhere that it does; that is not the same as having watched it refuse." The note set a rule for the feature: if realtime authorization could not be proven over a real websocket, chat would ship on polling. Slower is not the same as wrong.</p>
       <p>So the probe came first. Not a unit test, because the thing under suspicion was not my code. The probe opens two real websocket connections as two real users in two different garages, sends messages, and records who hears what. The migration that published the messages table said, in its own header, that enabling it without that probe "would be shipping a guess about somebody else's server."</p>
@@ -85,13 +87,15 @@
     <div class="cell"><h2>The measurement</h2></div>
   </div>
 
-  <section class="row">
+  <section class="row gutter">
+    <div class="cell gcell" aria-hidden="true"><span class="glabel">probe</span></div>
     <div class="cell prose">
       <p>The probe ran four cases. Three passed. The one that failed was the one the feature exists for.</p>
     </div>
   </section>
 
-  <div class="row">
+  <div class="row gutter">
+    <div class="cell gcell" aria-hidden="true"></div>
     <div class="cell flush">
       <div class="plate">
         <div class="phead mono">What the websocket actually delivered</div>
@@ -105,7 +109,8 @@
     </div>
   </div>
 
-  <section class="row">
+  <section class="row gutter">
+    <div class="cell gcell" aria-hidden="true"><span class="glabel">verdict</span></div>
     <div class="cell prose">
       <p>The diagnosis took a while, and it is the interesting part. The read policy on messages checks the message kind first: broadcasts are readable by the whole garage, so the policy short-circuits before it ever calls the membership function. That is why broadcasts worked. For private conversations, the policy calls a function that checks membership, and that function calls another function underneath. Under a normal database session, the chain evaluates correctly. Under the realtime layer's own policy evaluation, the nested call came back false. Same policy, same data, different evaluator, different answer.</p>
       <p>Note the direction of the failure. The realtime layer refused too much rather than too little. No garage ever saw another garage's messages, so this was never a security incident waiting to happen. But a chat where you do not receive your own conversations is not a chat. A feature that fails safe is still a feature that does not work.</p>
@@ -117,7 +122,8 @@
     <div class="cell"><h2>The walk-back</h2></div>
   </div>
 
-  <section class="row">
+  <section class="row gutter">
+    <div class="cell gcell" aria-hidden="true"><span class="glabel">fix</span></div>
     <div class="cell prose">
       <p>The tempting path at this point is to debug the evaluator. Restructure the policy, inline the membership check, add special cases, and re-run the probe until all four lines pass. I had a working chat on polling and a realtime design that depended on the fine print of somebody else's policy engine. Every hour spent making the clever design work was an hour spent deepening a dependency I could not see into.</p>
       <p>The fix was to send less. The messages table came off the wire the same day it went on, and a new table went up in its place: one row per conversation, holding a conversation id, a garage id and a timestamp. No content. When a message lands, a trigger bumps the row. Clients subscribe to the bump, and when it arrives they refetch through the normal API, where row security runs in the boring, well-understood, provable way. The realtime policy shrank to a single comparison on the garage id, which is precisely the predicate the probe had shown the realtime layer evaluating correctly.</p>
@@ -130,7 +136,8 @@
     <div class="cell"><h2>What it cost, and what I keep from it</h2></div>
   </div>
 
-  <section class="row">
+  <section class="row gutter">
+    <div class="cell gcell" aria-hidden="true"><span class="glabel">keep</span></div>
     <div class="cell prose">
       <p>The direct cost was small: one design, one day, discarded. That is the point. The walk-back was cheap because the risk was priced before the feature was built on top of it. The probe existed before the publication did, the fallback was named in the design note, and so being wrong was a scheduled possibility rather than an emergency. The same discovery two months later, underneath a shipped chat feature with users on it, would have been a rewrite under pressure and an awkward conversation about why messages were on the wire at all.</p>
       <p>Three things I keep from it. First, an asserted guarantee is not a measured one, and the difference matters most exactly where the stakes are highest. Everyone repeats that the realtime layer respects row security. It does, mostly, in the common cases. My case was one function call too deep. Second, when a dependency behaves strangely, shrinking the surface you expose to it beats getting cleverer against it. The ping design is not a workaround, it is a better design: less data in flight, one policy instead of a policy per published table, and the sensitive read path stays on the road most traveled. Third, the failure direction is part of the result. I got to walk back calmly because the system failed closed. If the probe had shown the opposite, messages leaking across garages, the correct response would not have been a redesign but a halt.</p>

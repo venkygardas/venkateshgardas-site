@@ -15,6 +15,7 @@
   --measure-prose:68ch;
   --measure-card:50ch;
   --pad-x:1.5rem;
+  --gutter:5.5rem;
 }
 
 *{box-sizing:border-box;}
@@ -50,6 +51,7 @@ img{max-width:100%;display:block;}
 }
 
 /* ---- frame ---- */
+.frame.reading{width:min(940px,94vw);--gutter:4.5rem;}
 .frame{
   width:min(1180px,94vw);
   margin:2rem auto 3.5rem;
@@ -116,6 +118,7 @@ img{max-width:100%;display:block;}
 }
 .phero .say{font-size:clamp(1.05rem,1.8vw,1.2rem);line-height:1.45;max-width:36ch;margin:0;}
 .on-blue{background:var(--blue);}
+.on-pink{background:var(--pink);}
 .on-yellow{background:var(--yellow);}
 .on-green{background:var(--green);color:var(--paper);}
 .on-green .mono{color:var(--paper);}
@@ -126,9 +129,10 @@ img{max-width:100%;display:block;}
 .plate dl{margin:0;flex:1;display:flex;flex-direction:column;}
 .plate .prow{
   display:grid;grid-template-columns:7.6rem 1fr;
-  gap:.9rem;align-items:baseline;
+  gap:.9rem;align-items:center;
   padding:.85rem var(--pad-x);
   border-bottom:1px solid rgba(18,18,18,.18);
+  flex:1 1 auto;min-height:3.4rem;
 }
 .plate .prow:last-child{border-bottom:0;}
 .plate dt{color:var(--dim);}
@@ -153,7 +157,7 @@ img{max-width:100%;display:block;}
 .btn.line:hover{background:var(--ink);color:var(--white);}
 
 /* ---- section headers ---- */
-.shead{grid-template-columns:auto 1fr;align-items:center;background:var(--paper);}
+.shead{grid-template-columns:var(--gutter) 1fr;align-items:center;background:var(--paper);}
 .shead .n{padding:.75rem var(--pad-x);color:var(--dim);}
 .shead h2{
   font-family:"Archivo",sans-serif;font-weight:700;
@@ -168,6 +172,7 @@ img{max-width:100%;display:block;}
 .row.grid2 > .cell,.row.grid3 > .cell,.row.grid4 > .cell{border-right:0;background:var(--white);}
 .row.screens > .cell{border-right:0;background:var(--paper);}
 .row.grid2 > .on-blue,.row.grid3 > .on-blue{background:var(--blue);}
+.on-pink{background:var(--pink);}
 .row.grid2 > .on-yellow,.row.grid3 > .on-yellow{background:var(--yellow);}
 .row.grid2 > .on-green,.row.grid3 > .on-green{background:var(--green);}
 a.vent{display:flex;text-decoration:none;}
@@ -212,7 +217,16 @@ a.job:hover .go{text-decoration:underline;}
 .note p{margin:0;font-size:.92rem;color:var(--dim);max-width:var(--measure-card);}
 
 /* ---- numbered feature list (detail pages) ---- */
-.feat{grid-template-columns:auto 1fr;align-items:start;}
+.feat{grid-template-columns:var(--gutter) 1fr;align-items:start;}
+.feat.auto{grid-template-columns:auto 1fr;}
+.row.gutter{grid-template-columns:var(--gutter) 1fr;}
+.gcell{border-right:var(--line);padding:0;}
+.gcell .glabel{
+  display:block;padding:2.3rem 0 0 .9rem;
+  font-family:"Space Mono",monospace;font-size:.55rem;
+  letter-spacing:.09em;text-transform:uppercase;color:var(--dim);
+  white-space:nowrap;overflow:hidden;
+}
 .feat .n{
   padding:1.3rem var(--pad-x);color:var(--dim);
   font-family:"Space Mono",monospace;font-size:.68rem;letter-spacing:.14em;
@@ -301,8 +315,8 @@ a.job:hover .go{text-decoration:underline;}
 .foot .links a:hover{color:var(--ink);text-decoration:underline;}
 
 /* ---- brand wordmarks ---- */
-.wall{display:flex;gap:.7rem;flex-wrap:wrap;align-items:center;padding:1.6rem var(--pad-x);}
-.wall .lbl{color:var(--dim);margin-right:.6rem;}
+.wall{display:grid;grid-template-columns:auto 1fr;gap:1rem;align-items:start;padding:1.6rem var(--pad-x);}
+.wall > .lbl{color:var(--dim);padding-top:.55rem;}
 .wm{
   font-family:"Archivo",sans-serif;font-weight:800;
   font-size:1.05rem;letter-spacing:-.01em;
@@ -317,7 +331,7 @@ a.job:hover .go{text-decoration:underline;}
 
 /* ---- toolkit chips ---- */
 .tools{background:var(--white);}
-.tools .set{display:flex;gap:.55rem;flex-wrap:wrap;padding:1.4rem var(--pad-x);}
+.tools .set{display:grid;grid-template-columns:auto 1fr;gap:1rem;align-items:start;padding:1.4rem var(--pad-x);}
 .tchip{
   font-family:"Space Mono",monospace;font-size:.68rem;
   letter-spacing:.12em;text-transform:uppercase;
@@ -353,7 +367,9 @@ a.job:hover .go{text-decoration:underline;}
 @media (max-width:640px){.gallery .cols{columns:1;}}
 
 /* ---- utility classes (replace inline styles) ---- */
-.set .lbl{align-self:center;color:var(--dim);margin-right:.6rem;}
+.set > .lbl{color:var(--dim);padding-top:.62rem;}
+.chips{display:flex;gap:.55rem;flex-wrap:wrap;}
+.wall .chips{gap:.7rem;align-items:center;}
 a.note{display:block;text-decoration:none;}
 a.note .go{
   font-family:"Space Mono",monospace;font-size:.68rem;
@@ -393,6 +409,10 @@ a.note:hover .go{text-decoration:underline;}
   .masthead .cv{border-bottom:var(--line);}
   .masthead .nav{grid-column:1 / -1;justify-content:flex-start;gap:1.2rem;border-top:0;border-bottom:0;}
   .cell{border-right:0;border-bottom:var(--line);}
+  .shead{grid-template-columns:auto 1fr;}
+  .feat{grid-template-columns:auto 1fr;}
+  .row.gutter{grid-template-columns:1fr;}
+  .gcell{display:none;}
   .row > .cell:last-child{border-bottom:0;}
   .row.grid2 > .cell,.row.grid3 > .cell,.row.grid4 > .cell,.row.screens > .cell{border-bottom:0;}
   .feat{grid-template-columns:auto 1fr;}
