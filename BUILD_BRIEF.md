@@ -38,7 +38,7 @@ What we took:
 - **A utility strip is part of the grid**, not chrome bolted on top. Ours is the CV/email/LinkedIn row.
 - **Neutral grotesque type, sentence case.** The layout does the work.
 
-What we deliberately did not take: their sky blue (too close to their brand and generic on its own), and their commissioned illustration (copyrighted, credited to Laure Rees-Smith).
+What we deliberately did not take: their sky blue (too close to their brand and generic on its own), and their commissioned illustration (copyrighted, credited to Laure Rees-Smith). 2026-08-08: the cool panel colour moved from green #2E6B58 to a saturated process blue #0E639C at Venkatesh's request, closer to the reference's energy but still clearly not C40's sky blue.
 
 **The signature element** is the spec plate in the right half of the hero: mono label/value rows in a bordered cell giving status, role, domains, markets and current projects. It is honest content presented as instrumentation, not decoration. Do not remove it or turn it into a graphic.
 
@@ -52,13 +52,13 @@ Defined as CSS custom properties on `:root`. **Derive every colour and size from
 --paper : #EFEDE4   /* page background, warm off-white */
 --white : #FBFAF6   /* cell background, slightly brighter */
 --ink   : #15140F   /* text and all hairline rules */
---green : #2E6B58   /* saturated cool panel: hero, 5-12 Mart */
+--blue  : #0E639C   /* saturated cool panel: hero, 5-12 Mart */
 --ochre : #E3A83C   /* saturated warm panel: PitStop, contact */
 --sand  : #DCD3C2   /* quiet neutral panel: plate header, strip */
 --dim   : #5E5A4E   /* secondary text */
 ```
 
-Text on `--green` is `--paper`. Text on `--ochre` and `--sand` is `--ink`.
+Text on `--blue` is `--paper`. Text on `--ochre` and `--sand` is `--ink`.
 
 **Typography, three roles:**
 
@@ -93,9 +93,9 @@ Column counts come from utility classes on the row: `.grid2`, `.grid3`, `.hero`,
 Sections in order. Numbered eyebrows on section headers reflect real sequence, so if you reorder sections, renumber them.
 
 1. **Masthead** — `VG` mark cell + nav (Building / Work / Contact)
-2. **Hero** — green panel with name and one-line positioning, plus the spec plate
+2. **Hero** — blue panel with name and one-line positioning, plus the spec plate
 3. **Action strip** — sand background, Download CV / Email me / LinkedIn
-4. **01 Things I am building** — 2x2 venture grid: PitStop (ochre), Saathi (white, links to heysaathi.vercel.app), Roko (white), 5-12 Mart (green)
+4. **01 Things I am building** — 2x2 venture grid: PitStop (ochre), Saathi (white, links to heysaathi.vercel.app), Roko (white), 5-12 Mart (blue)
 5. **02 Work** — two job cells: KPMG (present), Expenzing (earlier)
 6. **03 How I work** — three notes: Start at the counter, Ship the boring part first, Adoption is the metric
 7. **Contact** — full-width ochre panel, large email link
@@ -119,8 +119,8 @@ Sections in order. Numbered eyebrows on section headers reflect real sequence, s
 
 **Nice to have, in rough priority order:**
 
-- [ ] `favicon.ico` and `apple-touch-icon.png`. Suggest a solid `--green` square with the `VG` mark in Archivo 800.
-- [ ] Open Graph image at 1200x630. Should use the same grid language: green panel, name in Archivo, hairline border.
+- [ ] `favicon.ico` and `apple-touch-icon.png`. Suggest a solid `--blue` square with the `VG` mark in Archivo 800.
+- [ ] Open Graph image at 1200x630. Should use the same grid language: blue panel, name in Archivo, hairline border.
 - [ ] `robots.txt` and `sitemap.xml`
 - [ ] JSON-LD `Person` schema in `<head>` for search and AI crawlers. Cloudflare's AI crawler settings for this zone are set to allow, deliberately, so the structured data is worth having.
 
@@ -140,7 +140,7 @@ Sections in order. Numbered eyebrows on section headers reflect real sequence, s
 **Do maintain:**
 
 - Responsive down to 360px
-- Visible keyboard focus on every interactive element (currently a 3px `--green` outline)
+- Visible keyboard focus on every interactive element (currently a 3px `--blue` outline)
 - `prefers-reduced-motion` respected, which currently kills all animation and transitions
 - Semantic HTML. Real `<header>`, `<section>`, `<footer>`, `<dl>` for the spec plate.
 - Total page weight under 100KB excluding fonts
