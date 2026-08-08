@@ -219,11 +219,13 @@ a.job:hover .go{text-decoration:underline;}
 .phone img{width:100%;}
 
 /* browser-style mock frame */
-.mockwin{border:var(--line);background:var(--white);font-size:.72rem;line-height:1.4;}
-.mockwin .bar{display:flex;gap:5px;padding:.5rem .6rem;border-bottom:var(--line);background:var(--paper);}
-.mockwin .bar i{width:8px;height:8px;border:2px solid var(--ink);display:block;}
-.mock-pad{padding:.8rem;}
-.mock-h{font-family:"Archivo",sans-serif;font-weight:700;font-size:.85rem;margin:0 0 .6rem;letter-spacing:-.01em;}
+.mockwin{border:var(--line);background:var(--white);font-size:.8rem;line-height:1.45;width:100%;max-width:340px;margin:0 auto;}
+.mockwin .bar{display:flex;gap:6px;padding:.55rem .7rem;border-bottom:var(--line);background:var(--paper);}
+.mockwin .bar i{width:9px;height:9px;border:2px solid var(--ink);display:block;}
+.mock-pad{padding:1rem;}
+.mock-h{font-family:"Archivo",sans-serif;font-weight:700;font-size:.95rem;margin:0 0 .7rem;letter-spacing:-.01em;}
+.shot{align-items:stretch;}
+.shot .cap{margin-top:auto;}
 .mstats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:.45rem;margin-bottom:.7rem;}
 .mstat{border:2px solid var(--ink);padding:.45rem .5rem;}
 .mstat b{display:block;font-family:"Archivo",sans-serif;font-size:.95rem;letter-spacing:-.01em;}
@@ -279,6 +281,34 @@ a.job:hover .go{text-decoration:underline;}
 .foot .links{display:flex;gap:1.2rem;padding:.85rem 1.3rem;flex-wrap:wrap;}
 .foot .links a{color:var(--dim);text-decoration:none;}
 .foot .links a:hover{color:var(--ink);text-decoration:underline;}
+
+/* ---- brand wordmarks ---- */
+.wall{display:flex;gap:.7rem;flex-wrap:wrap;align-items:center;padding:1.6rem 1.5rem;}
+.wall .lbl{color:var(--dim);margin-right:.6rem;}
+.wm{
+  font-family:"Archivo",sans-serif;font-weight:800;
+  font-size:1.05rem;letter-spacing:-.01em;
+  padding:.55rem 1.05rem;border:var(--line);
+  white-space:nowrap;
+}
+.wm.kpmg{background:#00338D;color:#FFFFFF;}
+.wm.bajaj{background:#0066B3;color:#FFFFFF;}
+.wm.akasa{background:#FF6300;color:#FFFFFF;}
+.wm.plain{background:var(--white);}
+
+/* ---- toolkit chips ---- */
+.tools{background:var(--white);}
+.tools .set{display:flex;gap:.55rem;flex-wrap:wrap;padding:1.4rem 1.5rem;}
+.tchip{
+  font-family:"Space Mono",monospace;font-size:.68rem;
+  letter-spacing:.12em;text-transform:uppercase;
+  border:var(--line);padding:.5rem .85rem;background:var(--paper);
+}
+
+/* ---- colophon ---- */
+.colophon{background:var(--paper);padding:1.8rem 1.8rem;}
+.colophon p{margin:0;max-width:64ch;font-size:.92rem;color:var(--dim);}
+.colophon .mono{display:block;color:var(--dim);margin-bottom:.7rem;}
 
 /* back link on detail pages */
 .crumb{background:var(--paper);}
