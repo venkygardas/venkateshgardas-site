@@ -25,6 +25,7 @@ structure:
   cards: contiguous white cells sharing single 1px hairlines inside grid rows, corner registration dots at intersections, radius 2px outside grids and 0 inside. No tints anywhere; olive only on interaction
   nav: white full pill with VG avatar and name left, links center with olive active, olive Contact button right
 cache:
+  edge_race: "An edge can cache STALE content under a NEW ?v= key if it fetches mid-deploy. After every push, assert a sentinel from the new CSS via its versioned URL; if stale, re-key and push again"
   rule: "Any same-URL asset edit MUST bump ?r= in HTML. CSS busts via ?v=, currently v20. Run scripts-verify-live.sh after every push"
 a11y:
   contrast_min: "4.5:1 body. Ink on canvas 13:1. Olive on white passes large only, use olive for text at 700 weight 18px+ or on white chips"
