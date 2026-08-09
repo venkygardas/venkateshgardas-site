@@ -22,7 +22,7 @@
   --gutter:5.5rem;
   --measure-prose:62ch;
   --measure-card:46ch;
-  --font-display:"Syne",sans-serif;
+  --font-display:"Poiret One","Syne",sans-serif;
   --font-body:"Inter Tight",system-ui,sans-serif;
   --font-mono:"Space Mono",ui-monospace,monospace;
 }
@@ -135,8 +135,8 @@ img{max-width:100%;}
 .vhero .eyebrow::before{content:"\2726  ";}
 .vhero h1{
   position:absolute;left:4%;bottom:22%;z-index:4;max-width:70%;margin:0;
-  font-family:var(--font-display);font-weight:800;
-  font-size:clamp(2.4rem,5.2vw,4.3rem);line-height:1;letter-spacing:-.02em;color:#fff;
+  font-family:var(--font-display);font-weight:400;font-synthesis-weight:none;
+  font-size:clamp(2.6rem,5.6vw,4.6rem);line-height:1;letter-spacing:.01em;color:#fff;
   text-shadow:0 2px 30px rgba(23,50,56,.45);
 }
 .vhero .sub{
@@ -179,8 +179,8 @@ img{max-width:100%;}
 .phero .lead{padding:2.6rem 1.8rem 2.2rem;border-radius:var(--radius);}
 .phero .lead .mono{opacity:.85;display:block;margin-bottom:1.4rem;}
 .phero h1{
-  font-family:var(--font-display);font-weight:800;
-  font-size:clamp(2rem,4vw,3rem);line-height:1.04;letter-spacing:-.02em;margin:0 0 1rem;
+  font-family:var(--font-display);font-weight:400;font-synthesis-weight:none;
+  font-size:clamp(2.2rem,4.4vw,3.3rem);line-height:1.06;letter-spacing:.01em;margin:0 0 1rem;
 }
 .phero .say{font-size:clamp(1rem,1.6vw,1.15rem);line-height:1.4;max-width:30ch;margin:0;}
 
@@ -229,8 +229,8 @@ img{max-width:100%;}
 .shead{grid-template-columns:var(--gutter) 1fr;align-items:baseline;padding:3rem 2rem .6rem;}
 .shead .n{color:var(--coral-soft);font-family:var(--font-mono);padding:0;}
 .shead h2{
-  font-family:var(--font-display);font-weight:700;
-  font-size:1.7rem;letter-spacing:-.01em;margin:0;padding:0;color:var(--text);
+  font-family:var(--font-display);font-weight:400;font-synthesis-weight:none;
+  font-size:1.9rem;letter-spacing:.01em;margin:0;padding:0;color:var(--text);
 }
 
 /* ---- card grids ---- */
@@ -243,7 +243,7 @@ img{max-width:100%;}
 .vent .glyph{margin-bottom:.6rem;}
 .vent .glyph svg{display:block;}
 .vent .top{display:flex;justify-content:space-between;align-items:baseline;gap:1rem;}
-.vent h3{font-family:var(--font-display);font-weight:700;font-size:1.5rem;letter-spacing:-.01em;margin:0;}
+.vent h3{font-family:var(--font-body);font-weight:600;font-size:1.4rem;letter-spacing:-.01em;margin:0;}
 .vent p{margin:0;font-size:.92rem;line-height:1.5;max-width:var(--measure-card);flex:1;}
 .vent .go{font-family:var(--font-mono);font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;margin-top:.8rem;font-weight:700;}
 a.vent{transition:transform .15s cubic-bezier(.2,.6,.2,1);}
@@ -257,7 +257,7 @@ a.vent:hover .go{text-decoration:underline;}
 
 .job{padding:1.7rem var(--pad-x);}
 .job .mono{color:var(--muted);display:block;margin-bottom:.9rem;}
-.job h3{font-family:var(--font-display);font-weight:700;font-size:1.3rem;margin:0 0 .2rem;}
+.job h3{font-family:var(--font-body);font-weight:600;font-size:1.25rem;margin:0 0 .2rem;}
 .job .role{display:block;font-size:.9rem;font-weight:500;color:var(--muted);margin-bottom:.7rem;}
 .job p{margin:0;font-size:.92rem;max-width:var(--measure-card);}
 a.job{display:block;transition:transform .15s cubic-bezier(.2,.6,.2,1);}
@@ -267,7 +267,7 @@ a.job:hover .go{text-decoration:underline;}
 
 .note{padding:1.6rem var(--pad-x);}
 .note .mono{color:var(--coral-soft);}
-.note h3{font-family:var(--font-display);font-weight:700;font-size:1.1rem;margin:.6rem 0 .45rem;}
+.note h3{font-family:var(--font-body);font-weight:600;font-size:1.1rem;margin:.6rem 0 .45rem;}
 .note p{margin:0;font-size:.9rem;color:var(--muted);max-width:var(--measure-card);}
 a.note{display:block;text-decoration:none;transition:transform .15s cubic-bezier(.2,.6,.2,1);}
 a.note:hover{transform:translateY(-3px);}
@@ -349,8 +349,8 @@ a.note:hover .go{text-decoration:underline;}
 /* ---- stats ---- */
 .bignum{padding:1.4rem var(--pad-x);display:grid;grid-template-columns:auto 1fr;gap:1.1rem;align-items:center;}
 .bignum b{
-  font-family:var(--font-display);font-weight:800;
-  font-size:clamp(2.1rem,3.6vw,2.9rem);letter-spacing:-.02em;
+  font-family:var(--font-display);font-weight:400;font-synthesis-weight:none;
+  font-size:clamp(2.3rem,3.8vw,3.1rem);letter-spacing:.02em;
   line-height:1;color:#fff;
 }
 .bignum span{
@@ -390,9 +390,9 @@ a.note:hover .go{text-decoration:underline;}
   padding:4.2rem 2rem;text-align:center;color:#fff;margin:1.2rem 0 0;
 }
 .contact .mono{color:rgba(255,255,255,.85);}
-.contact h2{
-  font-family:var(--font-display);font-weight:800;
-  font-size:clamp(2.2rem,6vw,3.6rem);letter-spacing:-.02em;
+.contact h2,.contact h1{
+  font-family:var(--font-display);font-weight:400;font-synthesis-weight:none;
+  font-size:clamp(2.4rem,6.4vw,3.9rem);letter-spacing:.01em;
   margin:.7rem 0 .9rem;line-height:1;
 }
 .contact p{margin:0 auto 1.8rem;max-width:46ch;font-size:1.05rem;}

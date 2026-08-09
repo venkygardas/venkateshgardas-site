@@ -20,7 +20,7 @@ structure:
   pad_x: 1.5rem
   measure_prose: 68ch
 type:
-  display: "Syne 700/800, headings only. Stand-in for the deco display face Venky liked; swap via --font-display when he names it"
+  display: "Poiret One 400, big display moments only. Venky picked it as the free match for Troika, which he chose but did not buy. It exists thin-only, so card titles use Inter Tight 600 instead of faux-bolding it. Syne stays as fallback"
   body: Inter Tight 400/500/600
   utility: Space Mono, uppercase, letterspaced
 a11y:
