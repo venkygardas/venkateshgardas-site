@@ -47,7 +47,7 @@
 }
 </script>
 
-<link rel="stylesheet" href="/styles.css?v=14">
+<link rel="stylesheet" href="/styles.css?v=15">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -85,18 +85,18 @@
       <polygon points="560,300 900,180 900,350 560,470" fill="#D9D1BF"/>
       <rect x="130" y="340" width="180" height="130" fill="#22333A"/>
       <rect x="350" y="340" width="180" height="130" fill="#22333A"/>
-      <text x="140" y="325" font-family="Space Mono,monospace" font-size="20" letter-spacing="6" fill="#B3492F">PITSTOP · SERVICE BAY 01</text>
+      <text x="140" y="325" font-family="Space Mono,monospace" font-size="17" letter-spacing="5" fill="#B3492F" opacity=".75">PITSTOP · SERVICE BAY 01</text>
       <g>
-        <rect x="180" y="150" width="14" height="60" fill="#22333A"/>
-        <rect x="330" y="150" width="14" height="60" fill="#22333A"/>
-        <rect x="150" y="52" width="220" height="104" rx="10" fill="#22333A"/>
-        <text x="166" y="76" font-family="Space Mono,monospace" font-size="13" letter-spacing="3" fill="#9DB4AF">RISK OPS</text>
-        <rect x="166" y="92" width="16" height="48" fill="#E8482B"/>
-        <rect x="190" y="106" width="16" height="34" fill="#F0603F"/>
-        <rect x="214" y="84" width="16" height="56" fill="#E8482B"/>
-        <rect x="238" y="112" width="16" height="28" fill="#F0603F"/>
-        <rect x="262" y="72" width="16" height="68" fill="#E8482B"/>
-        <polyline points="290,120 310,96 330,108 350,78" fill="none" stroke="#EDF2F0" stroke-width="4" stroke-linecap="round"/>
+        <rect x="180" y="180" width="14" height="30" fill="#22333A"/>
+        <rect x="330" y="180" width="14" height="30" fill="#22333A"/>
+        <rect x="150" y="82" width="220" height="104" rx="10" fill="#22333A"/>
+        <text x="166" y="106" font-family="Space Mono,monospace" font-size="13" letter-spacing="3" fill="#9DB4AF">RISK OPS</text>
+        <rect x="166" y="122" width="16" height="48" fill="#E8482B"/>
+        <rect x="190" y="136" width="16" height="34" fill="#F0603F"/>
+        <rect x="214" y="114" width="16" height="56" fill="#E8482B"/>
+        <rect x="238" y="142" width="16" height="28" fill="#F0603F"/>
+        <rect x="262" y="102" width="16" height="68" fill="#E8482B"/>
+        <polyline points="290,150 310,126 330,138 350,108" fill="none" stroke="#EDF2F0" stroke-width="4" stroke-linecap="round"/>
       </g>
       <g>
         <rect x="500" y="470" width="46" height="86" rx="12" fill="#F6F2E8"/>
@@ -148,11 +148,12 @@
         <circle cx="10" cy="632" r="24" fill="#22333A"/><circle cx="10" cy="632" r="10" fill="#8FA2A6"/>
         <circle cx="140" cy="632" r="24" fill="#22333A"/><circle cx="140" cy="632" r="10" fill="#8FA2A6"/>
       </g>
+      <g><circle class="spot-ring " cx="260" cy="104" r="24" fill="none" stroke="rgba(232,72,43,.8)" stroke-width="3"/><circle cx="260" cy="104" r="10" fill="#E8482B" stroke="#FFFFFF" stroke-width="3"/></g>
+      <g><circle class="spot-ring r2" cx="755" cy="310" r="24" fill="none" stroke="rgba(232,72,43,.8)" stroke-width="3"/><circle cx="755" cy="310" r="10" fill="#E8482B" stroke="#FFFFFF" stroke-width="3"/></g>
+      <g><circle class="spot-ring r3" cx="523" cy="470" r="24" fill="none" stroke="rgba(232,72,43,.8)" stroke-width="3"/><circle cx="523" cy="470" r="10" fill="#E8482B" stroke="#FFFFFF" stroke-width="3"/></g>
     </svg>
     </div>
-    <span class="hotspot" style="left:18%;top:14%;"></span>
-    <span class="hotspot h2" style="left:52%;top:44%;"></span>
-    <span class="hotspot h3" style="left:37%;top:64%;"></span>
+
     <div class="spotcard sc1">
       <span class="mono"><span>&#9636; KPMG · risk analytics</span><span>&#8599;</span></span>
       <h3>40 plus decision flows in production</h3>
@@ -161,12 +162,12 @@
     <div class="spotcard sc2">
       <span class="mono"><span>&#9636; PitStop · live at a garage</span><span>&#8599;</span></span>
       <h3>A real shop runs on this</h3>
-      <p>Job cards, customer approvals and GST invoicing, worked at the counter of a real garage every day.</p>
+      <p>Job cards, customer approvals and GST invoicing, working at the counter of a real garage every day.</p>
     </div>
     <div class="spotcard sc3">
       <span class="mono"><span>&#9636; Saathi · live beta</span><span>&#8599;</span></span>
       <h3>A companion that speaks Malayalam</h3>
-      <p>Voice-first AI for elderly parents, with type you can read at arm's length, set up by family from another continent.</p>
+      <p>Voice-first AI for elderly parents, with type you can read at arm’s length, set up by family from another continent.</p>
     </div>
     <span class="eyebrow">Product manager · Fairfax, Virginia</span>
     <h1>Venkatesh Gardas</h1>
@@ -203,31 +204,41 @@
   </div>
 
   <section class="row grid2">
-    <a class="cell vent on-blue" href="/pitstop">
+    <a class="cell vent tint-coral" href="/pitstop">
+      <span class="glyph" aria-hidden="true"><svg width="44" height="30" viewBox="0 0 44 30" fill="none"><path d="M4 26 V8 M40 26 V8 M2 8 H42" stroke="#FF7D5C" stroke-width="4" stroke-linecap="round"/><rect x="13" y="14" width="18" height="8" rx="3" fill="#FF7D5C"/></svg></span>
       <div class="top"><h3>PitStop</h3><span class="tag">Building</span></div>
       <p>Garage management for Indian workshops. Job cards, customer approvals, GST invoicing and UPI, built for a service advisor with oily hands and a queue at the counter.</p>
       <span class="go">See inside &rarr;</span>
     </a>
-    <a class="cell vent on-yellow" href="/saathi">
+    <a class="cell vent tint-gold" href="/saathi">
+      <span class="glyph" aria-hidden="true"><svg width="40" height="30" viewBox="0 0 40 30" fill="none"><rect x="2" y="2" width="14" height="26" rx="4" stroke="#F2C14E" stroke-width="3.4"/><path d="M23 8 a10 10 0 0 1 6 8 M28 2 a17 17 0 0 1 10 14" stroke="#F2C14E" stroke-width="3.4" stroke-linecap="round"/></svg></span>
       <div class="top"><h3>Saathi</h3><span class="tag">Live beta</span></div>
       <p>A voice companion for elderly Indian users. It speaks Malayalam and Telugu, the type is enormous, and the family sets it up from another continent.</p>
       <span class="go">See inside &rarr;</span>
     </a>
-    <a class="cell vent on-green" href="/roko">
+    <a class="cell vent tint-green" href="/roko">
+      <span class="glyph" aria-hidden="true"><svg width="34" height="30" viewBox="0 0 34 30" fill="none"><rect x="3" y="3" width="28" height="24" rx="5" stroke="#8AD4AC" stroke-width="3.4"/><circle cx="17" cy="12" r="4" fill="#8AD4AC"/><path d="M10 21 h14" stroke="#8AD4AC" stroke-width="3.4" stroke-linecap="round"/></svg></span>
       <div class="top"><h3>Roko</h3><span class="tag">Prototype</span></div>
       <p>Home security hardware for the Indian market. An alarm panel, sensors and an app, priced for a family that has never bought a security system before.</p>
       <span class="go">See inside &rarr;</span>
     </a>
-    <div class="cell vent">
+    <a class="cell vent tint-sand" href="https://resumeroast.vercel.app" target="_blank" rel="noopener">
+      <span class="glyph" aria-hidden="true"><svg width="30" height="30" viewBox="0 0 30 30" fill="none"><path d="M15 3 c4 5 9 8 9 14 a9 9 0 0 1 -18 0 c0 -6 5 -9 9 -14z" stroke="#E5DCC9" stroke-width="3.2" stroke-linejoin="round"/></svg></span>
       <div class="top"><h3>Resume Roast</h3><span class="tag">Shipped</span></div>
       <p>An AI app that tears a resume apart and hands back honest, useful feedback at three roast levels. Built and shipped in a weekend, which is its own kind of scope lesson.</p>
-    </div>
+      <span class="go">Try it live &rarr;</span>
+    </a>
   </section>
 
+  <div class="row now">
+    <span class="cell lbl mono">By the numbers</span>
+    <p class="cell">Six years across data, fintech and product, three products of my own, and a real garage running PitStop at its counter today.</p>
+  </div>
+
   <section class="row grid3">
-    <div class="cell bignum tint-coral"><b>6+</b><span>Years in product and data</span></div>
-    <div class="cell bignum tint-gold"><b>3</b><span>Products I build nights and weekends</span></div>
-    <div class="cell bignum tint-green"><b>1</b><span>Garage running PitStop in production</span></div>
+    <div class="cell bignum tint-coral"><b>6+</b><span>years across product and data roles</span></div>
+    <div class="cell bignum tint-gold"><b>3</b><span>products built nights and weekends</span></div>
+    <div class="cell bignum tint-green"><b>40+</b><span>risk decision flows live at KPMG</span></div>
   </section>
 
   <div class="row shead" id="work">
@@ -237,49 +248,101 @@
 
   <div class="row now">
     <span class="cell lbl mono">The arc</span>
-    <p class="cell">Five jobs, one direction. I started fixing other people's code and ended up deciding what gets written.</p>
+    <p class="cell">Five jobs, one direction. I started fixing other people’s code and ended up deciding what gets written.</p>
   </div>
 
   <section class="row grid2">
     <a class="cell job" href="/kpmg">
-      <span class="mono">Now</span>
+      <span class="mono">Risk analytics</span>
       <h3>KPMG</h3>
       <span class="role">Product Manager, AI risk analytics</span>
-      <p>Own the full lifecycle of an AI risk analytics platform: 40 plus automated risk decision flows, decision cycles down 16 percent, adoption at 90 percent.</p>
+      <p>I own the full lifecycle of an AI risk analytics platform: 40 plus automated risk decision flows, decision cycles down 16 percent, adoption at 90 percent.</p>
       <span class="go">What I do there &rarr;</span>
     </a>
     <a class="cell job" href="/expenzing">
-      <span class="mono">Fintech</span>
+      <span class="mono">Procurement</span>
       <h3>Expenzing</h3>
       <span class="role">Product Owner, procure to pay and loan origination</span>
-      <p>B2B procurement for clients like Bajaj, HDB Hiranandani and Akasa Air. Rebuilt the budget module, built a loan origination system that became a paid module.</p>
+      <p>B2B procurement for clients like Bajaj, HDB Hiranandani and Akasa Air. Rebuilt the budget module and built a loan origination system that shipped as a paid add-on.</p>
       <span class="go">What I did there &rarr;</span>
     </a>
   </section>
 
   <section class="row grid3">
     <div class="cell job">
-      <span class="mono">Data</span>
+      <span class="mono">E-commerce data</span>
       <h3>Purplle</h3>
       <span class="role">Data Modeler</span>
-      <p>SQL pipelines, cohort models, price determination and catalog modeling for purplle.com. That work fed a 12 percent drop in churn and 15 percent growth in repeat orders.</p>
+      <p>SQL pipelines, cohort models, price determination and catalog modeling for purplle.com. That work drove a 12 percent drop in churn and 15 percent growth in repeat orders.</p>
     </div>
     <div class="cell job">
-      <span class="mono">ERP</span>
+      <span class="mono">ERP and logistics</span>
       <h3>Globe Trek Engineering</h3>
       <span class="role">Business Analyst</span>
       <p>Large ERP and logistics modules: pricing for manufactured products, requirement analysis, the website, and every piece of analysis in between. Delivery risk down 25 percent.</p>
     </div>
     <div class="cell job">
-      <span class="mono">The start</span>
+      <span class="mono">Support engineering</span>
       <h3>Compel Consultancy</h3>
       <span class="role">Support software developer</span>
-      <p>JavaScript and Python, other people's bugs, users on the phone while you fix them. The best possible school for a future product manager.</p>
+      <p>JavaScript and Python, other people’s bugs, users on the phone while you fix them. The best possible school for a future product manager.</p>
     </div>
   </section>
 
   <div class="row shead" id="education">
     <div class="cell n mono">03</div>
+    <div class="cell"><h2>From code to product</h2></div>
+  </div>
+
+  <div class="row">
+    <div class="cell cgraph glass">
+      <div class="cg-desktop" aria-hidden="true">
+        <svg viewBox="0 0 1200 275" xmlns="http://www.w3.org/2000/svg">
+          <path d="M100 195 H325 V165 H550 V135 H775 V105 H1000 V75" fill="none" stroke="rgba(237,242,240,.85)" stroke-width="3"/>
+          <path d="M1000 75 L1110 42" stroke="rgba(237,242,240,.6)" stroke-width="2" stroke-dasharray="6 5" fill="none"/>
+          <g fill="#E8482B" stroke="#FFFFFF" stroke-width="2.5">
+            <rect x="92" y="187" width="16" height="16" rx="4"/>
+            <rect x="317" y="157" width="16" height="16" rx="4"/>
+            <rect x="542" y="127" width="16" height="16" rx="4"/>
+            <rect x="767" y="97" width="16" height="16" rx="4"/>
+            <rect x="992" y="67" width="16" height="16" rx="4"/>
+          </g>
+          <rect x="1102" y="34" width="16" height="16" rx="4" fill="#E0A81C" stroke="#FFFFFF" stroke-width="2.5"/>
+          <g font-family="Inter Tight,sans-serif" font-weight="600" font-size="19" fill="#EDF2F0" text-anchor="middle">
+            <text x="100" y="174">Compel</text>
+            <text x="325" y="144">Globe Trek</text>
+            <text x="550" y="114">Purplle</text>
+            <text x="775" y="84">Expenzing</text>
+            <text x="1000" y="54">KPMG</text>
+          </g>
+          <g font-family="Space Mono,monospace" font-size="11.5" letter-spacing="1.5" fill="#9DB4AF" text-anchor="middle">
+            <text x="100" y="232">SUPPORT SOFTWARE DEV</text>
+            <text x="325" y="202">BUSINESS ANALYST</text>
+            <text x="550" y="172">DATA MODELER</text>
+            <text x="775" y="142">PRODUCT OWNER</text>
+            <text x="1000" y="112">PRODUCT MANAGER</text>
+            <text x="1110" y="72">+ PITSTOP, SAATHI, ROKO</text>
+          </g>
+          <g font-family="Space Mono,monospace" font-size="12" letter-spacing="2" fill="#FF7D5C">
+            <text x="30" y="252">WROTE THE CODE</text>
+            <text x="1170" y="26" text-anchor="end">DECIDES WHAT GETS BUILT</text>
+          </g>
+        </svg>
+      </div>
+      <div class="cg-mobile">
+        <div class="trow"><i></i><div><b>Compel Consultancy</b><span>Support software dev</span></div></div>
+        <div class="trow"><i></i><div><b>Globe Trek Engineering</b><span>Business analyst</span></div></div>
+        <div class="trow"><i></i><div><b>Purplle</b><span>Data modeler</span></div></div>
+        <div class="trow"><i></i><div><b>Expenzing</b><span>Product owner</span></div></div>
+        <div class="trow"><i></i><div><b>KPMG</b><span>Product manager</span></div></div>
+        <div class="trow"><i style="background:#E0A81C"></i><div><b>PitStop · Saathi · Roko</b><span>Founder, nights and weekends</span></div></div>
+      </div>
+      <p class="why">Each step was a deliberate trade: support to get closer to users, analysis to get closer to decisions, data to prove them, product to own them.</p>
+    </div>
+  </div>
+
+  <div class="row shead" id="edu">
+    <div class="cell n mono">04</div>
     <div class="cell"><h2>Education and credentials</h2></div>
   </div>
 
@@ -288,7 +351,7 @@
       <span class="mono">Graduate school</span>
       <h3>George Mason University</h3>
       <span class="role">M.S. Applied Information Technology · Fairfax, VA</span>
-      <p>The masters that brought me to the US, finished May 2026 while shipping three products of my own on the side.</p>
+      <p>The master’s that brought me to the US. Finished May 2026, while shipping three products of my own on the side.</p>
     </div>
     <div class="cell job">
       <span class="mono">Business school</span>
@@ -304,21 +367,9 @@
     </div>
   </section>
 
-  <div class="row tools">
-    <div class="cell set">
-      <span class="lbl mono">Certified</span>
-      <div class="chips">
-      <span class="tchip">CSM</span>
-      <span class="tchip">CSPO</span>
-      <span class="tchip">Power Platform Solution Architect Expert</span>
-      <span class="tchip">Certified in Cybersecurity</span>
-      <span class="tchip">PMP · in progress</span>
-      </div>
-    </div>
-  </div>
 
   <div class="row shead">
-    <div class="cell n mono">04</div>
+    <div class="cell n mono">05</div>
     <div class="cell"><h2>How I work</h2></div>
   </div>
 
@@ -372,7 +423,7 @@
   </div>
 
   <div class="row shead" id="offclock">
-    <div class="cell n mono">05</div>
+    <div class="cell n mono">06</div>
     <div class="cell"><h2>Off the clock</h2></div>
   </div>
 
@@ -380,7 +431,7 @@
     <a class="cell note tint-sand" href="/photos">
       <span class="mono">Camera</span>
       <h3>Photography</h3>
-      <p>Streets, machines and light, on a Sony a7 V. Thirty one frames, picked without mercy.</p>
+      <p>Streets, machines and light, on a Sony a7 V. Sixteen frames, picked without mercy.</p>
       <span class="go">See the gallery &rarr;</span>
     </a>
     <div class="cell note tint-coral">
@@ -395,10 +446,15 @@
     </div>
   </section>
 
+  <div class="row shead">
+    <div class="cell n mono">07</div>
+    <div class="cell"><h2>Contact</h2></div>
+  </div>
+
   <section class="row" id="contact">
     <div class="cell contact">
       <span class="mono">Open to work</span>
-      <h2>Let's talk.</h2>
+      <h2>Let’s talk.</h2>
       <p>I am looking for a product management role in vertical SaaS, fintech or AI tooling, in the US or remote. Authorized to work in the US on OPT. Happy to talk shop about garages, approval matrices or alarm panels too.</p>
       <!--email_off--><a class="mail" href="mailto:venkatesh@venkateshgardas.com">venkatesh@venkateshgardas.com</a><!--/email_off-->
       <div class="socials">
@@ -415,6 +471,8 @@
       <a href="https://www.linkedin.com/in/venkateshgardas" target="_blank" rel="noopener">LinkedIn</a>
       <a href="https://www.instagram.com/mates_mechanic/" target="_blank" rel="noopener">Instagram</a>
       <a href="https://github.com/venkygardas" target="_blank" rel="noopener">GitHub</a>
+      <a href="/now">Now</a>
+      <a href="/notes/">Notes</a>
       <a href="/colophon">Colophon</a>
     </div>
   </footer>
