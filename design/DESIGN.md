@@ -19,10 +19,10 @@ type:
   headline_pair: "Inter Tight 700 first line, Instrument Serif italic second line. This pair IS the brand"
   body: Inter Tight 400/500/600
   utility: Space Mono, uppercase, .72rem floor
-  name_face: Poiret One 400 carries the name in the hero and on the CV. Syne is deleted
+  faces: exactly three. Inter Tight for everything, Instrument Serif italic for pair lines, Space Mono for micro labels. Poiret and Syne are deleted. Headings are Title Case, pair lines lowercase italic
 structure:
   canvas: full-bleed light page, rows self-constrain to 1240px (1040px on reading pages)
-  cards: white, 1px hairline #DBD9D2, corner registration dots (the Ozsoy signature)
+  cards: contiguous white cells sharing single 1px hairlines inside grid rows, corner registration dots at intersections, radius 2px outside grids and 0 inside. No tints anywhere; olive only on interaction
   nav: white full pill with VG avatar and name left, links center with olive active, olive Contact button right
 cache:
   rule: "Any same-URL asset edit MUST bump ?r= in HTML. CSS busts via ?v=, currently v20. Run scripts-verify-live.sh after every push"
