@@ -20,7 +20,7 @@
   --radius:18px;
   --pad-x:1.5rem;
   --gutter:5.5rem;
-  --measure-prose:62ch;
+  --measure-prose:68ch;
   --measure-card:46ch;
   --font-display:"Poiret One","Syne",sans-serif;
   --font-body:"Inter Tight",system-ui,sans-serif;
@@ -62,7 +62,7 @@ img{max-width:100%;}
   border-radius:22px;overflow:clip;
   box-shadow:0 30px 80px rgba(23,50,56,.35);
 }
-.frame.reading{width:min(980px,100%);--gutter:4.5rem;}
+.frame.reading{width:min(1040px,100%);--gutter:4.5rem;}
 
 /* rows become spaced sections */
 .row{display:grid;padding:0 2rem;}
@@ -321,7 +321,7 @@ a.note:hover .go{text-decoration:underline;}
 .feat .n{padding:0;color:var(--muted);font-family:var(--font-mono);font-variant-numeric:tabular-nums;}
 .feat .body{padding:0;}
 .feat h3{font-family:var(--font-body);font-weight:600;font-size:1.05rem;margin:0 0 .35rem;}
-.feat p{margin:0;font-size:.92rem;color:var(--muted);max-width:var(--measure-prose);}
+.feat p{margin:0;font-size:.95rem;color:var(--muted);max-width:72ch;}
 .row.gutter{grid-template-columns:var(--gutter) 1fr;padding:0 2rem;}
 .gcell{border-right:1px solid rgba(255,255,255,.1);}
 .gcell .glabel{
