@@ -83,10 +83,8 @@ img{max-width:100%;}
   display:flex;align-items:center;gap:.65rem;margin-right:auto;
   font-weight:600;font-size:.95rem;color:var(--ink);padding:.3rem .4rem;
 }
-.pillnav .who i{
-  width:34px;height:34px;border-radius:50%;background:var(--coral);color:#fff;
-  display:inline-flex;align-items:center;justify-content:center;
-  font-style:normal;font-weight:700;font-size:.78rem;letter-spacing:.02em;flex:none;
+.pillnav .who img{
+  width:34px;height:34px;border-radius:50%;object-fit:cover;flex:none;display:block;
 }
 @media (max-width:880px){.pillnav .who b{display:none;}}
 @media (max-width:640px){.pillnav a.m-hide{display:none;}}
