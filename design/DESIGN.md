@@ -21,7 +21,7 @@ type:
   utility: Space Mono, uppercase, .72rem floor
   benched: Poiret One and Syne files remain in /fonts, unused
 structure:
-  canvas: floating light canvas, 22px radius, soft shadow
+  canvas: full-bleed light page, rows self-constrain to 1240px (1040px on reading pages)
   cards: white, 1px hairline #DBD9D2, corner registration dots (the Ozsoy signature)
   nav: white full pill with VG avatar and name left, links center with olive active, olive Contact button right
 cache:
@@ -43,6 +43,6 @@ detail pages, the accessibility floor, the cache discipline, and the
 verify-at-zoom habit. What is new: light ground, earthy accent set,
 corner-dotted cards, and the roman-plus-italic-serif headline voice.
 
-The garage scene survives in the earthy palette. Phase 2 candidates:
-redraw the scene as Ozsoy-style line art, replace the VG monogram in
+The garage scene is Ozsoy-style line art: ink outlines, white fills,
+olive accents, text never overlaps the illustration. Phase 2: replace the VG monogram in
 the nav with a real headshot when Venky provides one.
