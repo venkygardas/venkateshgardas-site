@@ -1,58 +1,48 @@
 ---
 name: venkateshgardas.com
-version: v2 glass, 2026-08-08. v1 (2px ink grid on paper) lives in git history
-direction: Floating rounded canvas, dark teal ground, glassmorphism cards, coral accent, living hero scene. After Arounda's port-automation concept
+version: v3 earthy fintech, 2026-08-09. v2 glass and v1 ink grid live in git history
+direction: Light greige ground, white cards with hairlines and corner registration dots, bold grotesque plus italic serif headline pairs, olive primary. After Mehmet Ozsoy's AI fintech concept
 colors:
-  backdrop: "#DFE5E8"
-  deep: "#173238"
-  deep2: "#0F2227"
-  text: "#EDF2F0"
-  muted: "#9DB4AF"
-  coral: "#E8482B"
-  coral_soft: "#FF7D5C  # use for small accent text on dark, plain coral fails contrast there"
-  gold: "#E0A81C"
-  sand: "#EDE6DA"
-  ink: "#1C2B30"
-structure:
-  canvas: "the site floats: body padding, 22px radius, shadow, nothing touches the browser edge"
-  radius: "18px cards, 999px pills"
-  glass: "rgba(255,255,255,.06) fill, rgba(255,255,255,.14) line, blur(16px) only over imagery"
-  pad_x: 1.5rem
-  measure_prose: 68ch
+  backdrop: "#D9DAD5"
+  canvas: "#F2F1EE"
+  card: "#FBFAF8 and #FFFFFF"
+  ink: "#15120A"
+  muted: "#5B666D"
+  gray: "#A6A6A5"
+  olive: "#6E7B45  # primary CTA, active nav, accents"
+  olive_deep: "#5C6839"
+  steel: "#375A74  # links, secondary accent, focus ring"
+  tan: "#A68B74"
+  mauve: "#886F66"
+  brown: "#553519"
 type:
-  display: "Poiret One 400, big display moments only. Venky picked it as the free match for Troika, which he chose but did not buy. It exists thin-only, so card titles use Inter Tight 600 instead of faux-bolding it. Syne stays as fallback"
+  headline_pair: "Inter Tight 700 first line, Instrument Serif italic second line. This pair IS the brand"
   body: Inter Tight 400/500/600
-  utility: Space Mono, uppercase, letterspaced, .72rem floor
+  utility: Space Mono, uppercase, .72rem floor
+  benched: Poiret One and Syne files remain in /fonts, unused
+structure:
+  canvas: floating light canvas, 22px radius, soft shadow
+  cards: white, 1px hairline #DBD9D2, corner registration dots (the Ozsoy signature)
+  nav: white full pill with VG avatar and name left, links center with olive active, olive Contact button right
 cache:
-  rule: "Images and any same-URL asset edit MUST bump a ?r= query in the HTML. Cloudflare Pages edge-caches asset bodies; HTML and CSS already bust via ?v=. Run scripts-verify-live.sh after every push"
+  rule: "Any same-URL asset edit MUST bump ?r= in HTML. CSS busts via ?v=, currently v20. Run scripts-verify-live.sh after every push"
 a11y:
-  contrast_min: "4.5:1 body, 3:1 large. text on deep is 11:1, muted on deep 5.5:1. Small coral text on dark must use coral_soft"
-  focus_ring: 3px coral outline, never removed
-  reduced_motion: kills all animation including the hero scene
-  skip_link: first focusable element on every page
+  contrast_min: "4.5:1 body. Ink on canvas 13:1. Olive on white passes large only, use olive for text at 700 weight 18px+ or on white chips"
+  focus_ring: 3px steel, white on olive surfaces
+  reduced_motion: kills all animation including pseudo-elements
 motion:
-  hero: "Ken Burns zoom, lift raising the car, tow truck crossing, pulsing hotspots, cards revealing on a loop"
-  elsewhere: "hover translateY on cards. No scroll reveals"
+  hero: Ken Burns scene, lift, truck, olive pulse rings
+  elsewhere: hover lifts only
 ---
 
 ## Rationale
 
-Eleven plain HTML files and one stylesheet. No framework, no build step. That
-survives every redesign.
+Third design system, chosen from Mehmet Ozsoy's fintech concept. What
+carries over from v1 and v2: the layout logic, the reading frame on
+detail pages, the accessibility floor, the cache discipline, and the
+verify-at-zoom habit. What is new: light ground, earthy accent set,
+corner-dotted cards, and the roman-plus-italic-serif headline voice.
 
-The hero is a scene, not a block: an illustrated garage where things happen.
-Content overlays it as glass. Everything below sits on the dark teal ground as
-glass cards separated by gaps, not borders.
-
-Fonts are self-hosted woff2 in /fonts. No third-party requests anywhere.
-
-No em dashes or double hyphens in copy, alt text or meta. American spelling.
-
-Email links stay wrapped in Cloudflare email_off comments. The stylesheet is
-versioned by query string: bump ?v= on every CSS change.
-
-Product accent mapping: PitStop coral, Saathi gold, Roko green, editorial
-panels sand. The wm client chips keep their real brand colors.
-
-Photos ship as WebP with JPEG fallback, 900px and 1600px variants, width and
-height always set, rounded 14px in the gallery.
+The garage scene survives in the earthy palette. Phase 2 candidates:
+redraw the scene as Ozsoy-style line art, replace the VG monogram in
+the nav with a real headshot when Venky provides one.
