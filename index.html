@@ -47,122 +47,99 @@
 }
 </script>
 
-<link rel="stylesheet" href="/styles.css?v=11">
+<link rel="stylesheet" href="/styles.css?v=13">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
 
 <div class="frame">
 
-  <header class="row masthead">
-    <a class="cell mark" href="/">VG</a>
-    <nav class="cell nav mono">
-      <a href="#building">Building</a>
-      <a href="#work">Work</a>
-      <a href="#contact">Contact</a>
+  <header class="pillnav">
+    <nav aria-label="Main">
+      <a href="/">Home</a>
+      <a href="/#building">Building</a>
+      <a href="/#work">Work</a>
+      <a href="/photos">Photos</a>
+      <a href="/cv">CV</a>
+      <a class="cta" href="/#contact">Contact</a>
     </nav>
-    <a class="cv" href="/venkatesh-gardas-cv.pdf" download>Download CV</a>
   </header>
 
-  <section class="row hero" id="main">
-    <div class="cell lead">
-      <span class="mono">Product Manager · Fairfax, Virginia</span>
-      <h1>Venkatesh<br>Gardas</h1>
-      <p class="say">I turn messy operational work into software people open on a Monday morning.</p>
-      <p class="say sub">I fixed other people's JavaScript, wrote specs for ERP systems and built SQL pipelines for an e-commerce major before I ever owned a roadmap. Now I ship AI risk analytics at KPMG by day, and the rest of the time I build products for people software forgot: garage owners, grandparents, families buying their first alarm.</p>
+  <section class="vhero" id="main" aria-label="Intro">
+    <div class="scenewrap">
+    <svg class="scene" viewBox="0 0 1440 760" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      <defs>
+        <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#B9C8CC"/><stop offset="1" stop-color="#D8D2C4"/></linearGradient>
+        <linearGradient id="ground" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#E9E2D3"/><stop offset="1" stop-color="#D4CCBA"/></linearGradient>
+        <linearGradient id="roof" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F4EFE5"/><stop offset="1" stop-color="#DED6C4"/></linearGradient>
+        <linearGradient id="coralF" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F0603F"/><stop offset="1" stop-color="#D23A1D"/></linearGradient>
+        <linearGradient id="coralS" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#C13317"/><stop offset="1" stop-color="#A82A10"/></linearGradient>
+        <linearGradient id="crateW" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FBF8F1"/><stop offset="1" stop-color="#E4DCCB"/></linearGradient>
+        <filter id="soft" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="10"/></filter>
+      </defs>
+      <rect width="1440" height="760" fill="url(#sky)"/>
+      <rect x="0" y="300" width="1440" height="460" fill="url(#ground)"/>
+      <polygon points="0,760 420,470 1440,470 1440,760" fill="#CFC7B4" opacity=".55"/>
+      <polygon points="80,300 420,180 900,180 560,300" fill="url(#roof)"/>
+      <polygon points="80,300 560,300 560,470 80,470" fill="#EFE9DC"/>
+      <polygon points="560,300 900,180 900,350 560,470" fill="#D9D1BF"/>
+      <rect x="130" y="340" width="180" height="130" fill="#22333A"/>
+      <rect x="350" y="340" width="180" height="130" fill="#22333A"/>
+      <text x="140" y="325" font-family="Space Mono,monospace" font-size="20" letter-spacing="6" fill="#B3492F">PITSTOP · SERVICE BAY 01</text>
+      <ellipse cx="1050" cy="640" rx="330" ry="46" fill="#1B2E33" opacity=".18" filter="url(#soft)"/>
+      <g>
+        <polygon points="880,420 1000,370 1120,420 1000,470" fill="url(#crateW)"/>
+        <polygon points="880,420 1000,470 1000,600 880,550" fill="#D8D0BE"/>
+        <polygon points="1120,420 1000,470 1000,600 1120,550" fill="#C9C0AC"/>
+        <polygon points="1000,300 1120,250 1240,300 1120,350" fill="url(#coralF)"/>
+        <polygon points="1000,300 1120,350 1120,480 1000,430" fill="url(#coralS)"/>
+        <polygon points="1240,300 1120,350 1120,480 1240,430" fill="#B02D12"/>
+        <text x="1054" y="332" font-family="Space Mono,monospace" font-size="17" fill="#FFEDE6" transform="rotate(-23 1054 332)">· VG PARTS</text>
+        <polygon points="1120,180 1240,130 1360,180 1240,230" fill="url(#crateW)"/>
+        <polygon points="1120,180 1240,230 1240,360 1120,310" fill="#D8D0BE"/>
+        <polygon points="1360,180 1240,230 1240,360 1360,310" fill="#C9C0AC"/>
+      </g>
+      <g>
+        <rect x="620" y="300" width="26" height="240" fill="url(#coralF)"/>
+        <rect x="860" y="300" width="26" height="240" fill="url(#coralF)"/>
+        <rect x="600" y="270" width="310" height="34" rx="8" fill="url(#coralF)"/>
+        <ellipse cx="753" cy="585" rx="180" ry="26" fill="#1B2E33" opacity=".22" filter="url(#soft)"/>
+        <g class="lift-group">
+          <rect x="640" y="430" width="230" height="60" rx="18" fill="#F6F2E8"/>
+          <rect x="676" y="396" width="130" height="48" rx="16" fill="#F6F2E8"/>
+          <rect x="690" y="406" width="44" height="28" rx="6" fill="#9FB4B8"/>
+          <circle cx="690" cy="496" r="26" fill="#22333A"/><circle cx="690" cy="496" r="11" fill="#8FA2A6"/>
+          <circle cx="820" cy="496" r="26" fill="#22333A"/><circle cx="820" cy="496" r="11" fill="#8FA2A6"/>
+        </g>
+      </g>
+      <g class="drive-group">
+        <rect x="-40" y="560" width="200" height="66" rx="16" fill="#F6F2E8"/>
+        <rect x="112" y="536" width="70" height="50" rx="12" fill="#F6F2E8"/>
+        <rect x="124" y="546" width="34" height="26" rx="6" fill="#9FB4B8"/>
+        <rect x="-24" y="572" width="120" height="40" rx="8" fill="url(#coralF)"/>
+        <circle cx="10" cy="632" r="24" fill="#22333A"/><circle cx="10" cy="632" r="10" fill="#8FA2A6"/>
+        <circle cx="140" cy="632" r="24" fill="#22333A"/><circle cx="140" cy="632" r="10" fill="#8FA2A6"/>
+      </g>
+    </svg>
     </div>
-    <div class="cell art" aria-hidden="true">
-      <svg viewBox="0 0 800 640" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
-        <!-- ink plus marks on the pink field -->
-        <g stroke="#121212" stroke-width="5" stroke-linecap="round">
-          <path d="M60 88 v28 M46 102 h28"/>
-          <path d="M742 118 v24 M730 130 h24"/>
-          <path d="M76 548 v24 M64 560 h24"/>
-        </g>
-
-        <!-- the worktable -->
-        <circle cx="400" cy="330" r="238" fill="#0DAEE9"/>
-
-        <!-- car, top view -->
-        <g transform="translate(320,310) rotate(-14)">
-          <rect x="-46" y="-92" width="92" height="184" rx="30" fill="#FFC845" stroke="#121212" stroke-width="5"/>
-          <rect x="-32" y="-48" width="64" height="30" rx="9" fill="#FFFFFF" stroke="#121212" stroke-width="4"/>
-          <rect x="-32" y="24" width="64" height="26" rx="9" fill="#FFFFFF" stroke="#121212" stroke-width="4"/>
-          <circle cx="-50" cy="-58" r="7" fill="#121212"/>
-          <circle cx="50" cy="-58" r="7" fill="#121212"/>
-        </g>
-
-        <!-- phone with voice arcs -->
-        <g transform="translate(505,300) rotate(9)">
-          <rect x="-30" y="-56" width="60" height="112" rx="12" fill="#FFFFFF" stroke="#121212" stroke-width="5"/>
-          <circle cx="0" cy="34" r="8" fill="#121212"/>
-          <path d="M40 -66 a34 34 0 0 1 18 30" fill="none" stroke="#121212" stroke-width="5" stroke-linecap="round"/>
-          <path d="M52 -84 a52 52 0 0 1 27 46" fill="none" stroke="#121212" stroke-width="5" stroke-linecap="round"/>
-        </g>
-
-        <!-- house -->
-        <g transform="translate(455,445)">
-          <rect x="-27" y="-16" width="54" height="42" fill="#FFFFFF" stroke="#121212" stroke-width="5"/>
-          <path d="M-36 -14 L0 -46 L36 -14 Z" fill="#2E9E63" stroke="#121212" stroke-width="5" stroke-linejoin="round"/>
-          <rect x="-8" y="4" width="16" height="22" fill="#121212"/>
-        </g>
-
-        <!-- wrench -->
-        <g transform="translate(295,455) rotate(38)" stroke="#121212" stroke-width="5" fill="#FFFFFF">
-          <rect x="-8" y="-44" width="16" height="88" rx="8"/>
-          <circle cx="0" cy="-50" r="16"/>
-          <circle cx="0" cy="50" r="16"/>
-        </g>
-
-        <!-- receipt -->
-        <g transform="translate(560,412) rotate(-8)">
-          <path d="M-24 -34 h48 v60 l-8 8 -8 -8 -8 8 -8 -8 -8 8 -8 -8 Z" fill="#FFFFFF" stroke="#121212" stroke-width="4" stroke-linejoin="round"/>
-          <g stroke="#121212" stroke-width="3" stroke-linecap="round">
-            <path d="M-14 -20 h28 M-14 -8 h28 M-14 4 h18"/>
-          </g>
-        </g>
-
-        <!-- white sparkles on the table -->
-        <g fill="#FFFFFF">
-          <g transform="translate(258,212)"><ellipse rx="6" ry="14"/><ellipse rx="14" ry="6"/></g>
-          <g transform="translate(548,196)"><ellipse rx="5" ry="12"/><ellipse rx="12" ry="5"/></g>
-          <g transform="translate(420,528)"><ellipse rx="5" ry="12"/><ellipse rx="12" ry="5"/></g>
-          <g transform="translate(232,398)"><ellipse rx="4" ry="10"/><ellipse rx="10" ry="4"/></g>
-        </g>
-
-        <!-- hands reaching in -->
-        <!-- top left, yellow sleeve -->
-        <g transform="rotate(-42 400 330)">
-          <rect x="372" y="-40" width="56" height="150" rx="28" fill="#FFC845" stroke="#121212" stroke-width="5"/>
-          <ellipse cx="400" cy="128" rx="32" ry="36" fill="#8A5A3B" stroke="#121212" stroke-width="5"/>
-          <ellipse cx="372" cy="112" rx="11" ry="17" transform="rotate(-28 372 112)" fill="#8A5A3B" stroke="#121212" stroke-width="4"/>
-        </g>
-        <!-- top right, white sleeve -->
-        <g transform="rotate(34 400 330)">
-          <rect x="372" y="-52" width="56" height="150" rx="28" fill="#FFFFFF" stroke="#121212" stroke-width="5"/>
-          <ellipse cx="400" cy="116" rx="32" ry="36" fill="#C08552" stroke="#121212" stroke-width="5"/>
-          <ellipse cx="428" cy="100" rx="11" ry="17" transform="rotate(28 428 100)" fill="#C08552" stroke="#121212" stroke-width="4"/>
-        </g>
-        <!-- right, green sleeve -->
-        <g transform="rotate(105 400 330)">
-          <rect x="372" y="-46" width="56" height="140" rx="28" fill="#2E9E63" stroke="#121212" stroke-width="5"/>
-          <ellipse cx="400" cy="112" rx="32" ry="36" fill="#6E4529" stroke="#121212" stroke-width="5"/>
-          <ellipse cx="372" cy="96" rx="11" ry="17" transform="rotate(-28 372 96)" fill="#6E4529" stroke="#121212" stroke-width="4"/>
-        </g>
-        <!-- bottom, ink sleeve -->
-        <g transform="rotate(178 400 330)">
-          <rect x="372" y="-48" width="56" height="146" rx="28" fill="#121212"/>
-          <ellipse cx="400" cy="116" rx="32" ry="36" fill="#A96C3F" stroke="#121212" stroke-width="5"/>
-          <ellipse cx="428" cy="100" rx="11" ry="17" transform="rotate(28 428 100)" fill="#A96C3F" stroke="#121212" stroke-width="4"/>
-        </g>
-        <!-- left, paper sleeve -->
-        <g transform="rotate(-115 400 330)">
-          <rect x="372" y="-44" width="56" height="142" rx="28" fill="#F7F5F0" stroke="#121212" stroke-width="5"/>
-          <ellipse cx="400" cy="116" rx="32" ry="36" fill="#4A332A" stroke="#121212" stroke-width="5"/>
-          <ellipse cx="372" cy="100" rx="11" ry="17" transform="rotate(-28 372 100)" fill="#4A332A" stroke="#121212" stroke-width="4"/>
-        </g>
-      </svg>
+    <span class="hotspot" style="left:52%;top:44%;"></span>
+    <span class="hotspot h2" style="left:79%;top:38%;"></span>
+    <div class="spotcard">
+      <span class="mono"><span>&#9636; Two-post lift · Bay 01</span><span>&#8599;</span></span>
+      <h3>Job card, mid-service</h3>
+      <div class="id">JC-2026-0847</div>
+      <p>Brake pads and labor on a 2019 Swift. The estimate went out as a tokenized link, approval landed in minutes, and the GST invoice carries a UPI QR.</p>
     </div>
+    <span class="eyebrow">Product manager · Fairfax, Virginia</span>
+    <h1>Software for the people software forgot.</h1>
+    <div class="ctas">
+      <a class="btn" href="https://cal.com/venky1104" target="_blank" rel="noopener">Book 20 minutes <b></b></a>
+      <a class="btn ghost" href="/venkatesh-gardas-cv.pdf" download>Download CV</a>
+    </div>
+    <div class="herocard">
+      AI risk analytics at KPMG by day. The rest of the time, products for garage owners, grandparents and families buying their first alarm.
+    </div>
+    <span class="scrollhint">Scroll to explore</span>
   </section>
 
   <div class="row strip">
