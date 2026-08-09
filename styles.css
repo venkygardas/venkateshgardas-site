@@ -118,24 +118,32 @@ img{max-width:100%;}
   position:absolute;left:4%;top:21%;width:min(340px,86vw);padding:1.2rem 1.3rem;z-index:4;
   background:var(--glass-dark);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
   border:1px solid rgba(255,255,255,.35);border-radius:var(--radius);
-  animation:cardloop 9s ease infinite;
+  opacity:0;
 }
 .spotcard .mono{display:flex;justify-content:space-between;opacity:.9;}
 .spotcard h3{font-size:1.05rem;font-weight:600;margin:.5rem 0 .2rem;font-family:var(--font-body);}
 .spotcard .id{font-family:var(--font-mono);font-size:.78rem;color:#FFD9CF;margin-bottom:.5rem;}
 .spotcard p{font-size:.82rem;line-height:1.5;margin:0;}
-@keyframes cardloop{0%,10%{opacity:0;transform:translateY(10px);}20%,85%{opacity:1;transform:none;}95%,100%{opacity:0;transform:translateY(10px);}}
+@keyframes cardcycle{0%{opacity:0;transform:translateY(10px);}4%,29%{opacity:1;transform:none;}33%,100%{opacity:0;transform:translateY(10px);}}
+.spotcard.sc1{animation:cardcycle 27s ease infinite;}
+.spotcard.sc2{animation:cardcycle 27s ease 9s infinite;}
+.spotcard.sc3{animation:cardcycle 27s ease 18s infinite;}
 .vhero .eyebrow{
-  position:absolute;left:4%;bottom:33%;z-index:4;
+  position:absolute;left:4%;bottom:31%;z-index:4;
   background:var(--glass-dark);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
   border:1px solid rgba(255,255,255,.35);padding:.5rem 1rem;border-radius:999px;font-size:.78rem;color:#fff;
 }
 .vhero .eyebrow::before{content:"\2726  ";}
 .vhero h1{
-  position:absolute;left:4%;bottom:13%;z-index:4;max-width:58%;margin:0;
+  position:absolute;left:4%;bottom:22%;z-index:4;max-width:70%;margin:0;
   font-family:var(--font-display);font-weight:800;
-  font-size:clamp(2.3rem,4.8vw,4rem);line-height:1.02;letter-spacing:-.02em;color:#fff;
+  font-size:clamp(2.4rem,5.2vw,4.3rem);line-height:1;letter-spacing:-.02em;color:#fff;
   text-shadow:0 2px 30px rgba(23,50,56,.45);
+}
+.vhero .sub{
+  position:absolute;left:4%;bottom:14.5%;z-index:4;max-width:46ch;margin:0;
+  font-size:clamp(.95rem,1.5vw,1.15rem);color:#fff;
+  text-shadow:0 1px 18px rgba(23,50,56,.55);
 }
 .vhero .ctas{position:absolute;left:4%;bottom:4%;z-index:4;display:flex;gap:.7rem;}
 .vhero .herocard{
@@ -229,7 +237,6 @@ img{max-width:100%;}
 .grid3{grid-template-columns:repeat(3,1fr);}
 .grid4{grid-template-columns:repeat(4,1fr);}
 .row.grid2,.row.grid3,.row.grid4,.row.screens{gap:1.1rem;padding-top:1rem;padding-bottom:.2rem;}
-.row.grid2 > .cell,.row.grid3 > .cell,.row.grid4 > .cell{padding:0;}
 
 .vent{display:flex;flex-direction:column;gap:.55rem;padding:1.7rem var(--pad-x);min-height:230px;}
 .vent .top{display:flex;justify-content:space-between;align-items:baseline;gap:1rem;}
@@ -266,6 +273,15 @@ a.note .go{
   font-weight:700;display:inline-block;margin-top:.8rem;color:var(--coral-soft);
 }
 a.note:hover .go{text-decoration:underline;}
+
+/* ---- tinted card variants ---- */
+.tint-coral{background:rgba(232,72,43,.18);border-color:rgba(232,72,43,.32);}
+.tint-gold{background:rgba(224,168,28,.16);border-color:rgba(224,168,28,.32);}
+.tint-green{background:rgba(62,155,110,.18);border-color:rgba(62,155,110,.34);}
+.tint-sand{background:rgba(237,230,218,.12);border-color:rgba(237,230,218,.3);}
+.tint-gold .mono{color:#F2C14E;}
+.tint-green .mono{color:#8AD4AC;}
+.tint-sand .mono{color:#E5DCC9;}
 
 /* ---- numbered features ---- */
 .feat{grid-template-columns:var(--gutter) 1fr;align-items:start;padding:1.2rem 2rem;border-bottom:1px solid rgba(255,255,255,.08);margin:0 0;}
@@ -394,7 +410,8 @@ a.note:hover .go{text-decoration:underline;}
 /* ---- motion discipline ---- */
 @media (prefers-reduced-motion:reduce){
   *{animation:none!important;transition:none!important;}
-  .spotcard{opacity:1;transform:none;}
+  .spotcard{opacity:0;}
+  .spotcard.sc1{opacity:1;transform:none;}
 }
 
 /* ---- mobile ---- */
@@ -410,11 +427,13 @@ a.note:hover .go{text-decoration:underline;}
   .gcell{display:none;}
   .pillnav nav{flex-wrap:wrap;justify-content:center;}
   .vhero{height:auto;min-height:640px;margin-top:-4.6rem;}
-  .vhero h1{max-width:92%;bottom:16%;}
+  .vhero h1{max-width:92%;bottom:26%;}
+  .vhero .sub{bottom:15%;max-width:92%;}
   .vhero .herocard{display:none;}
-  .vhero .eyebrow{bottom:42%;}
+  .vhero .eyebrow{bottom:36%;}
   .spotcard{display:none;}
   .scrollhint{display:none;}
+  .hotspot{display:none;}
   .gallery .cols{columns:1;}
   .strip{grid-template-columns:1fr;}
   .now{grid-template-columns:1fr;gap:.2rem;}
