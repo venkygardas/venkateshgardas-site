@@ -3,10 +3,8 @@
    v1 (2px ink grid on paper) is in git history before 2026-08-08. */
 
 :root{
-  --backdrop:#D9DAD5;
   --deep:#F2F1EE;
   --deep2:#ECEBE7;
-  --footer:#E4E3DF;
   --text:#15120A;
   --muted:#5B666D;
   --coral:#6E7B45;
@@ -91,6 +89,7 @@ img{max-width:100%;}
   font-style:normal;font-weight:700;font-size:.78rem;letter-spacing:.02em;flex:none;
 }
 @media (max-width:880px){.pillnav .who b{display:none;}}
+@media (max-width:640px){.pillnav a.m-hide{display:none;}}
 .pillnav a{
   color:var(--ink);font-size:.92rem;font-weight:500;
   padding:.5rem 1rem;border-radius:999px;white-space:nowrap;
@@ -126,14 +125,10 @@ img{max-width:100%;}
 
 @keyframes kenburns{from{transform:scale(1);}to{transform:scale(1.06);}}
 .vhero svg.scene{width:100%;height:auto;display:block;}
-.scene .spot-ring{transform-origin:center;transform-box:fill-box;animation:ring 2.2s ease-out infinite;}
 .scene .spot-ring.r2{animation-delay:.8s;}
 .scene .spot-ring.r3{animation-delay:1.4s;}
 @keyframes ring{0%{transform:scale(.5);opacity:1;}85%,100%{transform:scale(1.7);opacity:0;}}
 @keyframes cardcycle{0%{opacity:0;transform:translateY(10px);}2%,31%{opacity:1;transform:none;}34%,100%{opacity:0;transform:translateY(10px);}}
-.spotcard.sc1{animation:cardcycle 27s ease infinite;}
-.spotcard.sc2{animation:cardcycle 27s ease 9s infinite;}
-.spotcard.sc3{animation:cardcycle 27s ease 18s infinite;}
 .vhead{max-width:880px;margin:0 auto;text-align:center;padding:7rem 2rem 1.6rem;}
 .vhead .eyebrow{
   display:inline-block;background:#FFFFFF;border:1px solid var(--glass-line);
@@ -342,13 +337,13 @@ a.note:hover .go{text-decoration:underline;}
 .screens{grid-template-columns:repeat(3,1fr);}
 .shot{padding:0;display:flex;flex-direction:column;gap:.9rem;margin:0;}
 .shot .cap{color:var(--muted);margin-top:auto;padding:0 .2rem .4rem;}
-.mockwin{overflow:clip;background:#FDFBF6;color:var(--ink);border:1px solid var(--glass-line);}
-.mockwin .bar{display:flex;gap:.35rem;padding:.55rem .8rem;border-bottom:1px solid #E4DCCB;}
-.mockwin .bar i{width:9px;height:9px;border-radius:50%;background:#D8D0BE;display:block;}
+.mockwin{overflow:clip;background:#FBFAF8;color:var(--ink);border:1px solid var(--glass-line);}
+.mockwin .bar{display:flex;gap:.35rem;padding:.55rem .8rem;border-bottom:1px solid #DBD9D2;}
+.mockwin .bar i{width:9px;height:9px;border-radius:50%;background:#DBD9D2;display:block;}
 .mockwin .pad{padding:.9rem;}
 .mockwin .big{font-weight:700;font-size:1.3rem;font-family:var(--font-body);}
-.mockwin .lab{font-family:var(--font-mono);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--dim-ink,#6B6B60);}
-.mockwin .line{display:flex;justify-content:space-between;padding:.45rem 0;border-bottom:1px solid #EFE9DC;font-size:.82rem;}
+.mockwin .lab{font-family:var(--font-mono);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--dim-ink,#5B666D);}
+.mockwin .line{display:flex;justify-content:space-between;padding:.45rem 0;border-bottom:1px solid #ECEBE7;font-size:.82rem;}
 .mockwin .line:last-child{border-bottom:0;}
 .mockwin .pill{font-size:.72rem;padding:.15rem .5rem;border-radius:999px;font-weight:600;}
 .mockwin.narrow{max-width:210px;margin:0 auto;}

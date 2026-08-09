@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Three design systems in five days · Venkatesh Gardas</title>
+<meta name="description" content="A field note on redesigning the same website three times in one week: what each system cost, what survived all three, and what it teaches about migrations.">
+<meta property="og:title" content="Three design systems in five days">
+<meta property="og:description" content="What each redesign cost, what survived all three, and what it teaches about migrations.">
+<meta property="og:url" content="https://venkateshgardas.com/notes/three-design-systems">
+<meta property="og:type" content="article">
+<meta property="og:image" content="https://venkateshgardas.com/og-notes.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://venkateshgardas.com/notes/three-design-systems">
+<link rel="alternate" type="application/rss+xml" title="Field notes" href="/rss.xml">
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="stylesheet" href="/fonts.css">
+<link rel="stylesheet" href="/styles.css?v=25">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<div class="frame reading">
+
+  <header class="pillnav">
+    <nav aria-label="Main">
+      <span class="who"><i>VG</i><b>Venkatesh Gardas</b></span>
+      <a href="/">Home</a>
+      <a href="/#building">Products</a>
+      <a href="/#work">Work</a>
+      <a href="/photos">Photos</a>
+      <a class="m-hide" href="/notes/" aria-current="page">Notes</a>
+      <a class="m-hide" href="/now">Now</a>
+      <a class="m-hide" href="/cv">CV</a>
+      <a class="cta" href="/#contact">Contact</a>
+    </nav>
+  </header>
+
+  <div class="row crumb"><a href="/notes/">&larr; All field notes</a></div>
+
+  <section class="row phero" id="main">
+    <div class="cell lead on-blue">
+      <span class="mono">Field note · This site</span>
+      <h1>Three design systems in five days</h1>
+      <p class="say">What churn actually costs, measured on the smallest codebase I own.</p>
+    </div>
+    <div class="cell plate">
+      <div class="phead mono">The short version</div>
+      <dl>
+        <div class="prow"><dt class="mono">The site</dt><dd>Ten pages, one stylesheet, no build step</dd></div>
+        <div class="prow"><dt class="mono">The week</dt><dd>Three complete visual systems, shipped live</dd></div>
+        <div class="prow"><dt class="mono">The cost</dt><dd>Every reskin reset a layer of QC</dd></div>
+        <div class="prow"><dt class="mono">The keep</dt><dd>What survived all three is the real system</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <div class="row shead">
+    <div class="cell n mono">01</div>
+    <div class="cell"><h2>What happened<span class="pairline">a week of molting</span></h2></div>
+  </div>
+
+  <section class="row gutter">
+    <div class="cell gcell" aria-hidden="true"><span class="glabel">week</span></div>
+    <div class="cell prose">
+      <p>This website shipped three complete design systems in five days. First a flat editorial grid: paper ground, 2px ink hairlines, every element in a boxed cell. Then a dark glass system: floating rounded canvas, blurred cards, an animated isometric hero. Then the current one: light greige ground, line-art illustration, a bold grotesque arguing with an italic serif.</p>
+      <p>None of the three was a mistake, exactly. Each came from a real reference and a real reaction to the previous version. But the sequence is the kind of churn every product team recognizes: direction changes faster than the work can settle, and each change looks small from the outside because the pages stay the same. Only the paint moves. The paint is most of the work.</p>
+    </div>
+  </section>
+
+  <div class="row shead">
+    <div class="cell n mono">02</div>
+    <div class="cell"><h2>What each reskin cost<span class="pairline">the invoice nobody itemizes</span></h2></div>
+  </div>
+
+  <section class="row gutter">
+    <div class="cell gcell" aria-hidden="true"><span class="glabel">cost</span></div>
+    <div class="cell prose">
+      <p>The obvious cost is the styling itself, and it was the smallest line item. The real invoice: every audit finding tied to the old skin became void, and the new skin shipped its own fresh defects that had already been fixed once in the old one. Contrast ratios had to be re-measured because the accents changed. Share images had to be regenerated three times or they would advertise a site that no longer existed. The font story ran four faces deep before it settled. And a CDN quietly served the previous design's photographs for a day because image URLs never changed while their bytes did.</p>
+      <p>That last one became a permanent rule, which is the only good thing a defect can become.</p>
+    </div>
+  </section>
+
+  <div class="row shead">
+    <div class="cell n mono">03</div>
+    <div class="cell"><h2>What survived all three<span class="pairline">the load-bearing walls</span></h2></div>
+  </div>
+
+  <section class="row gutter">
+    <div class="cell gcell" aria-hidden="true"><span class="glabel">kept</span></div>
+    <div class="cell prose">
+      <p>Some things crossed all three systems untouched, and the list is instructive. The reading measure on long-form pages. The accessibility floor: skip links, visible focus, reduced-motion support, minimum tap sizes. The cache-busting discipline. The habit of verifying every change against the live site at full zoom rather than trusting a thumbnail. The copy voice. The information architecture: not one page was added or removed by any redesign.</p>
+      <p>That is the actual design system. Not the colors, which changed weekly, but the constraints that made each new coat of paint land in days instead of weeks. A design system is whatever survives your next redesign.</p>
+    </div>
+  </section>
+
+  <div class="row shead">
+    <div class="cell n mono">04</div>
+    <div class="cell"><h2>What it cost, and what I keep from it<span class="pairline">a rule for migrations</span></h2></div>
+  </div>
+
+  <section class="row gutter">
+    <div class="cell gcell" aria-hidden="true"><span class="glabel">rule</span></div>
+    <div class="cell prose">
+      <p>The lesson maps directly onto product work. When a team reskins, replatforms or rebrands, the visible artifact is the cheap part. The expensive parts are the invalidated verification, the assets that keep telling the old story, and the small honest documents that quietly become liars. Budget for those or the migration is not done when it looks done.</p>
+      <p>So the rule I keep: before changing a system, write down what must survive it. If the list is empty, the system was never real. Mine had six entries, and they are the only reason the third redesign took a day instead of a month.</p>
+    </div>
+  </section>
+
+  <section class="row" id="contact">
+    <div class="cell contact">
+      <span class="mono">Migrating something?</span>
+      <h2>Ask me what survives.</h2>
+      <p>I have the git history and the scars. Happy to compare notes.</p>
+      <!--email_off--><a class="mail" href="mailto:venkatesh@venkateshgardas.com">venkatesh@venkateshgardas.com</a><!--/email_off-->
+    </div>
+  </section>
+
+  <footer class="row foot">
+    <span class="who mono">Venkatesh Gardas · 2026</span>
+    <div class="links mono">
+      <a href="/notes/">All notes</a>
+      <a href="/now">Now</a>
+      <a href="/colophon">Colophon</a>
+    </div>
+  </footer>
+
+</div>
+
+</body>
+</html>

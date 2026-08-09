@@ -19,7 +19,7 @@ type:
   headline_pair: "Inter Tight 700 first line, Instrument Serif italic second line. This pair IS the brand"
   body: Inter Tight 400/500/600
   utility: Space Mono, uppercase, .72rem floor
-  benched: Poiret One and Syne files remain in /fonts, unused
+  name_face: Poiret One 400 carries the name in the hero and on the CV. Syne is deleted
 structure:
   canvas: full-bleed light page, rows self-constrain to 1240px (1040px on reading pages)
   cards: white, 1px hairline #DBD9D2, corner registration dots (the Ozsoy signature)
