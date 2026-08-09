@@ -242,6 +242,7 @@ img{max-width:100%;}
 .grid3{grid-template-columns:repeat(3,1fr);}
 .grid4{grid-template-columns:repeat(4,1fr);}
 .row.grid2,.row.grid3,.row.grid4,.row.screens{gap:1.1rem;padding-top:1rem;padding-bottom:.2rem;}
+.row.stories{padding-top:1.4rem;}
 
 .vent{display:flex;flex-direction:column;gap:.55rem;padding:1.7rem var(--pad-x);min-height:230px;}
 .vent .glyph{margin-bottom:.6rem;}
@@ -264,6 +265,8 @@ a.vent:hover .go{text-decoration:underline;}
 .job h3{font-family:var(--font-body);font-weight:600;font-size:1.25rem;margin:0 0 .2rem;}
 .job .role{display:block;font-size:.92rem;font-weight:500;color:var(--muted);margin-bottom:.7rem;}
 .job p{margin:0;font-size:.92rem;max-width:var(--measure-card);}
+.row > a.job,.row > .cell.job{display:block;}
+.row > a.job p,.row > .cell.job p{max-width:72ch;}
 a.job{display:block;transition:transform .15s cubic-bezier(.2,.6,.2,1);}
 a.job:hover{transform:translateY(-3px);}
 a.job .go{display:block;font-family:var(--font-mono);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;font-weight:700;margin-top:1rem;color:var(--coral-soft);}
@@ -273,6 +276,7 @@ a.job:hover .go{text-decoration:underline;}
 .note .mono{color:var(--coral-soft);}
 .note h3{font-family:var(--font-body);font-weight:600;font-size:1.1rem;margin:.6rem 0 .45rem;}
 .note p{margin:0;font-size:.92rem;color:var(--muted);max-width:var(--measure-card);}
+.row > a.note p,.row > .cell.note p{max-width:72ch;}
 a.note{display:block;text-decoration:none;transition:transform .15s cubic-bezier(.2,.6,.2,1);}
 a.note:hover{transform:translateY(-3px);}
 a.note .go{
@@ -297,11 +301,16 @@ a.note:hover .go{text-decoration:underline;}
 
 .cgraph .why{margin:.6rem 0 0;font-size:.92rem;color:var(--muted);max-width:70ch;}
 
+/* ---- wide feature card ---- */
+.row > a.job.fieldnote{display:grid;grid-template-columns:1fr auto;align-items:center;column-gap:2.5rem;}
+.fieldnote .go{white-space:nowrap;font-size:.82rem;}
+@media (max-width:880px){.row > a.job.fieldnote{grid-template-columns:1fr;}}
+
 /* ---- tinted card variants ---- */
-.tint-coral{background:rgba(232,72,43,.18);border-color:rgba(232,72,43,.32);}
-.tint-gold{background:rgba(224,168,28,.16);border-color:rgba(224,168,28,.32);}
-.tint-green{background:rgba(62,155,110,.18);border-color:rgba(62,155,110,.34);}
-.tint-sand{background:rgba(237,230,218,.12);border-color:rgba(237,230,218,.3);}
+.tint-coral{background:rgba(232,72,43,.26);border-color:rgba(232,72,43,.45);}
+.tint-gold{background:rgba(224,168,28,.22);border-color:rgba(224,168,28,.45);}
+.tint-green{background:rgba(62,155,110,.26);border-color:rgba(62,155,110,.48);}
+.tint-sand{background:rgba(237,230,218,.16);border-color:rgba(237,230,218,.4);}
 .tint-gold .mono{color:#F2C14E;}
 .tint-green .mono{color:#8AD4AC;}
 .tint-sand .mono{color:#E5DCC9;}
@@ -423,17 +432,12 @@ a.note:hover .go{text-decoration:underline;}
 
 /* ---- photo gallery ---- */
 .gallery{padding:1.4rem 0;}
-.gallery .cols{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:200px;grid-auto-flow:dense;gap:1rem;}
+.gallery .cols{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));grid-auto-rows:8px;gap:14px;}
 .gallery figure{margin:0;overflow:clip;border-radius:14px;background:var(--deep2);}
-.gallery figure:nth-child(5n+1){grid-row:span 2;}
-.gallery figure:nth-child(7n+3){grid-column:span 2;grid-row:span 2;}
-.gallery figure:nth-child(11n+6){grid-column:span 2;}
-.gallery figure:last-child{grid-column:span 2;grid-row:span 1;}
-.gallery figure.crop-top img{object-position:top;}
-.gallery img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s cubic-bezier(.2,.6,.2,1);}
-.gallery figure:hover img{transform:scale(1.04);}
-@media (max-width:880px){
-  .gallery .cols{grid-template-columns:repeat(2,1fr);grid-auto-rows:150px;}
+.gallery img{width:100%;height:auto;display:block;transition:transform .5s cubic-bezier(.2,.6,.2,1);}
+.gallery figure:hover img{transform:scale(1.03);}
+@media (max-width:640px){
+  .gallery .cols{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;}
 }
 
 /* ---- scroll fade ---- */
