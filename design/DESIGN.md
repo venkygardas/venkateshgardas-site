@@ -22,7 +22,9 @@ structure:
 type:
   display: "Poiret One 400, big display moments only. Venky picked it as the free match for Troika, which he chose but did not buy. It exists thin-only, so card titles use Inter Tight 600 instead of faux-bolding it. Syne stays as fallback"
   body: Inter Tight 400/500/600
-  utility: Space Mono, uppercase, letterspaced
+  utility: Space Mono, uppercase, letterspaced, .72rem floor
+cache:
+  rule: "Images and any same-URL asset edit MUST bump a ?r= query in the HTML. Cloudflare Pages edge-caches asset bodies; HTML and CSS already bust via ?v=. Run scripts-verify-live.sh after every push"
 a11y:
   contrast_min: "4.5:1 body, 3:1 large. text on deep is 11:1, muted on deep 5.5:1. Small coral text on dark must use coral_soft"
   focus_ring: 3px coral outline, never removed

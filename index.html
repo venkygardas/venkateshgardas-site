@@ -47,7 +47,8 @@
 }
 </script>
 
-<link rel="stylesheet" href="/styles.css?v=16">
+<link rel="stylesheet" href="/styles.css?v=17">
+<link rel="alternate" type="application/rss+xml" title="Field notes" href="/rss.xml">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -56,10 +57,12 @@
 
   <header class="pillnav">
     <nav aria-label="Main">
-      <a href="/">Home</a>
+      <a href="/" aria-current="page">Home</a>
       <a href="/#building">Building</a>
       <a href="/#work">Work</a>
       <a href="/photos">Photos</a>
+      <a href="/notes/">Notes</a>
+      <a href="/now">Now</a>
       <a href="/cv">CV</a>
       <a class="cta" href="/#contact">Contact</a>
     </nav>
@@ -85,7 +88,7 @@
       <polygon points="560,300 900,180 900,350 560,470" fill="#D9D1BF"/>
       <rect x="130" y="340" width="180" height="130" fill="#22333A"/>
       <rect x="350" y="340" width="180" height="130" fill="#22333A"/>
-      <text x="140" y="325" font-family="Space Mono,monospace" font-size="17" letter-spacing="5" fill="#B3492F" opacity=".75">PITSTOP · SERVICE BAY 01</text>
+      <text x="140" y="325" font-family="Space Mono,monospace" font-size="17" letter-spacing="5" fill="#B3492F" opacity=".85">PITSTOP · SERVICE BAY 01</text>
       <g>
         <rect x="180" y="180" width="14" height="30" fill="#22333A"/>
         <rect x="330" y="180" width="14" height="30" fill="#22333A"/>
@@ -157,7 +160,7 @@
     <div class="spotcard sc1">
       <span class="mono"><span>&#9636; KPMG · risk analytics</span><span>&#8599;</span></span>
       <h3>40 plus decision flows in production</h3>
-      <p>An AI risk platform for audit teams. Decision cycles down 16 percent, reporting accuracy up 28, adoption at 90.</p>
+      <p>An AI risk platform for audit teams. Decision cycles down 16 percent, reporting accuracy up 28 percent, adoption at 90 percent.</p>
     </div>
     <div class="spotcard sc2">
       <span class="mono"><span>&#9636; PitStop · live at a garage</span><span>&#8599;</span></span>
@@ -205,7 +208,7 @@
 
   <section class="row grid2">
     <a class="cell vent tint-coral" href="/pitstop">
-      <span class="glyph" aria-hidden="true"><svg width="44" height="30" viewBox="0 0 44 30" fill="none"><path d="M4 26 V8 M40 26 V8 M2 8 H42" stroke="#FF7D5C" stroke-width="4" stroke-linecap="round"/><rect x="13" y="14" width="18" height="8" rx="3" fill="#FF7D5C"/></svg></span>
+      <span class="glyph" aria-hidden="true"><svg width="44" height="30" viewBox="0 0 44 30" fill="none"><path d="M4 26 V8 M40 26 V8 M2 8 H42" stroke="#FF7D5C" stroke-width="3.4" stroke-linecap="round"/><rect x="13" y="14" width="18" height="8" rx="3" fill="#FF7D5C"/></svg></span>
       <div class="top"><h3>PitStop</h3><span class="tag">Building</span></div>
       <p>Garage management for Indian workshops. Job cards, customer approvals, GST invoicing and UPI, built for a service advisor with oily hands and a queue at the counter.</p>
       <span class="go">See inside &rarr;</span>
@@ -223,7 +226,7 @@
       <span class="go">See inside &rarr;</span>
     </a>
     <a class="cell vent tint-sand" href="https://resumeroast.vercel.app" target="_blank" rel="noopener">
-      <span class="glyph" aria-hidden="true"><svg width="30" height="30" viewBox="0 0 30 30" fill="none"><path d="M15 3 c4 5 9 8 9 14 a9 9 0 0 1 -18 0 c0 -6 5 -9 9 -14z" stroke="#E5DCC9" stroke-width="3.2" stroke-linejoin="round"/></svg></span>
+      <span class="glyph" aria-hidden="true"><svg width="30" height="30" viewBox="0 0 30 30" fill="none"><path d="M15 3 c4 5 9 8 9 14 a9 9 0 0 1 -18 0 c0 -6 5 -9 9 -14z" stroke="#E5DCC9" stroke-width="3.4" stroke-linejoin="round"/></svg></span>
       <div class="top"><h3>Resume Roast</h3><span class="tag">Shipped</span></div>
       <p>An AI app that tears a resume apart and hands back honest, useful feedback at three roast levels. Built and shipped in a weekend, which is its own kind of scope lesson.</p>
       <span class="go">Try it live &rarr;</span>
@@ -270,7 +273,7 @@
 
   <section class="row grid3">
     <div class="cell job">
-      <span class="mono">E-commerce data</span>
+      <span class="mono">E-commerce</span>
       <h3>Purplle</h3>
       <span class="role">Data Modeler</span>
       <p>SQL pipelines, cohort models, price determination and catalog modeling for purplle.com. That work drove a 12 percent drop in churn and 15 percent growth in repeat orders.</p>
