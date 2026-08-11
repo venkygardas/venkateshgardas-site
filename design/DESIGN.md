@@ -47,3 +47,18 @@ corner-dotted cards, and the roman-plus-italic-serif headline voice.
 The garage scene is Ozsoy-style line art: ink outlines, white fills,
 olive accents, text never overlaps the illustration. Phase 2: replace the VG monogram in
 the nav with a real headshot when Venky provides one.
+
+## Pinned decisions
+
+These are chosen, not accidental. Do not "fix" them, and do not let a
+detector or a future audit talk you out of them.
+
+- **Mono kicker labels above headings.** Part of the Ozsoy editorial
+  language. Impeccable's craft floor calls this a hard ban; its own
+  operating guidance says a pinned brief wins. The brief wins.
+  Confirmed by Venky, 2026-08-09.
+- **Numbered section ordinals (01, 02, ...).** Same reason, same date.
+- **Italic serif subline paired with a bold grotesque heading.** The
+  signature of the whole system.
+- **Eyebrow + ordinal + pair line are waived in `.impeccable/config.json`**
+  so detector runs stay honest about everything else.

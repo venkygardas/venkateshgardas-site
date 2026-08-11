@@ -628,3 +628,21 @@ a.note:hover .muted-go{color:var(--muted);}
   .plate .prow{grid-template-columns:5.4rem 1fr;}
   .contact .mail{font-size:.85rem;white-space:nowrap;}
 }
+/* ---- browser surfaces ----
+   The parts nobody draws still carry the design: selection, caret,
+   scrollbar, underline offset, and the numerals in stacked data.
+   Left at browser defaults these belong to no design system at all. */
+
+::selection{background:rgba(110,123,69,.22);color:var(--ink);}
+::-moz-selection{background:rgba(110,123,69,.22);color:var(--ink);}
+
+html{scrollbar-color:rgba(21,18,10,.28) transparent;scrollbar-width:thin;caret-color:var(--coral);}
+::-webkit-scrollbar{width:11px;height:11px;}
+::-webkit-scrollbar-track{background:transparent;}
+::-webkit-scrollbar-thumb{background:rgba(21,18,10,.24);border-radius:999px;border:3px solid var(--deep);}
+::-webkit-scrollbar-thumb:hover{background:rgba(21,18,10,.38);}
+
+a{text-underline-offset:.18em;text-decoration-thickness:from-font;}
+
+/* stacked numerals line up: dates, money, stats, spec values */
+.feat .n,.plate dd,.bignum b,.mockwin .money,.cv-dates,.mono{font-variant-numeric:tabular-nums;}

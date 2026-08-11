@@ -1,0 +1,10 @@
+{
+  "detector": {
+    "ignoreRules": [
+      "kicker-eyebrow",
+      "section-numbers",
+      "italic-serif-display"
+    ],
+    "_note": "Pinned by the brief, not oversights. The site follows Mehmet Ozsoy's editorial fintech language: a mono kicker above each heading, numbered section ordinals, and an italic Instrument Serif subline paired with a bold grotesque heading. Impeccable's craft floor treats the first two as bans; its operating guidance says a pinned brief wins. Venky confirmed 2026-08-09: keep them."
+  }
+}
