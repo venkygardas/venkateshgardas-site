@@ -24,11 +24,17 @@
 
     var frameTop = frame.getBoundingClientRect().top + window.scrollY;
     var marks = Array.prototype.slice.call(frame.querySelectorAll('.shead, .cell.contact'));
-    if (!marks.length) return;
+    if (!marks.length) {
+      marks = Array.prototype.slice.call(frame.querySelectorAll('.row')).filter(function (r) {
+        return r.offsetHeight > 80;
+      });
+    }
+    if (!marks.length) { wrap.style.display = 'none'; return; }
 
     /* a rail in the left margin: never crosses the content column */
     var colLeft = (W - Math.min(W, parseFloat(getComputedStyle(frame).getPropertyValue('--pw')) || 1240)) / 2;
-    var mid = Math.max(18, colLeft * 0.42);
+    if (colLeft < 70) { wrap.style.display = 'none'; return; }
+    var mid = Math.max(24, colLeft * 0.42);
     var amp = Math.min(22, Math.max(8, colLeft * 0.22));
 
     var pts = [];
@@ -71,8 +77,8 @@
   function draw() {
     if (!len) return;
     if (reduce) { ink.style.strokeDashoffset = 0; return; }
-    var seen = window.scrollY + window.innerHeight * 0.62;
-    var p = Math.max(0, Math.min(1, seen / H));
+    var span = Math.max(1, H - window.innerHeight * 0.38);
+    var p = Math.max(0, Math.min(1, (window.scrollY + window.innerHeight * 0.62) / span));
     ink.style.strokeDashoffset = len * (1 - p);
   }
 

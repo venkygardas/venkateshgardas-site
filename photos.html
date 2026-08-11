@@ -16,7 +16,7 @@
 <link rel="canonical" href="https://venkateshgardas.com/photos">
 <link rel="icon" href="/favicon.ico" sizes="48x48">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<link rel="stylesheet" href="/styles.css?v=35">
+<link rel="stylesheet" href="/styles.css?v=36">
 <noscript><style>.gallery .cols{display:block;columns:3;column-gap:14px}.gallery figure{break-inside:avoid;margin:0 0 14px}@media(max-width:640px){.gallery .cols{columns:1}}</style></noscript>
 </head>
 <body>
@@ -121,7 +121,7 @@
   var grid=document.querySelector('.gallery .cols');
   if(!grid)return;
   function layout(){
-    var rowH=8,gap=14;
+    var rowH=8,gap=parseFloat(getComputedStyle(grid).rowGap)||14;
     grid.querySelectorAll('figure').forEach(function(f){
       var img=f.querySelector('img');
       var w=f.getBoundingClientRect().width;
@@ -134,6 +134,6 @@
   window.addEventListener('load',layout);
 })();
 </script>
-<script src="/thread.js?v=2" defer></script>
+<script src="/thread.js?v=3" defer></script>
 </body>
 </html>
