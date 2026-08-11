@@ -100,3 +100,57 @@
   });
   if (window.ResizeObserver) new ResizeObserver(build).observe(frame);
 })();
+
+/* Motion layer: cards arrive as you reach them, numbers count up.
+   Everything here is opt-out under prefers-reduced-motion. */
+(function () {
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var rows = document.querySelectorAll('.rv');
+  var stats = document.querySelectorAll('.bignum b');
+
+  if (reduce || !('IntersectionObserver' in window)) {
+    rows.forEach(function (r) { r.classList.add('in'); });
+    return;
+  }
+
+  rows.forEach(function (row) {
+    Array.prototype.forEach.call(row.children, function (cell, i) {
+      cell.style.transitionDelay = (i * 70) + 'ms';
+    });
+  });
+
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (!e.isIntersecting) return;
+      e.target.classList.add('in');
+      io.unobserve(e.target);
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+  rows.forEach(function (r) { io.observe(r); });
+
+  function countUp(el) {
+    var raw = el.textContent.trim();
+    var m = raw.match(/^(\d+)(\D*)$/);
+    if (!m) return;
+    var target = parseInt(m[1], 10), suffix = m[2], t0 = null;
+    var dur = 900;
+    el.style.fontVariantNumeric = 'tabular-nums';
+    function step(ts) {
+      if (t0 === null) t0 = ts;
+      var p = Math.min(1, (ts - t0) / dur);
+      var eased = 1 - Math.pow(1 - p, 3);
+      el.textContent = Math.round(target * eased) + suffix;
+      if (p < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+
+  var sio = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (!e.isIntersecting) return;
+      countUp(e.target);
+      sio.unobserve(e.target);
+    });
+  }, { threshold: 0.6 });
+  stats.forEach(function (s) { sio.observe(s); });
+})();
