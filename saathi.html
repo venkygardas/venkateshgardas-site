@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Saathi · Venkatesh Gardas</title>
-<meta name="description" content="Saathi is a voice companion for elderly Indian users. It speaks Malayalam and Telugu, the type is enormous, and the family sets it up from another continent.">
-<meta property="og:title" content="Saathi · a voice companion for your parents">
+<title>Hey Saathi · Venkatesh Gardas</title>
+<meta name="description" content="Hey Saathi is a voice companion for elderly Indian users. It speaks Malayalam and Telugu, the type is enormous, and the family sets it up from another continent.">
+<meta property="og:title" content="Hey Saathi · a voice companion for your parents">
 <meta property="og:description" content="It speaks Malayalam and Telugu, the type is enormous, and the family sets it up from another continent.">
 <meta property="og:url" content="https://venkateshgardas.com/saathi">
 <meta property="og:type" content="website">
@@ -16,12 +16,16 @@
 <link rel="canonical" href="https://venkateshgardas.com/saathi">
 <link rel="icon" href="/favicon.ico" sizes="48x48">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<link rel="stylesheet" href="/styles.css?v=32">
+<link rel="stylesheet" href="/styles.css?v=35">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
 
 <div class="frame reading">
+  <div class="threadwrap" aria-hidden="true">
+    <svg xmlns="http://www.w3.org/2000/svg"><path class="thread-bed"/><path class="thread-ink"/><g class="thread-nodes"></g></svg>
+  </div>
+
 
   <header class="pillnav">
     <nav aria-label="Main">
@@ -39,10 +43,20 @@
 
   <div class="row crumb"><a href="/">&larr; Back to home</a></div>
 
+  <div class="row now">
+    <span class="cell lbl mono">New</span>
+    <p class="cell">A new name and a new face. Hey Saathi is bigger, softer and kinder, and both screens below are captured from the live build this week.</p>
+  </div>
+
+  <div class="row now try-strip">
+    <span class="cell lbl mono">Try it</span>
+    <p class="cell">It runs in a browser, no install and no account. Open <a href="https://heysaathi.vercel.app" target="_blank" rel="noopener">heysaathi.vercel.app</a> on a phone, pick a language, and talk to it the way a parent would.</p>
+  </div>
+
   <section class="row phero" id="main">
     <div class="cell lead on-yellow">
       <span class="mono">Venture · 02</span>
-      <h1>Saathi</h1>
+      <h1>Hey Saathi</h1>
       <p class="say">A voice companion for your parents. It speaks their language, listens without hurry, and never asks them to type.</p>
       <div class="minianim" aria-hidden="true"><svg width="150" height="70" viewBox="0 0 150 70" fill="none" stroke="#15120A" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
         <rect x="30" y="8" width="28" height="54" rx="7" fill="#FFFFFF"/>
@@ -93,11 +107,11 @@
 
   <section class="row screens two">
     <figure class="cell shot">
-      <div class="phone"><picture><source srcset="/shots/saathi-language.webp" type="image/webp"><img src="/shots/saathi-language.jpg" alt="Saathi language selection with four large buttons: Telugu, Malayalam, Hindi and English, each in its own script" loading="lazy" width="1170" height="2532"></picture></div>
+      <div class="phone"><picture><source srcset="/shots/heysaathi-1.webp?r=1" type="image/webp"><img loading="lazy" src="/shots/heysaathi-1.jpg?r=1" alt="Hey Saathi language screen: a cream card with four large rounded buttons for Telugu, Malayalam, Hindi and English, each in its own script, step one of three" width="780" height="1688"></picture></div>
       <figcaption class="cap mono">Four scripts, four buttons, no menu</figcaption>
     </figure>
     <figure class="cell shot">
-      <div class="phone"><picture><source srcset="/shots/saathi-pairing.webp" type="image/webp"><img src="/shots/saathi-pairing.jpg" alt="Saathi pairing screen showing the large connect code a family member enters from abroad" loading="lazy" width="1170" height="2532"></picture></div>
+      <div class="phone"><picture><source srcset="/shots/heysaathi-2.webp?r=1" type="image/webp"><img loading="lazy" src="/shots/heysaathi-2.jpg?r=1" alt="Hey Saathi pairing screen in Malayalam: a six-character code field reading ABC123 above a large sage continue button, step two of three" width="780" height="1688"></picture></div>
       <figcaption class="cap mono">The pairing code, already in Malayalam</figcaption>
     </figure>
   </section>
@@ -123,5 +137,6 @@
 </div>
 
 
+<script src="/thread.js?v=2" defer></script>
 </body>
 </html>

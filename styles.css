@@ -56,7 +56,7 @@ img{max-width:100%;height:auto;}
 }
 
 /* ---- the floating canvas ---- */
-.frame{--pw:1240px;width:100%;background:var(--deep);}
+.frame{--pw:1240px;width:100%;background:var(--deep);position:relative;}
 .frame.reading{--pw:1040px;--gutter:5.4rem;}
 
 /* rows become spaced sections */
@@ -113,6 +113,48 @@ img{max-width:100%;height:auto;}
     radial-gradient(circle 2.2px at 0px 100%, var(--ink) 1.8px, transparent 2.2px),
     radial-gradient(circle 2.2px at 100% 100%, var(--ink) 1.8px, transparent 2.2px);
   background-repeat:no-repeat;
+}
+
+
+/* ---- the product thread: one line, whole site ---- */
+.threadwrap{
+  position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden;
+}
+.threadwrap svg{width:100%;height:100%;display:block;}
+.thread-bed{stroke:rgba(21,18,10,.09);stroke-width:1.25;fill:none;vector-effect:non-scaling-stroke;}
+.thread-ink{stroke:var(--coral);stroke-width:1.25;fill:none;opacity:.6;vector-effect:non-scaling-stroke;}
+.thread-node{fill:#fff;stroke:rgba(21,18,10,.35);stroke-width:1.25;vector-effect:non-scaling-stroke;}
+.frame > *:not(.threadwrap){position:relative;z-index:1;}
+
+/* ---- hero: the product loop ---- */
+.loopwrap{max-width:1040px;margin:0 auto;padding:0 2rem 1rem;}
+.loopwrap svg{width:100%;height:auto;display:block;overflow:visible;}
+.loop-path{fill:none;stroke:rgba(21,18,10,.16);stroke-width:1.5;}
+.loop-live{
+  fill:none;stroke:var(--coral);stroke-width:1.5;
+  stroke-dasharray:150 1050;
+  animation:loopDraw 9s cubic-bezier(.65,0,.35,1) infinite;
+}
+@keyframes loopDraw{to{stroke-dashoffset:-1200;}}
+.loop-node{fill:#fff;stroke:var(--ink);stroke-width:1.5;}
+.loop-node-fill{fill:var(--coral);stroke:none;opacity:0;animation:nodeLight 9s linear infinite;}
+.loop-node-fill.n2{animation-delay:1.8s;}
+.loop-node-fill.n3{animation-delay:3.6s;}
+.loop-node-fill.n4{animation-delay:5.4s;}
+.loop-node-fill.n5{animation-delay:7.2s;}
+@keyframes nodeLight{0%,4%{opacity:0;}8%,18%{opacity:1;}24%,100%{opacity:0;}}
+.loop-label{font-family:var(--font-mono);font-size:11px;letter-spacing:.14em;fill:var(--muted);text-transform:uppercase;}
+.loop-caption{font-family:var(--font-serif);font-style:italic;font-size:19px;fill:var(--ink);}
+.loop-tick{stroke:rgba(21,18,10,.16);stroke-width:1.5;}
+
+@media (prefers-reduced-motion:reduce){
+  .loop-live{animation:none;stroke-dasharray:none;}
+  .loop-node-fill{animation:none;opacity:1;}
+}
+@media (max-width:640px){
+  .loopwrap{padding:0 1.1rem 1rem;}
+  .loop-label{font-size:14px;}
+  .loop-caption{font-size:24px;}
 }
 
 /* ---- animated hero (homepage) ---- */

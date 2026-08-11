@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>PitStop · Venkatesh Gardas</title>
-<meta name="description" content="PitStop is garage management software for Indian workshops. Job cards, customer approvals, GST invoicing, UPI collection and a workshop chat, built phone first.">
+<meta name="description" content="PitStop, garage management for Indian workshops: job cards, customer approvals by link, GST invoicing and UPI collection, live at a working garage. PitStop is garage management software for Indian workshops. Job cards, customer approvals, GST invoicing, UPI collection and a workshop chat, built phone first.">
 <meta property="og:title" content="PitStop · garage management for Indian workshops">
 <meta property="og:description" content="Job cards, customer approvals, GST invoicing and UPI, built for a service advisor with oily hands and a queue at the counter.">
 <meta property="og:url" content="https://venkateshgardas.com/pitstop">
@@ -16,12 +16,16 @@
 <link rel="canonical" href="https://venkateshgardas.com/pitstop">
 <link rel="icon" href="/favicon.ico" sizes="48x48">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<link rel="stylesheet" href="/styles.css?v=32">
+<link rel="stylesheet" href="/styles.css?v=35">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
 
 <div class="frame reading">
+  <div class="threadwrap" aria-hidden="true">
+    <svg xmlns="http://www.w3.org/2000/svg"><path class="thread-bed"/><path class="thread-ink"/><g class="thread-nodes"></g></svg>
+  </div>
+
 
   <header class="pillnav">
     <nav aria-label="Main">
@@ -39,11 +43,16 @@
 
   <div class="row crumb"><a href="/">&larr; Back to home</a></div>
 
+  <div class="row now">
+    <span class="cell lbl mono">New</span>
+    <p class="cell">A second UI shipped this month: softer, faster, and already at the counter. Every screen below is captured from the live build, not a mockup.</p>
+  </div>
+
   <section class="row phero" id="main">
     <div class="cell lead on-blue">
       <span class="mono">Venture · 01</span>
       <h1>PitStop</h1>
-      <p class="say">Garage management for Indian workshops, built for a service advisor with oily hands and a queue at the counter.</p>
+      <p class="say">Garage management for Indian workshops. Intake to GST invoice, built for a service advisor with oily hands and a queue at the counter.</p>
       <div class="minianim" aria-hidden="true"><svg width="150" height="70" viewBox="0 0 150 70" fill="none" stroke="#15120A" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
         <g class="spin"><circle cx="38" cy="35" r="16"/><circle cx="38" cy="35" r="6"/>
           <path d="M38 13 v6 M38 51 v6 M16 35 h6 M54 35 h6 M22.5 19.5 l4.2 4.2 M49.3 46.3 l4.2 4.2 M53.5 19.5 l-4.2 4.2 M26.7 46.3 l-4.2 4.2"/></g>
@@ -99,18 +108,27 @@
   <section class="row">
     <figure class="cell shot">
       <div class="shotframe">
-        <picture><source srcset="/shots/pitstop-dashboard-3.webp" type="image/webp"><img src="/shots/pitstop-dashboard-3.jpg" alt="The live PitStop dashboard: out today, in the shop, ready for pickup, approvals pending and billed today cards over a by-stage chart" loading="lazy" width="1600" height="1248"></picture>
+        <picture><source srcset="/shots/pitstop-dash-4.webp?r=1" type="image/webp"><img src="/shots/pitstop-dash-4.jpg?r=1" alt="The PitStop dashboard: pastel cards for out today, in the shop, ready for pickup, waiting on a call and billed today, above a by-stage chart of every vehicle" loading="lazy" width="1600" height="900"></picture>
       </div>
-      <figcaption class="cap mono center">The dashboard for real. The garage and its customers are demo data</figcaption>
+      <figcaption class="cap mono center">The owner&rsquo;s morning in one screen. Demo garage, real product</figcaption>
     </figure>
   </section>
 
   <section class="row">
     <figure class="cell shot">
       <div class="shotframe">
-        <picture><source srcset="/shots/pitstop-jobboard-2.webp" type="image/webp"><img src="/shots/pitstop-jobboard-2.jpg" alt="The PitStop job board: every vehicle as a card arranged in stage columns" loading="lazy" width="1600" height="1067"></picture>
+        <picture><source srcset="/shots/pitstop-board-3.webp?r=1" type="image/webp"><img src="/shots/pitstop-board-3.jpg?r=1" alt="The PitStop job board filtered to in progress: seven vehicle cards with number plates, complaints in plain language, days late and approval chips" loading="lazy" width="1600" height="900"></picture>
       </div>
-      <figcaption class="cap mono center">The job board, every car by stage</figcaption>
+      <figcaption class="cap mono center">The board, filtered to what is being worked on right now</figcaption>
+    </figure>
+  </section>
+
+  <section class="row">
+    <figure class="cell shot">
+      <div class="shotframe">
+        <picture><source srcset="/shots/pitstop-sched-1.webp?r=1" type="image/webp"><img src="/shots/pitstop-sched-1.jpg?r=1" alt="PitStop scheduling: a week by bay, colour coded jobs across seven days, a double-booked chip, blocked time and a job that runs past closing" loading="lazy" width="1600" height="900"></picture>
+      </div>
+      <figcaption class="cap mono center">The week by bay. Double bookings and work past closing are labelled, not hidden</figcaption>
     </figure>
   </section>
 
@@ -228,5 +246,6 @@
 </div>
 
 
+<script src="/thread.js?v=2" defer></script>
 </body>
 </html>
