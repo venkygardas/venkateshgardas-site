@@ -24,10 +24,11 @@
 
     var frameTop = frame.getBoundingClientRect().top + window.scrollY;
     var marks = Array.prototype.slice.call(frame.querySelectorAll('.shead, .cell.contact'));
-    if (!marks.length) {
-      marks = Array.prototype.slice.call(frame.querySelectorAll('.row')).filter(function (r) {
+    if (marks.length < 3) {
+      var rows = Array.prototype.slice.call(frame.querySelectorAll('.row')).filter(function (r) {
         return r.offsetHeight > 80;
       });
+      if (rows.length > marks.length) marks = rows;
     }
     if (!marks.length) { wrap.style.display = 'none'; return; }
 
