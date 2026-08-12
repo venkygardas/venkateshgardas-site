@@ -17,7 +17,7 @@
 <link rel="icon" href="/favicon.ico" sizes="48x48">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="stylesheet" href="/fonts.css?v=2">
-<link rel="stylesheet" href="/styles.css?v=77">
+<link rel="stylesheet" href="/styles.css?v=78">
 <script>(function(){var r=document.documentElement;r.classList.add('js');try{var t=localStorage.getItem('theme');if(t==='dark'||t==='light')r.setAttribute('data-theme',t);}catch(e){}setTimeout(function(){if(!window.__rvReady)r.classList.add('rv-fail')},2500)})()</script>
 </head>
 <body>
@@ -45,6 +45,7 @@
 
   <div class="row crumb"><a href="/">Back to home</a></div>
 
+  <main id="main" tabindex="-1">
   <div class="row now try-strip">
     <span class="cell lbl mono">Try it</span>
     <p class="cell">You can use the part a customer uses. <a href="https://pitstop-demo-omega.vercel.app/approve/1afb6c96be634121a26407c920cdb302dcb631652d7b4aad8072f045c5ffb647" target="_blank" rel="noopener">Open a real estimate</a> and approve or reject it. No login, no app, just a link, which is exactly what the customer gets by text. The same car has a <a href="https://pitstop-demo-omega.vercel.app/portal/d145ebacd2ef49f1a3f326acbeaa120996de3113303f4daa8121af3452f4896f" target="_blank" rel="noopener">customer portal</a>, and here is the <a href="https://pitstop-demo-omega.vercel.app/gate/affa0c180d0b4a49a320595da81ab3382fd2313b29804a17a762dbaf54e5d52d" target="_blank" rel="noopener">gate pass</a> the security desk sees at handover. This runs the real product against a demo garage of invented people, so approve away: no real customer, no real money.</p>
@@ -52,10 +53,9 @@
 
   <div class="row now">
     <span class="cell lbl mono">New</span>
-    <p class="cell">A second UI shipped this month: softer, faster, and already at the counter. The eight screenshots below are captured from the live build. The small panels after them are drawn by hand, to show the shapes without the noise.</p>
+    <p class="cell">A second UI shipped this month: softer, faster, and already at the counter. The eight screenshots below are captured from the live build, and the estimate above is the real thing, not a picture of it.</p>
   </div>
 
-  <main id="main" tabindex="-1">
   <section class="row phero">
     <div class="cell lead">
       <span class="mono">Venture · 01</span>
@@ -229,63 +229,6 @@
       <figcaption class="cap mono center">Shop chat. Threads tie to a vehicle, and the parts question ends in a purchase request</figcaption>
     </figure>
   </section>
-
-  <section class="row screens">
-    <figure class="cell shot">
-      <div class="mockwin" lang="en-IN" role="img" aria-label="Mockup of the PitStop dashboard: billed today, cars in the shop, pending approvals and a weekly billing chart">
-        <div class="bar"><i></i><i></i><i></i></div>
-        <div class="mock-pad">
-          <p class="mock-h">Today</p>
-          <div class="mstats">
-            <div class="mstat"><b>&#8377;18,420</b><span>Billed</span></div>
-            <div class="mstat"><b>7</b><span>In shop</span></div>
-            <div class="mstat"><b>3</b><span>Approvals</span></div>
-          </div>
-          <div class="mbars"><i style="height:40%"></i><i style="height:65%"></i><i style="height:30%"></i><i style="height:80%"></i><i style="height:55%"></i><i style="height:95%"></i><i style="height:70%"></i></div>
-          <div class="mrow"><span>Ready for pickup</span><span class="money">2 cars</span></div>
-          <div class="mrow"><span>Unpaid this week</span><span class="money">&#8377;9,340</span></div>
-        </div>
-      </div>
-      <figcaption class="cap mono center">The shape of the dashboard, drawn by hand</figcaption>
-    </figure>
-    <figure class="cell shot">
-      <div class="mockwin" lang="en-IN" role="img" aria-label="Mockup of a PitStop job card for a Swift Dzire with priced line items, an assigned mechanic and old parts return marked yes">
-        <div class="bar"><i></i><i></i><i></i></div>
-        <div class="mock-pad">
-          <p class="mock-h">JC-0412 · Swift Dzire <span class="chip y">In progress</span></p>
-          <div class="mrow"><span>Front brake pads</span><span class="money">&#8377;1,850</span></div>
-          <div class="mrow"><span>Brake fluid flush</span><span class="money">&#8377;600</span></div>
-          <div class="mrow"><span>Labour</span><span class="money">&#8377;750</span></div>
-          <div class="mrow"><span>Mechanic</span><span class="money">Ramesh</span></div>
-          <div class="mrow"><span>Old parts return</span><span class="chip b">Yes</span></div>
-        </div>
-      </div>
-      <figcaption class="cap mono center">A job card, nothing hidden</figcaption>
-    </figure>
-    <figure class="cell shot">
-      <div class="mockwin narrow" lang="en-IN" role="img" aria-label="Mockup of the customer approval page on a phone: estimate lines, a total, an approve button and a UPI QR code">
-        <div class="bar"><i></i><i></i><i></i></div>
-        <div class="mock-pad">
-          <p class="mock-h">Estimate for your Swift</p>
-          <div class="mrow"><span>Brake pads</span><span class="money">&#8377;1,850</span></div>
-          <div class="mrow"><span>Fluid flush</span><span class="money">&#8377;600</span></div>
-          <div class="mrow"><span>Total</span><span class="money">&#8377;2,450</span></div>
-          <span class="mbtn">Approve work</span>
-          <div class="mqr">
-            <i></i><i class="o"></i><i></i><i></i><i class="o"></i><i></i><i></i>
-            <i class="o"></i><i></i><i class="o"></i><i></i><i class="o"></i><i></i><i class="o"></i>
-            <i></i><i class="o"></i><i></i><i class="o"></i><i></i><i></i><i class="o"></i>
-            <i></i><i></i><i class="o"></i><i></i><i class="o"></i><i></i><i></i>
-            <i class="o"></i><i></i><i></i><i class="o"></i><i></i><i class="o"></i><i></i>
-            <i></i><i class="o"></i><i></i><i></i><i class="o"></i><i></i><i class="o"></i>
-            <i></i><i></i><i class="o"></i><i></i><i></i><i class="o"></i><i></i>
-          </div>
-        </div>
-      </div>
-      <figcaption class="cap mono center">What the customer sees. A link, not an app</figcaption>
-    </figure>
-  </section>
-
 
   <div class="row shead">
     <div class="cell n mono">05</div>

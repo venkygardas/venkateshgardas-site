@@ -80,6 +80,40 @@ def check_justify_is_gated():
             fail(f'{CSS}:{n} justifies without the measure gate above it')
 
 
+def check_dangling_selectors():
+    """A selector list that runs into an at-rule is dropped, taking it with it.
+
+    Deleting a rule by regex leaves the surviving selector ending in a comma
+    with no block. Braces still balance, so check_braces sees nothing. If the
+    next thing is another selector the result is merely wrong; if it is an
+    at-rule, a selector list cannot contain one, so the parser discards
+    everything up to the next close and real rules vanish. That happened here:
+    two orphans left behind by a delete sat directly above @media blocks, and
+    only counting rules in a live browser caught it.
+
+    Only depth 0 counts. Inside a block a trailing comma is a value spanning
+    lines, not a selector, and comments are not code.
+    """
+    depth = 0
+    pending = None
+    text = open(CSS).read()
+    text = re.sub(r'/\*.*?\*/', lambda m: '\n' * m.group(0).count('\n'), text, flags=re.S)
+    for n, line in enumerate(text.split('\n'), 1):
+        s = line.strip()
+        if s and depth == 0:
+            if pending and s.startswith('@'):
+                fail(f'{CSS}:{pending} selector list runs into the at-rule at '
+                     f'line {n}, so both are dropped')
+                pending = None
+            elif '{' in s:
+                pending = None
+            elif s.endswith(','):
+                pending = pending or n
+        depth += line.count('{') - line.count('}')
+    if pending:
+        fail(f'{CSS}:{pending} selector list never reaches a block')
+
+
 def check_asset_versions():
     """A stylesheet edit that keeps its old ?v= is served stale from the edge."""
     versions = set()
@@ -113,6 +147,7 @@ if __name__ == '__main__':
     check_orphan_keyframes()
     check_required_rules()
     check_justify_is_gated()
+    check_dangling_selectors()
     check_asset_versions()
     check_dead_references()
 
@@ -122,5 +157,5 @@ if __name__ == '__main__':
             print('  -', f)
         sys.exit(1)
     print('OK: braces balanced, no orphan keyframes, required rules present, '
-          'justify gated on measure, one stylesheet version, '
+          'justify gated on measure, no dangling selectors, one stylesheet version, '
           'no dead asset references')

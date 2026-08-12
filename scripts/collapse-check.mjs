@@ -24,6 +24,12 @@ const PAGES = ['404', 'colophon', 'cv', 'expenzing', 'kpmg', 'now', 'pitstop', '
 const WIDTHS = [1440, 1180, 1024, 881, 375];
 const port = process.argv[2] || 8190;
 
+/* A floor, not a target. Deleting rules with a line regex once dropped the
+   sheet from 456 parsed rules to 359 while braces still balanced and every
+   other check passed: the only thing that noticed was counting what the browser
+   actually parsed. Raise this when the sheet genuinely grows. */
+const MIN_RULES = 400;
+
 const browser = await p.launch({ executablePath: CHROME, headless: 'new' });
 const page = await browser.newPage();
 const bad = [];
@@ -32,6 +38,14 @@ for (const width of WIDTHS) {
   await page.setViewport({ width, height: 900 });
   for (const f of PAGES) {
     await page.goto(`http://localhost:${port}/${f}.html`, { waitUntil: 'networkidle2' });
+    const parsed = await page.evaluate(() => {
+      const sheet = [...document.styleSheets].find(s => (s.href || '').includes('styles.css'));
+      try { return sheet.cssRules.length; } catch (e) { return -1; }
+    });
+    if (parsed < MIN_RULES) {
+      bad.push(`${width} ${f}: only ${parsed} CSS rules parse, expected at least ${MIN_RULES}`);
+    }
+
     const found = await page.evaluate(() => {
       const out = [];
       document.querySelectorAll('.frame *').forEach(el => {

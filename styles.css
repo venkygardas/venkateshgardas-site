@@ -136,13 +136,13 @@ body.short .frame > .row:not(.foot):not(.crumb){margin-block:auto;}
 .crumb a:hover{color:var(--text);}
 
 /* ---- glass card primitive ---- */
-.glass,.plate,.vent,.job,.note,.bignum,.set,.wall,.mockwin,.shotframe,.phero .lead,.contact{
+.glass, .plate, .vent, .job, .note, .bignum, .set, .wall, .shotframe, .phero .lead, .contact{
   background:var(--glass-bg);
   border:1px solid var(--glass-line);
   border-radius:var(--radius);
   position:relative;
 }
-.glass::after,.plate::after,.vent::after,.job::after,.note::after,.bignum::after,.set::after,.wall::after,.mockwin::after,.shotframe::after,.phero .lead::after,.contact::after{
+.glass::after, .plate::after, .vent::after, .job::after, .note::after, .bignum::after, .set::after, .wall::after, .shotframe::after, .phero .lead::after, .contact::after{
   content:"";position:absolute;inset:0;pointer-events:none;z-index:0;
   background-image:
     radial-gradient(circle 2.2px at 0px 0px, var(--ink) 1.8px, transparent 2.2px),
@@ -508,25 +508,14 @@ a.note:hover .muted-go{color:var(--muted);}
 /* ---- product mock windows (PitStop screens) ---- */
 .screens{grid-template-columns:repeat(3,1fr);align-items:stretch;}
 .row.screens .shot{height:100%;}
-.row.screens .mockwin{flex:1;}
 .screens.two{grid-template-columns:repeat(2,1fr);}
 .shot{padding:0;display:flex;flex-direction:column;gap:.9rem;margin:0;}
 .shot .cap{color:var(--muted);margin-top:auto;padding:0 .2rem .4rem;}
-.mockwin{overflow:clip;background:#FBFAF8;color:var(--ink);border:1px solid var(--glass-line);}
-.mockwin .bar{display:flex;gap:.35rem;padding:.55rem .8rem;border-bottom:1px solid #DBD9D2;}
-.mockwin .bar i{width:9px;height:9px;border-radius:50%;background:#DBD9D2;display:block;}
-.mockwin .pad{padding:.9rem;}
-.mockwin .big{font-weight:700;font-size:1.3rem;font-family:var(--font-body);}
-.mockwin .lab{font-family:var(--font-mono);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--dim-ink,#5B666D);}
-.mockwin .line{display:flex;justify-content:space-between;padding:.45rem 0;border-bottom:1px solid #ECEBE7;font-size:.82rem;}
-.mockwin .line:last-child{border-bottom:0;}
-.mockwin .pill{font-size:.72rem;padding:.15rem .5rem;border-radius:999px;font-weight:600;}
 /* An explicit width, not a max-width. `margin:0 auto` turns off cross-axis
    stretch in the column flex, so with only a max-width this panel was sized by
    its content, and it is a container: it collapsed to a 2px sliver and rendered
    as an empty white column, while still setting the row height so the two
    panels beside it carried 110px of dead space. */
-.mockwin.narrow{width:min(210px,100%);margin:0 auto;}
 .mbars{display:flex;gap:6px;align-items:flex-end;height:70px;margin-top:.6rem;}
 .mbars i{flex:1;background:var(--coral);display:block;border-radius:4px 4px 0 0;}
 .shotframe{overflow:clip;max-width:1000px;margin:0 auto;padding:.9rem;background-color:var(--sand);}
@@ -536,20 +525,9 @@ a.note:hover .muted-go{color:var(--muted);}
 /* phone screenshots (Saathi) */
 .shot .phone{border-radius:18px;overflow:clip;border:1px solid var(--glass-line);}
 .shot .phone img{display:block;}
-
-.mock-pad{padding:.9rem 1rem 1.1rem;}
-.mock-h{font-weight:600;font-size:.95rem;margin:0 0 .7rem;display:flex;justify-content:space-between;align-items:center;gap:.6rem;}
-.mstats{display:flex;gap:1px;background:var(--glass-line);border:1px solid var(--glass-line);margin-bottom:.8rem;}
-.mstat{flex:1;background:var(--glass-bg);padding:.5rem .6rem;}
-.mstat b{display:block;font-size:1rem;font-weight:600;}
-.mstat span{font-family:var(--font-mono);font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);}
-.mrow{display:flex;justify-content:space-between;gap:1rem;padding:.45rem 0;border-bottom:1px solid rgba(21,18,10,.1);font-size:.85rem;}
-.mrow:last-child{border-bottom:0;}
-.mrow .money{font-family:var(--font-mono);font-size:.78rem;}
 .chip{font-family:var(--font-mono);font-size:.58rem;letter-spacing:.08em;text-transform:uppercase;border:1px solid var(--glass-line);border-radius:999px;padding:.14rem .5rem;white-space:nowrap;}
 .chip.y{color:var(--coral-soft);border-color:var(--coral-soft);}
 .chip.b{color:var(--steel);border-color:var(--steel);}
-.mbtn{display:block;text-align:center;background:var(--coral);color:var(--on-accent);border-radius:999px;padding:.55rem 1rem;font-weight:600;font-size:.85rem;margin:.8rem 0;}
 .mqr{display:grid;grid-template-columns:repeat(7,10px);gap:2px;justify-content:center;margin:.6rem auto .2rem;}
 .mqr i{width:10px;height:10px;background:var(--ink);display:block;}
 .mqr i.o{background:transparent;border:1px solid var(--glass-line);}
@@ -739,12 +717,12 @@ a.vent:active,a.job:active,a.note:active{--lift:-2px;}
 
 /* Screens arrive the way a photograph develops: a wipe down the frame with the
    image sitting slightly large behind it, settling to true as the wipe lands. */
-.js .shotframe img,.js .mockwin{
+.js .shotframe img{
   clip-path:inset(0 0 100% 0);
   transition:clip-path .95s var(--ease-out),transform .95s var(--ease-out);
 }
 .js .shotframe img{transform:scale(1.05);}
-.js [data-rv].in .shotframe img,.js [data-rv].in .mockwin{clip-path:inset(0 0 0 0);}
+.js [data-rv].in .shotframe img{clip-path:inset(0 0 0 0);}
 .js [data-rv].in .shotframe img{transform:scale(1);}
 
 /* how far down the page you are, on the one element that is always in view */
@@ -789,8 +767,7 @@ a:hover .go::before,.go:hover::before{transform:scaleX(1);}
    exclusion below collapsed seven labels across three pages, printing "NEW"
    over the first word of the paragraph beside it. Test any addition here with
    `node scripts/collapse-check.mjs`. */
-.frame .cell:not(.lbl),.frame .prose,.frame .flow .step,
-.frame .gaps .gap,.frame .tradeoff > *,.frame .mockwin{
+.frame .cell:not(.lbl), .frame .prose, .frame .flow .step, .frame .gaps .gap, .frame .tradeoff > *{
   container-type:inline-size;
 }
 
@@ -940,7 +917,7 @@ a:hover .go::before,.go:hover::before{transform:scaleX(1);}
   /* nothing moves and nothing wipes: every arrival becomes a fade in place */
   .js [data-rv] > *,.js [data-hero] > *,.js [data-plate] .prow,
   .gallery figure,.js .shotframe img{transform:none!important;}
-  .js [data-rv] h2,.js [data-hero] h1,.js .shotframe img,.js .mockwin,
+  .js [data-rv] h2,.js [data-hero] h1,.js .shotframe img,
   .js [data-rv] .pull blockquote{clip-path:none!important;}
   .pillnav nav::after{display:none;}
   a.vent:hover,a.job:hover,a.note:hover,.gallery figure:hover img{transform:none!important;}
@@ -1020,7 +997,7 @@ html{scrollbar-color:rgba(21,18,10,.28) transparent;scrollbar-width:thin;caret-c
 a{text-underline-offset:.18em;text-decoration-thickness:from-font;}
 
 /* stacked numerals line up: dates, money, stats, spec values */
-.feat .n,.plate dd,.bignum b,.mockwin .money,.cv-dates,.mono{font-variant-numeric:tabular-nums;}
+.feat .n, .plate dd, .bignum b, .cv-dates, .mono{font-variant-numeric:tabular-nums;}
 
 
 /* ---- pointer response: the page answers the cursor ----
@@ -1091,7 +1068,7 @@ a{text-underline-offset:.18em;text-decoration-thickness:from-font;}
   .js [data-rv] > *,.js [data-hero] > *,.js [data-plate] .prow{
     opacity:1!important;transform:none!important;
   }
-  .js [data-rv] h2,.js [data-hero] h1,.js .shotframe img,.js .mockwin{clip-path:none!important;}
+  .js [data-rv] h2,.js [data-hero] h1,.js .shotframe img{clip-path:none!important;}
   h1,h2,h3{break-after:avoid;}
   .prose p,.feat p{orphans:3;widows:3;}
   /* a printed link is useless unless you can read where it goes */
@@ -1227,13 +1204,6 @@ a{text-underline-offset:.18em;text-decoration-thickness:from-font;}
    light palette in dark mode instead of inverting into something the product
    has never looked like. Pinned as their own local token scope so everything
    inside them stays consistent. */
-:root[data-theme="dark"] .mockwin,
-:root:not([data-theme="light"]) .mockwin{
-  --glass-bg:#FFFFFF; --glass-line:#E3E1DC;
-  --ink:#15120A; --text:#15120A; --muted:#6E6C64;
-  --coral:#6E7B45; --coral-soft:#5C6839; --on-accent:#FFFFFF;
-  background:#FBFAF8;color:#15120A;border-color:#E3E1DC;
-}
 
 /* ---- editorial push ----
    Same palette, same three faces. What changes is scale and axis.
@@ -1288,8 +1258,7 @@ a{text-underline-offset:.18em;text-decoration-thickness:from-font;}
    Set by the inline head script when thread.js has not reported in. */
 .rv-fail [data-rv] > *,.rv-fail [data-hero] > *,.rv-fail [data-plate] .prow,
 .rv-fail .gallery figure{opacity:1!important;transform:none!important;}
-.rv-fail [data-rv] h2,.rv-fail [data-hero] h1,.rv-fail .shotframe img,
-.rv-fail .mockwin,.rv-fail .pull blockquote{clip-path:none!important;}
+.rv-fail [data-rv] h2, .rv-fail [data-hero] h1, .rv-fail .shotframe img, .rv-fail .pull blockquote{clip-path:none!important;}
 .rv-fail .shotframe img{transform:none!important;}
 
 /* ---- inline SVG colours follow the theme ----
@@ -1308,8 +1277,7 @@ a{text-underline-offset:.18em;text-decoration-thickness:from-font;}
 .frame :is(svg,path,circle,rect,line,polyline,g,text)[fill="#6E6C64"]{fill:var(--muted);}
 .frame :is(svg,path,circle,rect,line,polyline,g,text)[fill="#FFFFFF"]{fill:var(--glass-bg);}
 .frame :is(svg,path,circle,rect,line,polyline,g,text)[stroke="#FFFFFF"]{stroke:var(--glass-bg);}
-.mockwin :is(svg,path,circle,rect,line,polyline,g,text)[stroke],
-.mockwin :is(svg,path,circle,rect,line,polyline,g,text)[fill]{stroke:revert-layer;fill:revert-layer;}
+path, circle, rect, line, polyline, g, text)[stroke], path, circle, rect, line, polyline, g, text)[fill]{stroke:revert-layer;fill:revert-layer;}
 
 /* the pieces of chrome that were still painted from the light palette */
 :root[data-theme="dark"] .cmdk-list li[aria-selected="true"]{background:#2A2E23;}
@@ -1331,8 +1299,6 @@ a{text-underline-offset:.18em;text-decoration-thickness:from-font;}
 .lit-surface::before{background:radial-gradient(420px circle at var(--mx,50%) var(--my,50%),
   color-mix(in srgb, var(--coral) 16%, transparent), transparent 60%);}
 /* the mockup scope pins the light palette, so it must pin every token it uses */
-:root[data-theme="dark"] .mockwin,
-:root:not([data-theme="light"]) .mockwin{--steel:#375A74;--deep:#F4F3F0;--deep2:#ECEBE7;}
 
 
 /* ---- audit fixes ----
