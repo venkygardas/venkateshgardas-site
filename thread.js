@@ -137,6 +137,9 @@
     var target = parseInt(m[1], 10), suffix = m[2], t0 = null;
     var dur = 900;
     el.style.fontVariantNumeric = 'tabular-nums';
+    // reserve the final width so counting never reflows the tile
+    el.style.display = 'inline-block';
+    el.style.minWidth = el.getBoundingClientRect().width + 'px';
     function step(ts) {
       if (t0 === null) t0 = ts;
       var p = Math.min(1, (ts - t0) / dur);
