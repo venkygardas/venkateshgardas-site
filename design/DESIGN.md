@@ -24,6 +24,8 @@ structure:
   canvas: full-bleed light page, rows self-constrain to 1240px (1040px on reading pages)
   cards: contiguous white cells sharing single 1px hairlines inside grid rows, corner registration dots at intersections, radius 2px outside grids and 0 inside. No tints anywhere; olive only on interaction
   nav: white full pill with VG avatar and name left, links center with olive active, olive Contact button right
+build:
+  rule: "Run `python3 check.py` before every push. It exists because a regex that deleted @keyframes stopped at the first closing brace, leaving orphan fragments whose stray braces made the CSS parser swallow the next rule. .vhead and .btn vanished, the hero lost its centring and every button lost its shape, and nothing in the repo complained. The check proves braces balance, no keyframe body is loose at the top level, the load-bearing rules exist, every page agrees on the stylesheet version, and no page references a missing asset."
 cache:
   edge_race: "An edge can cache STALE content under a NEW ?v= key if it fetches mid-deploy. After every push, assert a sentinel from the new CSS via its versioned URL; if stale, re-key and push again"
   rule: "Any same-URL asset edit MUST bump ?r= in HTML. CSS busts via ?v=, currently v20. Run scripts-verify-live.sh after every push"
