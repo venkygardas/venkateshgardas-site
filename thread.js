@@ -105,19 +105,50 @@
    Everything here is opt-out under prefers-reduced-motion. */
 (function () {
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var rows = document.querySelectorAll('.rv, .cgraph');
+  var frame = document.querySelector('.frame');
   var stats = document.querySelectorAll('.bignum b');
+  if (!frame) return;
+
+  /* Tag every content row on every page, so the motion is a property of the
+     system rather than a list of hand-marked rows that new pages fall out of. */
+  var SKIP = 'pillnav threadwrap crumb foot vhero';
+  var rows = [];
+  Array.prototype.forEach.call(frame.children, function (el) {
+    var cls = el.className || '';
+    if (SKIP.split(' ').some(function (c) { return cls.indexOf(c) > -1; })) return;
+    if (!el.children.length) return;
+    el.setAttribute('data-rv', '');
+    rows.push(el);
+  });
+  Array.prototype.forEach.call(frame.querySelectorAll('.cgraph, .plate'), function (el) {
+    if (el.classList.contains('plate')) el.setAttribute('data-plate', '');
+    if (rows.indexOf(el) === -1) rows.push(el);
+  });
+
+  /* The hero introduces itself the moment the page opens. */
+  var hero = frame.querySelector('.vhead') || frame.querySelector('.phero .lead');
+  if (hero) hero.setAttribute('data-hero', '');
+
+  var figs = frame.querySelectorAll('.gallery figure');
 
   if (reduce || !('IntersectionObserver' in window)) {
     rows.forEach(function (r) { r.classList.add('in'); });
+    if (hero) hero.classList.add('in');
+    Array.prototype.forEach.call(figs, function (f) { f.classList.add('in'); });
     return;
   }
 
-  rows.forEach(function (row) {
-    Array.prototype.forEach.call(row.children, function (cell, i) {
-      cell.style.transitionDelay = (i * 70) + 'ms';
+  function stagger(parent, step, sel) {
+    var kids = sel ? parent.querySelectorAll(sel) : parent.children;
+    Array.prototype.forEach.call(kids, function (k, i) {
+      k.style.transitionDelay = (i * step) + 'ms';
     });
+  }
+  rows.forEach(function (row) {
+    stagger(row, 70);
+    if (row.hasAttribute('data-plate')) stagger(row, 55, '.prow');
   });
+  if (hero) stagger(hero, 90);
 
   var io = new IntersectionObserver(function (entries) {
     entries.forEach(function (e) {
@@ -127,6 +158,19 @@
     });
   }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
   rows.forEach(function (r) { io.observe(r); });
+
+  /* the hero runs on load, not on scroll */
+  if (hero) requestAnimationFrame(function () { hero.classList.add('in'); });
+
+  var gio = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e, i) {
+      if (!e.isIntersecting) return;
+      e.target.style.transitionDelay = ((i % 6) * 45) + 'ms';
+      e.target.classList.add('in');
+      gio.unobserve(e.target);
+    });
+  }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+  Array.prototype.forEach.call(figs, function (f) { gio.observe(f); });
 
   function countUp(el) {
     if (el.dataset.counted) return;
