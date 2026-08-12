@@ -415,3 +415,198 @@
   }, { threshold: 0, rootMargin: '0px 0px -28% 0px' });
   stats.forEach(function (s) { sio.observe(s); });
 })();
+
+/* Command palette. Cmd+K or Ctrl+K anywhere, or / when you are not typing.
+
+   Built here rather than as its own file so it costs no extra request, and
+   built from a plain list rather than by crawling the DOM so it can reach
+   pages you are not currently on. Progressive enhancement: with no JS there is
+   no palette and every destination is still a link in the nav or the footer. */
+(function () {
+  if (!document.body || !window.matchMedia) return;
+
+  var ITEMS = [
+    { k: 'Page',    t: 'Home',                    u: '/' },
+    { k: 'Page',    t: 'Photos',                  u: '/photos' },
+    { k: 'Page',    t: 'Field notes',             u: '/notes/' },
+    { k: 'Page',    t: 'Now',                     u: '/now' },
+    { k: 'Page',    t: 'CV',                      u: '/cv' },
+    { k: 'Page',    t: 'Colophon',                u: '/colophon' },
+    { k: 'Product', t: 'PitStop',                 u: '/pitstop', s: 'garage management gst upi india' },
+    { k: 'Product', t: 'Hey Saathi',              u: '/saathi',  s: 'voice companion elderly malayalam telugu' },
+    { k: 'Product', t: 'Roko',                    u: '/roko',    s: 'home security hardware' },
+    { k: 'Work',    t: 'KPMG',                    u: '/kpmg',    s: 'risk analytics product manager' },
+    { k: 'Work',    t: 'Expenzing',               u: '/expenzing', s: 'procurement loan origination product owner' },
+    { k: 'Note',    t: 'Four Design Systems in Five Days', u: '/notes/three-design-systems', s: 'churn redesign' },
+    { k: 'Note',    t: 'The Feature I Measured, Walked Back and Shipped Smaller', u: '/notes/pitstop-realtime', s: 'realtime' },
+    { k: 'Section', t: 'Things I am building',     u: '/#building' },
+    { k: 'Section', t: 'Where I have worked',      u: '/#work' },
+    { k: 'Contact', t: 'Email me',                 u: 'mailto:venkatesh@venkateshgardas.com' },
+    { k: 'Contact', t: 'Book a call',              u: 'https://cal.com/venky1104' },
+    { k: 'Contact', t: 'LinkedIn',                 u: 'https://www.linkedin.com/in/venkateshgardas' },
+    { k: 'Contact', t: 'GitHub',                   u: 'https://github.com/venkygardas' },
+    { k: 'Contact', t: 'Download the CV as a PDF', u: '/venkatesh-gardas-cv.pdf' }
+  ];
+
+  var mac = /Mac|iPhone|iPad/.test(navigator.platform || '');
+  var wrap = document.createElement('div');
+  wrap.className = 'cmdk';
+  wrap.setAttribute('role', 'dialog');
+  wrap.setAttribute('aria-modal', 'true');
+  wrap.setAttribute('aria-label', 'Search this site');
+  wrap.innerHTML =
+    '<div class="cmdk-box">' +
+      '<input class="cmdk-in" type="text" autocomplete="off" spellcheck="false" ' +
+        'placeholder="Jump to a page, a product, a note" aria-label="Search this site" ' +
+        'role="combobox" aria-expanded="true" aria-controls="cmdk-list" aria-autocomplete="list">' +
+      '<ul class="cmdk-list" id="cmdk-list" role="listbox"></ul>' +
+      '<div class="cmdk-foot">Enter to open · arrows to move · esc to close</div>' +
+    '</div>';
+  document.body.appendChild(wrap);
+
+  var input = wrap.querySelector('.cmdk-in');
+  var list = wrap.querySelector('.cmdk-list');
+  var shown = [], sel = 0, lastFocus = null;
+
+  function render(q) {
+    q = (q || '').trim().toLowerCase();
+    shown = ITEMS.filter(function (it) {
+      if (!q) return true;
+      return (it.t + ' ' + it.k + ' ' + (it.s || '')).toLowerCase().indexOf(q) > -1;
+    });
+    sel = 0;
+    list.innerHTML = '';
+    if (!shown.length) {
+      list.innerHTML = '<li class="cmdk-empty" role="presentation">Nothing matches that</li>';
+      return;
+    }
+    shown.forEach(function (it, i) {
+      var li = document.createElement('li');
+      li.setAttribute('role', 'option');
+      li.id = 'cmdk-o' + i;
+      li.innerHTML = '<span class="k"></span><span class="t"></span>';
+      li.firstChild.textContent = it.k;
+      li.lastChild.textContent = it.t;
+      li.addEventListener('mouseenter', function () { sel = i; mark(); });
+      li.addEventListener('click', function () { go(it); });
+      list.appendChild(li);
+    });
+    mark();
+  }
+
+  function mark() {
+    Array.prototype.forEach.call(list.children, function (li, i) {
+      li.setAttribute('aria-selected', i === sel ? 'true' : 'false');
+    });
+    var cur = list.children[sel];
+    if (cur) {
+      input.setAttribute('aria-activedescendant', cur.id);
+      if (cur.scrollIntoView) cur.scrollIntoView({ block: 'nearest' });
+    }
+  }
+
+  function go(it) {
+    close();
+    if (/^https?:|^mailto:/.test(it.u)) window.open(it.u, it.u.indexOf('mailto:') === 0 ? '_self' : '_blank');
+    else window.location.href = it.u;
+  }
+
+  function open() {
+    lastFocus = document.activeElement;
+    wrap.classList.add('on');
+    input.value = '';
+    render('');
+    input.focus();
+  }
+  function close() {
+    wrap.classList.remove('on');
+    if (lastFocus && lastFocus.focus) lastFocus.focus();
+  }
+
+  function typing(el) {
+    if (!el) return false;
+    var t = (el.tagName || '').toLowerCase();
+    return t === 'input' || t === 'textarea' || t === 'select' || el.isContentEditable;
+  }
+
+  document.addEventListener('keydown', function (e) {
+    var openKey = (e.key === 'k' || e.key === 'K') && (e.metaKey || e.ctrlKey);
+    if (openKey) { e.preventDefault(); wrap.classList.contains('on') ? close() : open(); return; }
+    if (e.key === '/' && !wrap.classList.contains('on') && !typing(document.activeElement)) {
+      e.preventDefault(); open(); return;
+    }
+    if (!wrap.classList.contains('on')) return;
+    if (e.key === 'Escape') { e.preventDefault(); close(); return; }
+    if (e.key === 'ArrowDown') { e.preventDefault(); if (shown.length) { sel = (sel + 1) % shown.length; mark(); } return; }
+    if (e.key === 'ArrowUp') { e.preventDefault(); if (shown.length) { sel = (sel - 1 + shown.length) % shown.length; mark(); } return; }
+    if (e.key === 'Enter') { e.preventDefault(); if (shown[sel]) go(shown[sel]); return; }
+    /* a modal must not leak focus to the page behind it */
+    if (e.key === 'Tab') { e.preventDefault(); input.focus(); }
+  });
+
+  input.addEventListener('input', function () { render(input.value); });
+  wrap.addEventListener('mousedown', function (e) { if (e.target === wrap) close(); });
+
+  /* say the shortcut exists, in the one place always on screen */
+  var nav = document.querySelector('.pillnav .who');
+  if (nav) {
+    var hint = document.createElement('button');
+    hint.type = 'button';
+    hint.className = 'cmdk-hint';
+    hint.textContent = mac ? '⌘K' : 'Ctrl K';
+    hint.setAttribute('aria-label', 'Search this site');
+    hint.addEventListener('click', open);
+    nav.appendChild(hint);
+  }
+})();
+
+/* Theme toggle. Three states: no stored choice follows the system, and an
+   explicit choice wins in both directions, so someone on a dark system who
+   wants this page light can have it. The applying happens in the inline head
+   script, before first paint; this only builds the control and stores the
+   choice. */
+(function () {
+  var nav = document.querySelector('.pillnav nav');
+  if (!nav) return;
+  var root = document.documentElement;
+
+  var btn = document.createElement('button');
+  btn.type = 'button';
+  btn.className = 'themetog';
+  btn.innerHTML =
+    '<svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" ' +
+      'stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/>' +
+      '<path d="M12 2v2.4M12 19.6V22M2 12h2.4M19.6 12H22M4.9 4.9l1.7 1.7M17.4 17.4l1.7 1.7M19.1 4.9l-1.7 1.7M6.6 17.4l-1.7 1.7"/></svg>' +
+    '<svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" ' +
+      'stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
+      '<path d="M20 14.5A8.2 8.2 0 0 1 9.5 4a8.3 8.3 0 1 0 10.5 10.5z"/></svg>';
+
+  function systemDark() {
+    return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+  }
+  function isDark() {
+    var set = root.getAttribute('data-theme');
+    return set ? set === 'dark' : systemDark();
+  }
+  function label() {
+    btn.setAttribute('aria-label', isDark() ? 'Switch to the light theme' : 'Switch to the dark theme');
+    btn.setAttribute('aria-pressed', isDark() ? 'true' : 'false');
+  }
+
+  btn.addEventListener('click', function () {
+    var next = isDark() ? 'light' : 'dark';
+    root.setAttribute('data-theme', next);
+    try { localStorage.setItem('theme', next); } catch (e) {}
+    label();
+  });
+
+  /* if the reader has expressed no choice, follow the system live */
+  if (window.matchMedia) {
+    var mq = window.matchMedia('(prefers-color-scheme: dark)');
+    var onChange = function () { if (!root.getAttribute('data-theme')) label(); };
+    if (mq.addEventListener) mq.addEventListener('change', onChange);
+  }
+
+  label();
+  nav.appendChild(btn);
+})();

@@ -14,6 +14,8 @@
   --ink:#15120A;
   --steel:#375A74;
   --glass-bg:#FFFFFF;
+  /* what sits on an accent fill. Flips in dark, where the accent is light. */
+  --on-accent:#FFFFFF;
   --glass-line:#E3E1DC;
   /* One curve for arrivals, one for things moving on screen. The built-in CSS
      easings are too weak to read as intentional, and the site had grown three
@@ -50,7 +52,7 @@ img{max-width:100%;height:auto;}
 
 .skip{
   position:absolute;left:-9999px;top:0;z-index:100;
-  background:var(--ink);color:#fff;padding:.8rem 1.3rem;border-radius:999px;
+  background:var(--ink);color:var(--on-accent);padding:.8rem 1.3rem;border-radius:999px;
   font-family:var(--font-mono);font-size:.82rem;letter-spacing:.1em;text-transform:uppercase;
 }
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0;}
@@ -93,7 +95,7 @@ body.short .frame > .row:not(.foot):not(.crumb){margin-block:auto;}
   /* tracks the frame. This was hard-coded to 1040px, which was the old --pw,
      so the moment the frame narrowed the nav hung 130px past every card. */
   width:min(var(--pw),calc(100% - 1rem));
-  background:#FFFFFF;
+  background:var(--glass-bg);
   border:1px solid transparent;border-radius:999px;padding:.4rem .5rem .4rem .55rem;
   box-shadow:0 4px 16px rgba(21,18,10,.10);
 }
@@ -120,8 +122,8 @@ body.short .frame > .row:not(.foot):not(.crumb){margin-block:auto;}
 .pillnav .who b{white-space:nowrap;}
 .pillnav a:hover{color:var(--ink);background:rgba(21,18,10,.05);}
 .pillnav a[aria-current="page"]{color:var(--coral);font-weight:600;background:transparent;}
-.pillnav a.cta{background:var(--coral);color:#fff;padding:.6rem 1.3rem;margin-left:.4rem;}
-.pillnav a.cta:hover{background:var(--coral-soft);color:#fff;}
+.pillnav a.cta{background:var(--coral);color:var(--on-accent);padding:.6rem 1.3rem;margin-left:.4rem;}
+.pillnav a.cta:hover{background:var(--coral-soft);color:var(--on-accent);}
 
 .crumb{justify-items:start;padding:1.2rem 2rem 0;width:min(var(--pw),100%);margin-inline:auto;}
 .crumb a{
@@ -157,14 +159,14 @@ body.short .frame > .row:not(.foot):not(.crumb){margin-block:auto;}
 .threadwrap svg{width:100%;height:100%;display:block;}
 .thread-bed{stroke:rgba(21,18,10,.09);stroke-width:1.25;fill:none;vector-effect:non-scaling-stroke;}
 .thread-ink{stroke:var(--coral);stroke-width:1.25;fill:none;opacity:.6;vector-effect:non-scaling-stroke;}
-.thread-node{fill:#fff;stroke:rgba(21,18,10,.35);stroke-width:1.25;vector-effect:non-scaling-stroke;transition:fill .45s ease,stroke .45s ease;}
+.thread-node{fill:var(--glass-bg);stroke:rgba(21,18,10,.35);stroke-width:1.25;vector-effect:non-scaling-stroke;transition:fill .45s ease,stroke .45s ease;}
 .thread-node.lit{fill:var(--coral);stroke:var(--coral);}
 /* The head of the line, riding it as you scroll. The whole page is one journey
    and this is where you are on it: the thread is drawn to the marker, the
    milestones behind it are filled, the ones ahead are still open circles.
    It carries no information the page does not already give, so it stays small
    and it never enters the content column. */
-.thread-travel{fill:var(--coral);stroke:#fff;stroke-width:2;vector-effect:non-scaling-stroke;opacity:0;transition:opacity .4s var(--ease-out);}
+.thread-travel{fill:var(--coral);stroke:var(--glass-bg);stroke-width:2;vector-effect:non-scaling-stroke;opacity:0;transition:opacity .4s var(--ease-out);}
 .thread-travel.on{opacity:1;}
 .thread-halo{fill:var(--coral);opacity:0;transition:opacity .4s var(--ease-out);}
 .thread-halo.on{opacity:.14;}
@@ -181,7 +183,7 @@ body.short .frame > .row:not(.foot):not(.crumb){margin-block:auto;}
   animation:loopDraw 9s linear infinite;
 }
 @keyframes loopDraw{to{stroke-dashoffset:-1200;}}
-.loop-node{fill:#fff;stroke:var(--ink);stroke-width:1.5;}
+.loop-node{fill:var(--glass-bg);stroke:var(--ink);stroke-width:1.5;}
 .loop-node-fill{fill:var(--coral);stroke:none;opacity:0;animation:nodeLight 9s linear infinite;}
 .loop-node-fill.n2{animation-delay:1.8s;}
 .loop-node-fill.n3{animation-delay:3.6s;}
@@ -211,7 +213,7 @@ body.short .frame > .row:not(.foot):not(.crumb){margin-block:auto;}
 .vhero svg.scene{width:100%;height:auto;display:block;}
 .vhead{max-width:880px;margin:0 auto;text-align:center;padding:7rem 2rem 1.6rem;}
 .vhead .eyebrow{
-  display:inline-block;background:#FFFFFF;border:1px solid var(--glass-line);
+  display:inline-block;background:var(--glass-bg);border:1px solid var(--glass-line);
   padding:.5rem 1rem;border-radius:999px;font-size:.78rem;color:var(--ink);margin-bottom:1.4rem;
 }
 .vhead .eyebrow::before{
@@ -230,11 +232,11 @@ body.short .frame > .row:not(.foot):not(.crumb){margin-block:auto;}
 .vhead .ctas{display:flex;gap:.7rem;justify-content:center;}
 
 /* buttons */
-.btn{display:inline-flex;gap:.6rem;align-items:center;background:var(--ink);color:#fff;border:1px solid var(--ink);border-radius:999px;padding:.75rem 1.4rem;font-size:.9rem;font-weight:600;cursor:pointer;}
+.btn{display:inline-flex;gap:.6rem;align-items:center;background:var(--ink);color:var(--on-accent);border:1px solid var(--ink);border-radius:999px;padding:.75rem 1.4rem;font-size:.9rem;font-weight:600;cursor:pointer;}
 .btn b{width:22px;height:22px;border-radius:50%;background:var(--coral);display:inline-block;flex:none;}
-.btn:hover{background:var(--coral);border-color:var(--coral);color:#fff;}
-.btn.ghost{background:#FFFFFF;color:var(--ink);border:1px solid var(--glass-line);}
-.btn.ghost:hover{border-color:var(--ink);background:#FFFFFF;color:var(--ink);}
+.btn:hover{background:var(--coral);border-color:var(--coral);color:var(--on-accent);}
+.btn.ghost{background:var(--glass-bg);color:var(--ink);border:1px solid var(--glass-line);}
+.btn.ghost:hover{border-color:var(--ink);background:var(--glass-bg);color:var(--ink);}
 
 
 /* ---- detail-page hero ---- */
@@ -530,7 +532,7 @@ a.note:hover .muted-go{color:var(--muted);}
 .mock-pad{padding:.9rem 1rem 1.1rem;}
 .mock-h{font-weight:600;font-size:.95rem;margin:0 0 .7rem;display:flex;justify-content:space-between;align-items:center;gap:.6rem;}
 .mstats{display:flex;gap:1px;background:var(--glass-line);border:1px solid var(--glass-line);margin-bottom:.8rem;}
-.mstat{flex:1;background:#fff;padding:.5rem .6rem;}
+.mstat{flex:1;background:var(--glass-bg);padding:.5rem .6rem;}
 .mstat b{display:block;font-size:1rem;font-weight:600;}
 .mstat span{font-family:var(--font-mono);font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);}
 .mrow{display:flex;justify-content:space-between;gap:1rem;padding:.45rem 0;border-bottom:1px solid rgba(21,18,10,.1);font-size:.85rem;}
@@ -539,7 +541,7 @@ a.note:hover .muted-go{color:var(--muted);}
 .chip{font-family:var(--font-mono);font-size:.58rem;letter-spacing:.08em;text-transform:uppercase;border:1px solid var(--glass-line);border-radius:999px;padding:.14rem .5rem;white-space:nowrap;}
 .chip.y{color:var(--coral-soft);border-color:var(--coral-soft);}
 .chip.b{color:var(--steel);border-color:var(--steel);}
-.mbtn{display:block;text-align:center;background:var(--coral);color:#fff;border-radius:999px;padding:.55rem 1rem;font-weight:600;font-size:.85rem;margin:.8rem 0;}
+.mbtn{display:block;text-align:center;background:var(--coral);color:var(--on-accent);border-radius:999px;padding:.55rem 1rem;font-weight:600;font-size:.85rem;margin:.8rem 0;}
 .mqr{display:grid;grid-template-columns:repeat(7,10px);gap:2px;justify-content:center;margin:.6rem auto .2rem;}
 .mqr i{width:10px;height:10px;background:var(--ink);display:block;}
 .mqr i.o{background:transparent;border:1px solid var(--glass-line);}
@@ -566,7 +568,7 @@ a.note:hover .muted-go{color:var(--muted);}
   font-family:var(--font-mono);font-size:.72rem;
   letter-spacing:.1em;text-transform:uppercase;
   border:1px solid var(--glass-line);border-radius:var(--radius);
-  padding:.45rem .85rem;background:#FFFFFF;
+  padding:.45rem .85rem;background:var(--glass-bg);
 }
 .wall{display:grid;grid-template-columns:auto 1fr;gap:1rem;align-items:start;padding:1.4rem var(--pad-x);}
 .wall > .lbl{color:var(--muted);padding-top:.55rem;}
@@ -574,7 +576,7 @@ a.note:hover .muted-go{color:var(--muted);}
   font-family:var(--font-body);font-weight:600;
   font-size:1rem;letter-spacing:-.01em;color:var(--text);
   padding:.55rem 1.05rem;border-radius:999px;white-space:nowrap;
-  background:#FFFFFF;border:1px solid var(--glass-line);
+  background:var(--glass-bg);border:1px solid var(--glass-line);
   display:inline-flex;align-items:center;gap:.55rem;
 }
 .wm::before{content:"";width:10px;height:10px;border-radius:50%;background:var(--muted);flex:none;}
@@ -605,7 +607,7 @@ a.note:hover .muted-go{color:var(--muted);}
   border:1px solid var(--glass-line);border-radius:999px;padding:.55rem 1rem;color:var(--ink);
 }
 .socials a:hover{border-color:var(--ink);}
-.socials a.fill{background:var(--coral);color:#fff;border-color:var(--coral);}
+.socials a.fill{background:var(--coral);color:var(--on-accent);border-color:var(--coral);}
 .socials a.fill:hover{background:var(--coral-soft);}
 
 /* ---- footer ---- */
@@ -619,7 +621,7 @@ a.note:hover .muted-go{color:var(--muted);}
 /* ---- photo gallery ---- */
 .gallery{padding:1.4rem 0;}
 .gallery .cols{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));grid-auto-rows:8px;gap:14px;}
-.gallery figure{align-self:start;margin:0;overflow:clip;border-radius:var(--radius);background:#FFFFFF;border:1px solid var(--glass-line);}
+.gallery figure{align-self:start;margin:0;overflow:clip;border-radius:var(--radius);background:var(--glass-bg);border:1px solid var(--glass-line);}
 .gallery img{width:100%;height:auto;display:block;}
 
 @media (max-width:640px){
@@ -812,7 +814,7 @@ a:hover .go::before,.go:hover::before{transform:scaleX(1);}
 .chiprow .lbl{color:var(--muted);margin-right:.4rem;}
 .statchip{
   font-family:var(--font-mono);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;
-  border:1px solid var(--glass-line);border-radius:999px;padding:.42rem .8rem;background:#fff;
+  border:1px solid var(--glass-line);border-radius:999px;padding:.42rem .8rem;background:var(--glass-bg);
 }
 .statchip.on-now{border-color:var(--coral);color:var(--coral-soft);}
 .statchip.on-now::before{
@@ -822,7 +824,7 @@ a:hover .go::before,.go:hover::before{transform:scaleX(1);}
 
 /* the flow: numbered steps, the loop a product actually runs */
 .flow{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--glass-line);}
-.flow .step{background:#fff;padding:1.5rem var(--pad-x);position:relative;}
+.flow .step{background:var(--glass-bg);padding:1.5rem var(--pad-x);position:relative;}
 .flow .step .n{
   font-family:var(--font-mono);font-size:.72rem;letter-spacing:.12em;color:var(--muted);
   display:block;margin-bottom:.9rem;
@@ -832,7 +834,7 @@ a:hover .go::before,.go:hover::before{transform:scaleX(1);}
 .flow .step::after{
   content:"";position:absolute;top:1.75rem;right:-1px;width:9px;height:9px;
   border-right:1.5px solid var(--glass-line);border-top:1.5px solid var(--glass-line);
-  transform:rotate(45deg);background:#fff;z-index:2;
+  transform:rotate(45deg);background:var(--glass-bg);z-index:2;
 }
 .flow .step:nth-child(3n)::after,.flow .step:last-child::after{content:none;}
 @media (max-width:880px){
@@ -845,7 +847,7 @@ a:hover .go::before,.go:hover::before{transform:scaleX(1);}
   display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:1px;
   background:var(--glass-line);margin-block:1px;
 }
-.tradeoff > *{background:#fff;padding:1.5rem var(--pad-x);}
+.tradeoff > *{background:var(--glass-bg);padding:1.5rem var(--pad-x);}
 .tradeoff .chose .k{
   font-family:var(--font-mono);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;
   color:var(--coral-soft);display:block;margin-bottom:.7rem;
@@ -859,7 +861,7 @@ a:hover .go::before,.go:hover::before{transform:scaleX(1);}
 
 /* honest gaps: stated plainly, not hidden */
 .gaps{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--glass-line);}
-.gaps .gap{background:#fff;padding:1.4rem var(--pad-x);}
+.gaps .gap{background:var(--glass-bg);padding:1.4rem var(--pad-x);}
 .gaps .gap .k{
   font-family:var(--font-mono);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;
   color:var(--muted);display:block;margin-bottom:.6rem;
@@ -1085,4 +1087,137 @@ a{text-underline-offset:.18em;text-decoration-thickness:from-font;}
   .prose a[href^="http"]::after,.plate dd a[href^="http"]::after{
     content:" (" attr(href) ")";font-size:.75em;color:#555;word-break:break-all;
   }
+}
+
+/* ---- command palette ----
+   Cmd+K, or / from anywhere that is not a text field. Everything the site can
+   reach, reachable by typing. */
+.cmdk{
+  position:fixed;inset:0;z-index:200;display:none;
+  align-items:flex-start;justify-content:center;
+  padding:12vh 1rem 1rem;
+  background:rgba(21,18,10,.34);
+  backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px);
+}
+.cmdk[open],.cmdk.on{display:flex;}
+.cmdk-box{
+  width:min(560px,100%);max-height:70vh;display:flex;flex-direction:column;
+  background:var(--glass-bg);border:1px solid var(--glass-line);
+  border-radius:var(--radius);overflow:hidden;
+  box-shadow:0 18px 60px rgba(21,18,10,.22);
+}
+.cmdk-in{
+  border:0;border-bottom:1px solid var(--glass-line);background:transparent;
+  font-family:var(--font-body);font-size:1.05rem;color:var(--text);
+  padding:1rem 1.15rem;width:100%;
+}
+.cmdk-in:focus{outline:none;}
+.cmdk-in::placeholder{color:var(--muted);}
+.cmdk-list{list-style:none;margin:0;padding:.35rem;overflow-y:auto;}
+.cmdk-list li{
+  display:flex;align-items:baseline;gap:.7rem;
+  padding:.6rem .8rem;border-radius:var(--radius);cursor:pointer;
+}
+.cmdk-list li .k{
+  font-family:var(--font-mono);font-size:.62rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--muted);flex:none;min-width:5.2rem;
+}
+.cmdk-list li .t{font-weight:500;}
+.cmdk-list li[aria-selected="true"]{background:var(--deep2);}
+.cmdk-list li[aria-selected="true"] .t{color:var(--coral-soft);}
+.cmdk-empty{padding:1.1rem 1.15rem;color:var(--muted);}
+.cmdk-foot{
+  border-top:1px solid var(--glass-line);padding:.55rem 1.15rem;
+  font-family:var(--font-mono);font-size:.62rem;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--muted);
+}
+/* the hint that the palette exists at all */
+.cmdk-hint{
+  font-family:var(--font-mono);font-size:.6rem;letter-spacing:.1em;
+  border:1px solid var(--glass-line);border-radius:5px;
+  padding:.18rem .34rem;color:var(--muted);margin-left:.5rem;
+}
+@media (max-width:880px){.cmdk-hint{display:none;}}
+
+/* ---- dark ----
+   The whole system is tokens, so dark is a second set of tokens rather than a
+   second stylesheet. Two things do NOT simply invert. The accent has to get
+   lighter, because olive on near-black is unreadable at the light value, and
+   whatever sits on an accent fill has to flip from white to the ground colour.
+
+   Measured against the dark card #1A1D15: body text 14.3:1, muted 6.5:1,
+   accent 8.2:1, and a label on an accent fill 8.9:1.
+
+   Three states, deliberately: no attribute follows the system, and an explicit
+   data-theme wins in both directions so the toggle can override a system that
+   says dark when the reader wants light. */
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --deep:#12140E; --deep2:#1A1D15;
+    --glass-bg:#1A1D15; --glass-line:#2F3329;
+    --text:#EDEBE2; --ink:#EDEBE2; --muted:#A2A08F;
+    --coral:#A9BC72; --coral-soft:#C2D391;
+    --on-accent:#12140E;
+    --steel:#8FB6D6; --sand:#23261C; --gold:#C7AE93;
+  }
+}
+:root[data-theme="dark"]{
+  --deep:#12140E; --deep2:#1A1D15;
+  --glass-bg:#1A1D15; --glass-line:#2F3329;
+  --text:#EDEBE2; --ink:#EDEBE2; --muted:#A2A08F;
+  --coral:#A9BC72; --coral-soft:#C2D391;
+  --on-accent:#12140E;
+  --steel:#8FB6D6; --sand:#23261C; --gold:#C7AE93;
+}
+/* the pieces that were painted, not tokenised */
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]) .pillnav nav{box-shadow:0 4px 20px rgba(0,0,0,.45);}
+  :root:not([data-theme="light"]) .cmdk{background:rgba(0,0,0,.55);}
+  :root:not([data-theme="light"]) .cmdk-box{box-shadow:0 18px 60px rgba(0,0,0,.5);}
+  :root:not([data-theme="light"]) .shotframe{background:var(--deep2);}
+  :root:not([data-theme="light"]) .thread-bed{stroke:rgba(237,235,226,.10);}
+  :root:not([data-theme="light"]) .thread-node{stroke:rgba(237,235,226,.32);}
+  :root:not([data-theme="light"]) .prow{border-bottom-color:rgba(237,235,226,.14);}
+  /* screenshots are light UI: sit them on their own mat rather than glowing */
+  :root:not([data-theme="light"]) .shotframe img,
+  :root:not([data-theme="light"]) .gallery img{filter:brightness(.92) contrast(1.02);}
+}
+:root[data-theme="dark"] .pillnav nav{box-shadow:0 4px 20px rgba(0,0,0,.45);}
+:root[data-theme="dark"] .cmdk{background:rgba(0,0,0,.55);}
+:root[data-theme="dark"] .cmdk-box{box-shadow:0 18px 60px rgba(0,0,0,.5);}
+:root[data-theme="dark"] .shotframe{background:var(--deep2);}
+:root[data-theme="dark"] .thread-bed{stroke:rgba(237,235,226,.10);}
+:root[data-theme="dark"] .thread-node{stroke:rgba(237,235,226,.32);}
+:root[data-theme="dark"] .prow{border-bottom-color:rgba(237,235,226,.14);}
+:root[data-theme="dark"] .shotframe img,
+:root[data-theme="dark"] .gallery img{filter:brightness(.92) contrast(1.02);}
+
+/* the toggle itself */
+.themetog{
+  background:transparent;border:1px solid var(--glass-line);border-radius:999px;
+  width:30px;height:30px;flex:none;cursor:pointer;color:var(--muted);
+  display:inline-flex;align-items:center;justify-content:center;margin-left:.35rem;
+  transition:color .15s ease,border-color .15s ease;
+}
+.themetog:hover{color:var(--ink);border-color:var(--ink);}
+.themetog svg{width:15px;height:15px;display:block;}
+.themetog .moon{display:none;}
+:root[data-theme="dark"] .themetog .moon{display:block;}
+:root[data-theme="dark"] .themetog .sun{display:none;}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]) .themetog .moon{display:block;}
+  :root:not([data-theme="light"]) .themetog .sun{display:none;}
+}
+
+/* The hand-drawn mockups are pictures of a light product UI, exactly like the
+   screenshots they sit beside. They are content, not chrome, so they keep the
+   light palette in dark mode instead of inverting into something the product
+   has never looked like. Pinned as their own local token scope so everything
+   inside them stays consistent. */
+:root[data-theme="dark"] .mockwin,
+:root:not([data-theme="light"]) .mockwin{
+  --glass-bg:#FFFFFF; --glass-line:#E3E1DC;
+  --ink:#15120A; --text:#15120A; --muted:#6E6C64;
+  --coral:#6E7B45; --coral-soft:#5C6839; --on-accent:#FFFFFF;
+  background:#FBFAF8;color:#15120A;border-color:#E3E1DC;
 }
