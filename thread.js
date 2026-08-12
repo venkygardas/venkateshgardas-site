@@ -264,7 +264,16 @@ window.__rvReady = true;
     if (nav) {
       var max = document.documentElement.scrollHeight - vh;
       var p = max > 0 ? Math.max(0, Math.min(1, window.scrollY / max)) : 0;
-      nav.style.setProperty('--progress', (p * 100).toFixed(2) + '%');
+      nav.style.setProperty('--p', p.toFixed(4));
+      /* The line begins just after the face, not underneath it. Anchored to
+         the image rather than the whole name block, and measured rather than
+         hard-coded because the avatar's right edge moves with the breakpoints:
+         80px at desktop, 64px on a phone. */
+      var face = nav.querySelector('.who img');
+      if (face) {
+        var x = face.getBoundingClientRect().right - nav.getBoundingClientRect().left;
+        nav.style.setProperty('--track-x', Math.round(x + 12) + 'px');
+      }
     }
     ticking = false;
   }

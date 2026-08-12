@@ -733,14 +733,20 @@ a.vent:active,a.job:active,a.note:active{--lift:-2px;}
 /* how far down the page you are, on the one element that is always in view */
 /* The pill used to clip its own overflow so the progress line would not poke
    out past the rounded ends. That also meant nothing could sit proud of the
-   bar. Inset the line instead of clipping the parent: it stops 14px short of
-   each end, where the curve is, so it never needs clipping and the avatar is
-   free to overflow. */
+   bar. Inset the line instead of clipping the parent: it stops short of the
+   curve at each end, so it never needs clipping and the avatar is free to
+   overflow.
+
+   It starts where the face ends, not underneath it. --track-x is written by
+   the script from the measured right edge of the name block, because that edge
+   moves with the breakpoints: 80px at desktop, 139px at 700, 64px at 480. Any
+   fixed value would be wrong somewhere. Scaled rather than sized, so the
+   growing edge is a transform and costs no layout. */
 .pillnav nav{position:relative;}
 .pillnav nav::after{
-  content:"";position:absolute;left:14px;bottom:2px;height:2px;
-  width:calc(var(--progress,0%) * 0.94);max-width:calc(100% - 28px);
+  content:"";position:absolute;left:var(--track-x,80px);right:14px;bottom:2px;height:2px;
   background:var(--coral);opacity:.55;border-radius:999px;
+  transform:scaleX(var(--p,0));transform-origin:left center;
   pointer-events:none;
 }
 
