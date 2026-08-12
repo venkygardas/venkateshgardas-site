@@ -1,3 +1,10 @@
+/* Tell the stylesheet the motion layer actually loaded. Everything hidden for
+   an entrance is hidden by CSS the instant the page parses, and only script
+   un-hides it, so if this file 404s or throws before it runs, every screenshot
+   and every card stays invisible forever. The head sets .rv-fail if this flag
+   has not appeared within 2.5s, which forces it all open. */
+window.__rvReady = true;
+
 /* The product thread: one continuous line down every page.
    Waypoints land on section heads, so the line literally passes through
    the numbers. Drawn progressively as you scroll. */
@@ -296,12 +303,28 @@
      system rather than a list of hand-marked rows that new pages fall out of. */
   var SKIP = 'pillnav threadwrap crumb foot vhero';
   var rows = [];
-  Array.prototype.forEach.call(frame.children, function (el) {
-    var cls = el.className || '';
-    if (SKIP.split(' ').some(function (c) { return cls.indexOf(c) > -1; })) return;
-    if (!el.children.length) return;
-    el.setAttribute('data-rv', '');
-    rows.push(el);
+
+  /* Walk the frame AND the main landmark. Wrapping every page in <main> for
+     accessibility left frame.children as [threadwrap, header, main, footer],
+     so <main> became the only tagged row and the twenty-two rows inside it got
+     nothing: every reveal, stagger, parallax, hover lift and pointer tilt on
+     the site was dead. Nothing looked broken, because a reveal that never
+     arms is just content that is already visible, which is why the checks did
+     not catch it either. */
+  var hosts = [frame];
+  var mainEl = frame.querySelector('main');
+  if (mainEl) hosts.push(mainEl);
+
+  hosts.forEach(function (host) {
+    Array.prototype.forEach.call(host.children, function (el) {
+      if (el.tagName === 'MAIN') return;
+      var cls = el.className || '';
+      if (SKIP.split(' ').some(function (c) { return cls.indexOf(c) > -1; })) return;
+      if (!el.children.length) return;
+      if (el.hasAttribute('data-rv')) return;
+      el.setAttribute('data-rv', '');
+      rows.push(el);
+    });
   });
   Array.prototype.forEach.call(frame.querySelectorAll('.cgraph, .plate'), function (el) {
     if (el.classList.contains('plate')) el.setAttribute('data-plate', '');
@@ -478,6 +501,7 @@
     list.innerHTML = '';
     if (!shown.length) {
       list.innerHTML = '<li class="cmdk-empty" role="presentation">Nothing matches that</li>';
+      input.removeAttribute('aria-activedescendant');
       return;
     }
     shown.forEach(function (it, i) {
@@ -507,8 +531,14 @@
 
   function go(it) {
     close();
-    if (/^https?:|^mailto:/.test(it.u)) window.open(it.u, it.u.indexOf('mailto:') === 0 ? '_self' : '_blank');
-    else window.location.href = it.u;
+    if (it.u.indexOf('mailto:') === 0) { window.location.href = it.u; return; }
+    if (/^https?:/.test(it.u)) {
+      /* noopener, or the opened page gets a live handle on this one */
+      var w = window.open(it.u, '_blank', 'noopener');
+      if (w) w.opener = null;
+      return;
+    }
+    window.location.href = it.u;
   }
 
   function open() {

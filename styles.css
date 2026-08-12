@@ -1275,3 +1275,53 @@ a{text-underline-offset:.18em;text-decoration-thickness:from-font;}
     font-size:clamp(1.15rem,1.8vw,1.55rem);color:var(--muted);
   }
 }
+
+/* The motion layer never loaded: show everything it would have revealed.
+   Set by the inline head script when thread.js has not reported in. */
+.rv-fail [data-rv] > *,.rv-fail [data-hero] > *,.rv-fail [data-plate] .prow,
+.rv-fail .gallery figure{opacity:1!important;transform:none!important;}
+.rv-fail [data-rv] h2,.rv-fail [data-hero] h1,.rv-fail .shotframe img,
+.rv-fail .mockwin,.rv-fail .pull blockquote{clip-path:none!important;}
+.rv-fail .shotframe img{transform:none!important;}
+
+/* ---- inline SVG colours follow the theme ----
+   Thirty-two hand-drawn icons, the career graph and the hero diagrams carry
+   their colours as presentation attributes, which were sampled from the light
+   palette. In dark they painted near-black ink on a near-black ground: the
+   icons measured 1.01:1 and the career graph 1.10:1, i.e. gone. CSS beats a
+   presentation attribute, so mapping the six literals onto the tokens fixes
+   every one of them at once and keeps them correct if the palette moves again.
+   The hand-drawn mockups are excluded: they are pinned light on purpose. */
+.frame :is(svg,path,circle,rect,line,polyline,g,text)[stroke="#15120A"]{stroke:var(--ink);}
+.frame :is(svg,path,circle,rect,line,polyline,g,text)[fill="#15120A"]{fill:var(--ink);}
+.frame :is(svg,path,circle,rect,line,polyline,g,text)[stroke="#6E7B45"]{stroke:var(--coral);}
+.frame :is(svg,path,circle,rect,line,polyline,g,text)[fill="#6E7B45"]{fill:var(--coral);}
+.frame :is(svg,path,circle,rect,line,polyline,g,text)[fill="#5C6839"]{fill:var(--coral-soft);}
+.frame :is(svg,path,circle,rect,line,polyline,g,text)[fill="#6E6C64"]{fill:var(--muted);}
+.frame :is(svg,path,circle,rect,line,polyline,g,text)[fill="#FFFFFF"]{fill:var(--glass-bg);}
+.frame :is(svg,path,circle,rect,line,polyline,g,text)[stroke="#FFFFFF"]{stroke:var(--glass-bg);}
+.mockwin :is(svg,path,circle,rect,line,polyline,g,text)[stroke],
+.mockwin :is(svg,path,circle,rect,line,polyline,g,text)[fill]{stroke:revert-layer;fill:revert-layer;}
+
+/* the pieces of chrome that were still painted from the light palette */
+:root[data-theme="dark"] .cmdk-list li[aria-selected="true"]{background:#2A2E23;}
+:root[data-theme="dark"] .cmdk-list li[aria-selected="true"] .t{color:var(--coral-soft);}
+:root[data-theme="dark"] .cmdk-hint{background:transparent;color:var(--muted);border-color:var(--glass-line);}
+:root[data-theme="dark"] ::-webkit-scrollbar-track{background:var(--deep);}
+:root[data-theme="dark"] ::-webkit-scrollbar-thumb{background:rgba(237,235,226,.24);}
+:root[data-theme="dark"] ::-webkit-scrollbar-thumb:hover{background:rgba(237,235,226,.38);}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]) .cmdk-list li[aria-selected="true"]{background:#2A2E23;}
+  :root:not([data-theme="light"]) .cmdk-list li[aria-selected="true"] .t{color:var(--coral-soft);}
+  :root:not([data-theme="light"]) .cmdk-hint{background:transparent;color:var(--muted);border-color:var(--glass-line);}
+  :root:not([data-theme="light"]) ::-webkit-scrollbar-track{background:var(--deep);}
+  :root:not([data-theme="light"]) ::-webkit-scrollbar-thumb{background:rgba(237,235,226,.24);}
+}
+/* the palette hint is a button, so it inherits the UA buttonface without this */
+.cmdk-hint{background:transparent;font-family:var(--font-mono);cursor:pointer;}
+/* the light that follows the cursor has to be the theme's accent, not a literal */
+.lit-surface::before{background:radial-gradient(420px circle at var(--mx,50%) var(--my,50%),
+  color-mix(in srgb, var(--coral) 16%, transparent), transparent 60%);}
+/* the mockup scope pins the light palette, so it must pin every token it uses */
+:root[data-theme="dark"] .mockwin,
+:root:not([data-theme="light"]) .mockwin{--steel:#375A74;--deep:#F4F3F0;--deep2:#ECEBE7;}
