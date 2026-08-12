@@ -191,7 +191,10 @@ img{max-width:100%;height:auto;}
   display:inline-block;background:#FFFFFF;border:1px solid var(--glass-line);
   padding:.5rem 1rem;border-radius:999px;font-size:.78rem;color:var(--ink);margin-bottom:1.4rem;
 }
-.vhead .eyebrow::before{content:"\2726  ";}
+.vhead .eyebrow::before{
+  content:"";display:inline-block;width:.42em;height:.42em;margin-right:.55em;
+  background:var(--coral);transform:rotate(45deg) translateY(-.04em);
+}
 .vhead h1{
   margin:0 0 .7rem;font-family:var(--font-body);font-weight:700;
   font-size:clamp(2.6rem,5.4vw,4.4rem);line-height:1;letter-spacing:-.02em;color:var(--ink);
@@ -323,6 +326,16 @@ img{max-width:100%;height:auto;}
 .vent h3{font-family:var(--font-body);font-weight:600;font-size:1.4rem;letter-spacing:-.01em;margin:0;}
 .vent p{margin:0;font-size:.92rem;line-height:1.5;max-width:none;flex:1;}
 .vent .muted-go{color:var(--muted);}
+.go::after{
+  content:"";display:inline-block;width:.62em;height:.62em;margin-left:.5em;
+  border-right:1.5px solid currentColor;border-top:1.5px solid currentColor;
+  transform:rotate(45deg) translateY(.06em);
+}
+.crumb a::before{
+  content:"";display:inline-block;width:.55em;height:.55em;margin-right:.5em;
+  border-left:1.5px solid currentColor;border-bottom:1.5px solid currentColor;
+  transform:rotate(45deg) translateY(-.04em);
+}
 .go{font-family:var(--font-mono);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;margin-top:.8rem;font-weight:700;}
 a.vent{transition:transform .15s cubic-bezier(.2,.6,.2,1);}
 a.vent:hover{transform:translateY(-3px);}

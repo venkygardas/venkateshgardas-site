@@ -62,3 +62,10 @@ detector or a future audit talk you out of them.
   signature of the whole system.
 - **Eyebrow + ordinal + pair line are waived in `.impeccable/config.json`**
   so detector runs stay honest about everything else.
+- **The rupee sign is the one glyph allowed to fall back.** No shipped
+  face carries U+20B9, and it appears only inside the PitStop product
+  mocks, where rupee amounts are the point. Every other exotic glyph
+  was removed or drawn in CSS: the arrows in link labels, the back
+  chevron, the hero star, and the Greek alpha in the camera name, so
+  the rest of the site renders in exactly three typefaces. Verified
+  with CSS.getPlatformFontsForNode.
