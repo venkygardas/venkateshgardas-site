@@ -129,6 +129,8 @@
   rows.forEach(function (r) { io.observe(r); });
 
   function countUp(el) {
+    if (el.dataset.counted) return;
+    el.dataset.counted = '1';
     var raw = el.textContent.trim();
     var m = raw.match(/^(\d+)(\D*)$/);
     if (!m) return;
@@ -151,6 +153,6 @@
       countUp(e.target);
       sio.unobserve(e.target);
     });
-  }, { threshold: 0.6 });
+  }, { threshold: 0.25 });
   stats.forEach(function (s) { sio.observe(s); });
 })();

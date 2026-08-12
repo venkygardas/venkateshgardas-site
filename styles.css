@@ -58,7 +58,8 @@ img{max-width:100%;height:auto;}
 }
 
 /* ---- the floating canvas ---- */
-.frame{--pw:1240px;width:100%;background:var(--deep);position:relative;}
+.frame{--pw:1240px;width:100%;background:var(--deep);position:relative;min-height:100svh;display:flex;flex-direction:column;}
+.frame > .foot{margin-top:auto;}
 .frame.reading{--pw:1040px;--gutter:5.4rem;}
 
 /* rows become spaced sections */
@@ -99,7 +100,7 @@ img{max-width:100%;height:auto;}
 .pillnav a.cta{background:var(--coral);color:#fff;padding:.6rem 1.3rem;margin-left:.4rem;}
 .pillnav a.cta:hover{background:var(--coral-soft);color:#fff;}
 
-.crumb{padding:1.2rem 2rem 0;width:min(var(--pw),100%);margin-inline:auto;}
+.crumb{justify-items:start;padding:1.2rem 2rem 0;width:min(var(--pw),100%);margin-inline:auto;}
 .crumb a{
   display:inline-block;color:var(--muted);font-family:var(--font-mono);font-size:.72rem;
   letter-spacing:.14em;text-transform:uppercase;padding:.6rem .4rem;margin:-.6rem -.4rem;
@@ -301,7 +302,7 @@ img{max-width:100%;height:auto;}
 }
 .row:is(.grid2,.grid3,.grid4,.screens) + .row:is(.grid2,.grid3,.grid4,.screens){margin-top:1px;}
 .row.grid2 > .cell,.row.grid3 > .cell,.row.grid4 > .cell,.row.screens > .cell{
-  border:0;outline:1px solid var(--glass-line);border-radius:0;
+  border:0;box-shadow:0 0 0 1px var(--glass-line);border-radius:0;
   background-color:var(--glass-bg);position:relative;
 }
 .row.grid2 > .cell::after,.row.grid3 > .cell::after,.row.grid4 > .cell::after,.row.screens > .cell::after{
@@ -414,7 +415,7 @@ a.note:hover .muted-go{color:var(--muted);}
 .feat{position:relative;column-gap:1.5rem;grid-template-columns:var(--gutter) 1fr;align-items:start;padding:1.2rem 2rem;margin-block:0;}
 .feat::after{content:"";position:absolute;bottom:0;left:2rem;right:2rem;height:1px;background:rgba(21,18,10,.12);}
 .feat.auto{grid-template-columns:auto 1fr;gap:1rem;}
-.feat .n{padding:0;color:var(--muted);font-family:var(--font-mono);font-variant-numeric:tabular-nums;}
+.feat .n{padding:0;color:var(--muted);font-family:var(--font-mono);font-size:.82rem;white-space:nowrap;font-variant-numeric:tabular-nums;}
 .feat .body{padding:0;}
 .feat h3{font-family:var(--font-body);font-weight:600;font-size:1.05rem;margin:0 0 .35rem;}
 .feat p{margin:0;font-size:.95rem;color:var(--muted);max-width:none;}
@@ -451,7 +452,7 @@ a.note:hover .muted-go{color:var(--muted);}
 .mbars i{flex:1;background:var(--coral);display:block;border-radius:4px 4px 0 0;}
 .shotframe{overflow:clip;max-width:1000px;margin:0 auto;padding:.9rem;background-color:var(--sand);}
 .shotframe img{border-radius:14px;display:block;}
-.cap.center{text-align:center;margin-top:1rem;}
+.shot .cap.center{text-align:center;margin-top:auto;padding-top:1rem;}
 
 /* phone screenshots (Saathi) */
 .shot .phone{border-radius:18px;overflow:clip;border:1px solid var(--glass-line);}
@@ -549,7 +550,7 @@ a.note:hover .muted-go{color:var(--muted);}
 /* ---- photo gallery ---- */
 .gallery{padding:1.4rem 0;}
 .gallery .cols{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));grid-auto-rows:8px;gap:14px;}
-.gallery figure{margin:0;overflow:clip;border-radius:var(--radius);background:#FFFFFF;border:1px solid var(--glass-line);}
+.gallery figure{align-self:start;margin:0;overflow:clip;border-radius:var(--radius);background:#FFFFFF;border:1px solid var(--glass-line);}
 .gallery img{width:100%;height:auto;display:block;transition:transform .5s cubic-bezier(.2,.6,.2,1);}
 .gallery figure:hover img{transform:scale(1.03);}
 @media (max-width:640px){
@@ -635,6 +636,20 @@ a.note:hover .muted-go{color:var(--muted);}
 }
 @media (min-width:881px) and (max-width:1100px){
   .gallery .cols{columns:2;}
+}
+
+@media (max-width:640px){
+  .pillnav a.m-hide-sm{display:none;}
+  .pillnav nav{gap:0;padding:.35rem .4rem;}
+  .pillnav a{padding:.5rem .55rem;font-size:.86rem;}
+  .pillnav a.cta{padding:.55rem .95rem;margin-left:.2rem;}
+  .vhead .ctas{flex-direction:column;align-items:stretch;}
+  .vhead .ctas .btn{justify-content:center;}
+  .feat{grid-template-columns:1fr;gap:.35rem;}
+  .feat::after{left:1.1rem;right:1.1rem;}
+}
+@media (max-width:880px){
+  .skip:focus{top:9.5rem;}
 }
 
 /* mobile overrides: MUST stay last in file to win the cascade */
