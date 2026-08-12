@@ -1018,3 +1018,45 @@ a{text-underline-offset:.18em;text-decoration-thickness:from-font;}
   .lit-surface::before{display:none;}
   .btn,.pillnav a.cta{transform:none!important;}
 }
+
+/* ---- cross-page continuity ----
+   Same-origin navigations cross-fade instead of flashing white, and the nav
+   pill is named so it morphs across the boundary rather than being torn down
+   and rebuilt. Browsers without view transitions ignore all of this and
+   navigate exactly as before, so there is nothing to fall back to. */
+@view-transition{navigation:auto;}
+::view-transition-old(root),::view-transition-new(root){
+  animation-duration:.32s;animation-timing-function:var(--ease-out);
+}
+.pillnav nav{view-transition-name:nav;}
+@media (prefers-reduced-motion:reduce){
+  @view-transition{navigation:none;}
+}
+
+/* ---- print ----
+   Someone will print the CV. Before this they got the nav pill, the thread,
+   the footer and a page of near-white ground over every sheet. */
+@media print{
+  @page{margin:14mm;}
+  html,body,.frame{background:#fff!important;color:#000;}
+  .pillnav,.threadwrap,.crumb,.foot,.skip,.socials,.minianim,
+  .loopwrap,.pull,.nextcase,.gallery{display:none!important;}
+  .frame{--pw:100%;min-height:0;}
+  .row{width:100%;padding:0;margin-block:0;break-inside:avoid;}
+  .glass,.plate,.vent,.job,.note,.bignum,.set,.wall,.phero .lead,.contact,.shotframe{
+    border:1px solid #bbb;box-shadow:none;background:#fff;
+  }
+  .glass::after,.plate::after,.vent::after,.job::after,.note::after,
+  .bignum::after,.set::after,.wall::after,.phero .lead::after,.contact::after{content:none!important;}
+  /* everything the script would have revealed is simply present */
+  .js [data-rv] > *,.js [data-hero] > *,.js [data-plate] .prow{
+    opacity:1!important;transform:none!important;
+  }
+  .js [data-rv] h2,.js [data-hero] h1,.js .shotframe img,.js .mockwin{clip-path:none!important;}
+  h1,h2,h3{break-after:avoid;}
+  .prose p,.feat p{orphans:3;widows:3;}
+  /* a printed link is useless unless you can read where it goes */
+  .prose a[href^="http"]::after,.plate dd a[href^="http"]::after{
+    content:" (" attr(href) ")";font-size:.75em;color:#555;word-break:break-all;
+  }
+}
