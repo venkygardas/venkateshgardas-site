@@ -621,6 +621,94 @@ a:hover .go::before,.go:hover::before{transform:scaleX(1);}
   .frame .vhead .sub{text-align:center;}
 }
 
+
+/* ---- case-study vocabulary: status, flow, tradeoffs, gaps, quotes ---- */
+
+/* status and stack chips directly under a product hero */
+.chiprow{display:flex;flex-wrap:wrap;gap:.45rem;align-items:center;padding:1.2rem var(--pad-x);}
+.chiprow .lbl{color:var(--muted);margin-right:.4rem;}
+.statchip{
+  font-family:var(--font-mono);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;
+  border:1px solid var(--glass-line);border-radius:999px;padding:.42rem .8rem;background:#fff;
+}
+.statchip.on-now{border-color:var(--coral);color:var(--coral-soft);}
+.statchip.on-now::before{
+  content:"";display:inline-block;width:6px;height:6px;border-radius:50%;
+  background:var(--coral);margin-right:.5rem;vertical-align:middle;
+}
+
+/* the flow: numbered steps, the loop a product actually runs */
+.flow{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--glass-line);}
+.flow .step{background:#fff;padding:1.5rem var(--pad-x);position:relative;}
+.flow .step .n{
+  font-family:var(--font-mono);font-size:.72rem;letter-spacing:.12em;color:var(--muted);
+  display:block;margin-bottom:.9rem;
+}
+.flow .step h3{font-size:1.05rem;font-weight:600;margin:0 0 .35rem;}
+.flow .step p{margin:0;font-size:.9rem;color:var(--muted);}
+.flow .step::after{
+  content:"";position:absolute;top:1.75rem;right:-1px;width:9px;height:9px;
+  border-right:1.5px solid var(--glass-line);border-top:1.5px solid var(--glass-line);
+  transform:rotate(45deg);background:#fff;z-index:2;
+}
+.flow .step:nth-child(3n)::after,.flow .step:last-child::after{content:none;}
+@media (max-width:880px){
+  .flow{grid-template-columns:1fr;}
+  .flow .step::after{content:none;}
+}
+
+/* the deliberate cut: what was chosen, over what, and why */
+.tradeoff{
+  display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:1px;
+  background:var(--glass-line);margin-block:1px;
+}
+.tradeoff > *{background:#fff;padding:1.5rem var(--pad-x);}
+.tradeoff .chose .k{
+  font-family:var(--font-mono);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--coral-soft);display:block;margin-bottom:.7rem;
+}
+.tradeoff .chose h3{font-size:1.05rem;font-weight:600;margin:0 0 .5rem;}
+.tradeoff .chose .over{font-size:.88rem;color:var(--muted);margin:0;}
+.tradeoff .chose .over b{font-weight:500;color:var(--ink);}
+.tradeoff .why{color:var(--muted);}
+.tradeoff .why p{margin:0;font-size:.92rem;}
+@media (max-width:880px){.tradeoff{grid-template-columns:1fr;}}
+
+/* honest gaps: stated plainly, not hidden */
+.gaps{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--glass-line);}
+.gaps .gap{background:#fff;padding:1.4rem var(--pad-x);}
+.gaps .gap .k{
+  font-family:var(--font-mono);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--muted);display:block;margin-bottom:.6rem;
+}
+.gaps .gap p{margin:0;font-size:.92rem;color:var(--muted);}
+@media (max-width:880px){.gaps{grid-template-columns:1fr;}}
+
+/* a line worth stopping on */
+.pull{padding:3.4rem 2rem;text-align:center;}
+.pull blockquote{
+  margin:0 auto;max-width:26ch;
+  font-family:var(--font-serif);font-style:italic;
+  font-size:clamp(1.6rem,3.4vw,2.5rem);line-height:1.25;color:var(--ink);
+}
+.pull .attrib{
+  display:block;margin-top:1.2rem;
+  font-family:var(--font-mono);font-size:.72rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--muted);
+}
+
+/* on to the next one */
+.nextcase{padding:2.4rem var(--pad-x);display:block;}
+.nextcase .k{
+  font-family:var(--font-mono);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--muted);display:block;margin-bottom:.7rem;
+}
+.nextcase h3{
+  font-family:var(--font-body);font-weight:700;
+  font-size:clamp(1.5rem,3vw,2.1rem);letter-spacing:-.02em;margin:0 0 .4rem;
+}
+.nextcase .sub{font-family:var(--font-serif);font-style:italic;font-size:1.15rem;color:var(--muted);margin:0 0 1rem;}
+
 /* ---- product mini animations ---- */
 .minianim{margin-top:1.6rem;}
 .minianim svg{display:block;}

@@ -17,7 +17,7 @@
 <link rel="icon" href="/favicon.ico" sizes="48x48">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="stylesheet" href="/fonts.css">
-<link rel="stylesheet" href="/styles.css?v=60">
+<link rel="stylesheet" href="/styles.css?v=61">
 <script>document.documentElement.classList.add('js')</script>
 </head>
 <body>
@@ -79,6 +79,23 @@
     </div>
   </section>
 
+
+  <div class="row">
+    <div class="cell chiprow">
+      <span class="lbl mono">Build</span>
+      <span class="statchip on-now">Live beta</span>
+      <span class="statchip">0 to 1</span>
+      <span class="statchip">Next.js</span>
+      <span class="statchip">Sarvam ASR</span>
+      <span class="statchip">Claude</span>
+      <span class="statchip">Malayalam</span>
+      <span class="statchip">Telugu</span>
+      <span class="statchip">Hindi</span>
+      <span class="statchip">Voice first</span>
+      <span class="statchip">Accessibility</span>
+    </div>
+  </div>
+
   <div class="row shead">
     <div class="cell n mono">01</div>
     <div class="cell"><h2>The Problem<span class="pairline">six quiet days a week</span></h2></div>
@@ -93,8 +110,33 @@
       <div class="cell gcell-r" aria-hidden="true"></div>
   </section>
 
+
   <div class="row shead">
     <div class="cell n mono">02</div>
+    <div class="cell"><h2>The Flow<span class="pairline">one call, end to end</span></h2></div>
+  </div>
+
+  <div class="row">
+    <div class="cell flush">
+      <div class="flow">
+        <div class="step"><span class="n">01</span><h3>Family Sets It Up</h3><p>A son in New Jersey picks the language and reads out a six-character code. The elder never onboards.</p></div>
+        <div class="step"><span class="n">02</span><h3>One Button</h3><p>No menu, no login, no notification tray. The screen holds a single thing to press.</p></div>
+        <div class="step"><span class="n">03</span><h3>She Speaks</h3><p>In Malayalam, Telugu or Hindi, at her own pace, with the hesitations real speech has.</p></div>
+        <div class="step"><span class="n">04</span><h3>Intent, Not Transcript</h3><p>The measure is whether the words that matter survived, not whether every word was spelled right.</p></div>
+        <div class="step"><span class="n">05</span><h3>It Answers Aloud</h3><p>Spoken back in the same language, slowly, with the type large enough to read without glasses.</p></div>
+        <div class="step"><span class="n">06</span><h3>The Family Sees Enough</h3><p>That she is using it, not what she said. Company is not surveillance.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <section class="row">
+    <div class="cell pull">
+      <blockquote>She has never used an app. She has used a telephone for sixty years.</blockquote>
+      <span class="attrib">The person every decision is measured against</span>
+    </div>
+  </section>
+  <div class="row shead">
+    <div class="cell n mono">03</div>
     <div class="cell"><h2>What I Sweat Over<span class="pairline">the details nobody sees</span></h2></div>
   </div>
 
@@ -104,7 +146,7 @@
   <div class="row feat"><div class="cell n"><svg width="30" height="30" viewBox="0 0 30 30" fill="none" stroke="#15120A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 22 l5.5 -14 5.5 14 M7.5 17 h6"/><path d="M18 22 h8 M18 22 l4 -11 l4 11" stroke="#6E7B45"/></svg>04</div><div class="cell body"><h3>Type You Can Read from Across the Room</h3><p>Every screen is designed for seventy year old eyes. If a line of text cannot be read at arm’s length without glasses, it does not ship.</p></div></div>
 
   <div class="row shead">
-    <div class="cell n mono">03</div>
+    <div class="cell n mono">04</div>
     <div class="cell"><h2>Screens<span class="pairline">type you can read at arm’s length</span></h2></div>
   </div>
 
@@ -118,6 +160,62 @@
       <figcaption class="cap mono">The pairing code, already in Malayalam</figcaption>
     </figure>
   </section>
+
+
+  <section class="row">
+    <div class="cell pull">
+      <blockquote>A week where she talked to it on six days, not one.</blockquote>
+      <span class="attrib">The north star</span>
+    </div>
+  </section>
+
+  <div class="row">
+    <a class="cell job nextcase" href="/roko">
+      <span class="k">Next product</span>
+      <h3>Roko</h3>
+      <p class="sub">safety at corner-shop prices</p>
+      <p>Home security hardware for families buying their first alarm. Three panels on the bench, sourced and evaluated rather than manufactured.</p>
+      <span class="go">See inside</span>
+    </a>
+  </div>
+
+    <div class="row shead">
+    <div class="cell n mono">05</div>
+    <div class="cell"><h2>The Deliberate Cut<span class="pairline">what I chose not to build</span></h2></div>
+  </div>
+
+  <div class="row">
+    <div class="cell flush">
+      <div class="tradeoff">
+        <div class="chose"><span class="k">Chose</span><h3>Voice first, one button</h3><p class="over">over <b>a chat interface with a keyboard</b></p></div>
+        <div class="why"><p>Typing Malayalam on a phone keyboard is the barrier, not the conversation. Every character of input the product asks for is a reason to put the phone down. One button removes the entire class of problem.</p></div>
+      </div>
+      <div class="tradeoff">
+        <div class="chose"><span class="k">Chose</span><h3>Keyword recall as the metric</h3><p class="over">over <b>word error rate</b></p></div>
+        <div class="why"><p>Word error rate punishes a harmless misspelling as hard as a lost word. What actually matters is whether &ldquo;chest pain&rdquo; survives the transcription. I benchmarked five providers on elderly Kerala voices and ranked them on recall of the words that carry meaning.</p></div>
+      </div>
+      <div class="tradeoff">
+        <div class="chose"><span class="k">Chose</span><h3>Setup by family, from another continent</h3><p class="over">over <b>the elder onboarding herself</b></p></div>
+        <div class="why"><p>The person who buys this is not the person who uses it. Making the buyer do the configuration removes the exact step where an eighty-year-old would give up, and it turns a support burden into a shared moment.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row shead">
+    <div class="cell n mono">06</div>
+    <div class="cell"><h2>What Isn&rsquo;t Built Yet<span class="pairline">the honest list</span></h2></div>
+  </div>
+
+  <div class="row">
+    <div class="cell flush">
+      <div class="gaps">
+        <div class="gap"><span class="k">Unpublished</span><p>Retention numbers exist in the beta but are not public yet. A companion is judged on the second week, not the launch, and that data is still thin.</p></div>
+        <div class="gap"><span class="k">Deliberately absent</span><p>No medical advice, ever, in any language. The product says it does not know rather than guess about a symptom.</p></div>
+        <div class="gap"><span class="k">Not yet</span><p>No offline mode. A dropped connection currently ends the conversation instead of degrading gracefully.</p></div>
+        <div class="gap"><span class="k">Open question</span><p>How much the family should see. Today it is presence only, and that line has not been tested with enough households.</p></div>
+      </div>
+    </div>
+  </div>
 
   <section class="row" id="contact">
     <div class="cell contact">
