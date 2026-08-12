@@ -105,7 +105,7 @@
    Everything here is opt-out under prefers-reduced-motion. */
 (function () {
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var rows = document.querySelectorAll('.rv');
+  var rows = document.querySelectorAll('.rv, .cgraph');
   var stats = document.querySelectorAll('.bignum b');
 
   if (reduce || !('IntersectionObserver' in window)) {
