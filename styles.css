@@ -1358,9 +1358,11 @@ path, circle, rect, line, polyline, g, text)[stroke], path, circle, rect, line, 
 @media (max-width:350px){.pillnav a[href="/photos"]{display:none;}}
 
 
-/* 404 sat 54.7px tighter under the nav than every other page, because it is the
-   one page with no breadcrumb row to open the gap. */
-body.short .frame > main{padding-top:1.2rem;}
+/* 404 is the one page with no breadcrumb row, and the crumb is what opens the
+   gap under the floating nav everywhere else. Without it the content started
+   8px ABOVE the bottom of the nav pill. 4.6rem reproduces the 47px the other
+   thirteen pages get from their crumb. */
+body.short .frame > main{padding-top:3.4rem;}
 
 /* colophon's CV link was the only footer link on the site that vanished on a
    phone, so that footer had three items on desktop and two on mobile while
