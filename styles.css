@@ -107,8 +107,13 @@ body.short .frame > .row:not(.foot):not(.crumb){margin-block:auto;}
   display:flex;align-items:center;gap:.65rem;margin-right:auto;
   font-weight:600;font-size:.95rem;color:var(--ink);padding:.3rem .4rem;
 }
+/* Deliberately larger than the pill's own height, standing a little proud of
+   it top and bottom. The negative block margin keeps the bar at 58px instead of
+   growing to fit, and the ring separates the face from the white behind it. */
 .pillnav .who img{
-  width:34px;height:34px;border-radius:50%;object-fit:cover;flex:none;display:block;
+  width:68px;height:68px;border-radius:50%;object-fit:cover;flex:none;display:block;
+  margin-block:-16px;margin-left:-4px;
+  box-shadow:0 0 0 3px var(--glass-bg),0 3px 10px rgba(21,18,10,.18);
 }
 @media (max-width:880px){
   .frame{--pad-inline:1.1rem;}
@@ -726,10 +731,16 @@ a.vent:active,a.job:active,a.note:active{--lift:-2px;}
 .js [data-rv].in .shotframe img{transform:scale(1);}
 
 /* how far down the page you are, on the one element that is always in view */
-.pillnav nav{position:relative;overflow:hidden;}
+/* The pill used to clip its own overflow so the progress line would not poke
+   out past the rounded ends. That also meant nothing could sit proud of the
+   bar. Inset the line instead of clipping the parent: it stops 14px short of
+   each end, where the curve is, so it never needs clipping and the avatar is
+   free to overflow. */
+.pillnav nav{position:relative;}
 .pillnav nav::after{
-  content:"";position:absolute;left:0;bottom:0;height:2px;
-  width:var(--progress,0%);background:var(--coral);opacity:.55;
+  content:"";position:absolute;left:14px;bottom:2px;height:2px;
+  width:calc(var(--progress,0%) * 0.94);max-width:calc(100% - 28px);
+  background:var(--coral);opacity:.55;border-radius:999px;
   pointer-events:none;
 }
 
@@ -1346,6 +1357,7 @@ path, circle, rect, line, polyline, g, text)[stroke], path, circle, rect, line, 
   .pillnav a{padding-inline:.5rem;font-size:.88rem;}
   .pillnav a.cta{padding-inline:.8rem;margin-left:.2rem;}
   .pillnav .who{padding-inline:.2rem;gap:.4rem;}
+  .pillnav .who img{width:46px;height:46px;margin-block:-9px;margin-left:-2px;box-shadow:0 0 0 2px var(--glass-bg);}
   .themetog{margin-left:.2rem;width:28px;height:28px;}
 }
 
@@ -1374,4 +1386,33 @@ body.short .frame > main{padding-top:3.4rem;}
 @media (max-width:360px){
   .plate .prow{grid-template-columns:1fr;gap:.15rem;min-height:0;padding-block:.7rem;}
   .plate dd{font-size:.9rem;}
+}
+
+/* ---- the loop, ridden ----
+   A cart that runs the product loop, because the curve was already a track.
+   It follows the same path the highlight draws, on the same 9s cycle, so the
+   cart and the lit segment arrive at each stage together. offset-rotate:auto
+   banks it into the curve, which is the whole charm: it leans down the drop
+   into Build and climbs back out toward Measure.
+
+   Motion path support is not universal, so the cart only exists where it
+   works. Everywhere else the loop is exactly what it was. */
+.loop-cart{display:none;}
+@supports (offset-path: path("M0 0 L1 1")){
+  .loop-cart{
+    display:block;
+    offset-path:path("M70 140 C 150 140, 190 66, 300 66 S 420 168, 510 168 S 650 74, 760 74 S 900 150, 970 150");
+    offset-rotate:auto;
+    animation:cartRide 9s linear infinite;
+  }
+}
+@keyframes cartRide{from{offset-distance:0%;}to{offset-distance:100%;}}
+.cart-body{fill:var(--coral);stroke:none;}
+.cart-wheel{fill:var(--glass-bg);stroke:var(--ink);stroke-width:2;}
+.cart-rider{fill:var(--ink);stroke:none;}
+.cart-arms{stroke:var(--ink);stroke-width:2.4;fill:none;stroke-linecap:round;}
+.loopwrap.paused .loop-cart{animation-play-state:paused;}
+@media (prefers-reduced-motion:reduce){
+  /* it parks at the first stage rather than disappearing */
+  .loop-cart{animation:none;offset-distance:0%;}
 }
