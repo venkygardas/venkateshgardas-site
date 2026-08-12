@@ -498,7 +498,12 @@ a.note:hover .muted-go{color:var(--muted);}
 .mockwin .line{display:flex;justify-content:space-between;padding:.45rem 0;border-bottom:1px solid #ECEBE7;font-size:.82rem;}
 .mockwin .line:last-child{border-bottom:0;}
 .mockwin .pill{font-size:.72rem;padding:.15rem .5rem;border-radius:999px;font-weight:600;}
-.mockwin.narrow{max-width:210px;margin:0 auto;}
+/* An explicit width, not a max-width. `margin:0 auto` turns off cross-axis
+   stretch in the column flex, so with only a max-width this panel was sized by
+   its content, and it is a container: it collapsed to a 2px sliver and rendered
+   as an empty white column, while still setting the row height so the two
+   panels beside it carried 110px of dead space. */
+.mockwin.narrow{width:min(210px,100%);margin:0 auto;}
 .mbars{display:flex;gap:6px;align-items:flex-end;height:70px;margin-top:.6rem;}
 .mbars i{flex:1;background:var(--coral);display:block;border-radius:4px 4px 0 0;}
 .shotframe{overflow:clip;max-width:1000px;margin:0 auto;padding:.9rem;background-color:var(--sand);}
@@ -676,8 +681,17 @@ a:hover .go::before,.go:hover::before{transform:scaleX(1);}
 .js .gallery figure.in{opacity:1;transform:none;}
 
 /* Each column measures itself, so the rule below can ask how much room a
-   paragraph actually got rather than which component it happens to sit in. */
-.frame .cell,.frame .prose,.frame .flow .step,
+   paragraph actually got rather than which component it happens to sit in.
+
+   ONLY put this on an element whose width comes from OUTSIDE it. inline-size
+   containment stops an element contributing its content to its own width, so
+   anything sized by its content collapses to zero and its text prints on top
+   of whatever sits next to it. That is not theoretical: `.lbl` sits in the
+   `auto` track of `.now` and `.strip`, and shipping this rule without the
+   exclusion below collapsed seven labels across three pages, printing "NEW"
+   over the first word of the paragraph beside it. Test any addition here with
+   `node scripts/collapse-check.mjs`. */
+.frame .cell:not(.lbl),.frame .prose,.frame .flow .step,
 .frame .gaps .gap,.frame .tradeoff > *,.frame .mockwin{
   container-type:inline-size;
 }

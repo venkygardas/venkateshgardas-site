@@ -82,6 +82,19 @@ detector or a future audit talk you out of them.
   holds paragraphs needs `container-type:inline-size` on the column, or
   it will inherit the wrong container's width and justify when it should
   not. Opt-out lists fail silently here; the container query cannot.
+- **Only put `container-type` on an element whose width comes from
+  OUTSIDE it.** Inline-size containment stops an element contributing its
+  own content to its own width, so anything sized BY its content
+  collapses to zero and prints on top of its neighbour. This shipped:
+  `.lbl` sits in the `auto` track of `.now` and `.strip`, and seven
+  labels across three pages went to 0px, putting "NEW" over the first
+  word of the paragraph beside it; the customer-approval mock became a
+  2px empty sliver because `margin:0 auto` had made it fit-content, while
+  still setting the row height so the two panels next to it carried 110px
+  of dead space. Nothing caught it, because a collapsed element causes no
+  overflow, no horizontal scroll and nothing offscreen: every check
+  running at the time passed. Run `node scripts/collapse-check.mjs`
+  before adding anything to that rule.
 - **Two easing curves, and they are tokens.** `--ease-out` for anything
   entering or leaving, `--ease-in-out` for anything moving on screen.
   Never `ease-in` on UI: it starts slow, at exactly the moment being
