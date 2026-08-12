@@ -572,11 +572,15 @@ a.note:hover .muted-go{color:var(--muted);}
 .set > .lbl{color:var(--muted);padding-top:.5rem;}
 .chips{display:flex;gap:.55rem;flex-wrap:wrap;}
 .wall .chips{gap:.7rem;align-items:center;}
-.tchip{
+/* One chip component, two names, because they were the same thing declared
+   twice: identical family, size, tracking, case, border and background, with
+   a 2px radius on one and 999px on the other and 0.03rem of padding between
+   them. A chip is a pill in this system, the way .btn and the nav links are. */
+.tchip,.statchip{
   font-family:var(--font-mono);font-size:.72rem;
   letter-spacing:.1em;text-transform:uppercase;
-  border:1px solid var(--glass-line);border-radius:var(--radius);
-  padding:.45rem .85rem;background:var(--glass-bg);
+  border:1px solid var(--glass-line);border-radius:999px;
+  padding:.42rem .85rem;background:var(--glass-bg);
 }
 .wall{display:grid;grid-template-columns:auto 1fr;gap:1rem;align-items:start;padding:1.4rem var(--pad-x);}
 .wall > .lbl{color:var(--muted);padding-top:.55rem;}
@@ -716,10 +720,13 @@ a.vent:active,a.job:active,a.note:active{--lift:-2px;}
    12px is invisible on a page this quiet; a wipe is the thing you actually
    notice, and it costs one property. */
 .js [data-rv] h2,.js [data-rv] .pull blockquote{
-  clip-path:inset(0 0 108% 0);
-  transition:clip-path .85s var(--ease-out);
+  clip-path:inset(0 0 102% 0);
+  transition:clip-path .6s var(--ease-out);
 }
-.js [data-rv].in h2,.js [data-rv].in .pull blockquote{clip-path:inset(0 0 -25% 0);}
+/* -8%, not -25%. The edge only has to clear the last descender; a quarter of a
+   box past it is 600ms of an 850ms animation spent moving a line nobody can
+   see, which is why the wipe read as slower than it looked. */
+.js [data-rv].in h2,.js [data-rv].in .pull blockquote{clip-path:inset(0 0 -8% 0);}
 
 /* the hero states its name, then its line, then its buttons */
 .js [data-hero] > *{opacity:0;transform:translateY(20px);}
@@ -727,8 +734,8 @@ a.vent:active,a.job:active,a.note:active{--lift:-2px;}
   opacity:1;transform:none;
   transition:opacity .7s var(--ease-out),transform .7s var(--ease-out);
 }
-.js [data-hero] h1{clip-path:inset(0 0 108% 0);transition:clip-path .95s var(--ease-out);}
-.js [data-hero].in h1{clip-path:inset(0 0 -25% 0);}
+.js [data-hero] h1{clip-path:inset(0 0 102% 0);transition:clip-path .65s var(--ease-out);}
+.js [data-hero].in h1{clip-path:inset(0 0 -8% 0);}
 
 /* Screens arrive the way a photograph develops: a wipe down the frame with the
    image sitting slightly large behind it, settling to true as the wipe lands. */
@@ -820,10 +827,6 @@ a:hover .go::before,.go:hover::before{transform:scaleX(1);}
 /* status and stack chips directly under a product hero */
 .chiprow{display:flex;flex-wrap:wrap;gap:.45rem;align-items:center;padding:1.2rem var(--pad-x);}
 .chiprow .lbl{color:var(--muted);margin-right:.4rem;}
-.statchip{
-  font-family:var(--font-mono);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;
-  border:1px solid var(--glass-line);border-radius:999px;padding:.42rem .8rem;background:var(--glass-bg);
-}
 .statchip.on-now{border-color:var(--coral);color:var(--coral-soft);}
 .statchip.on-now::before{
   content:"";display:inline-block;width:6px;height:6px;border-radius:50%;
