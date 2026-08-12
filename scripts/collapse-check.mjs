@@ -39,8 +39,21 @@ for (const width of WIDTHS) {
         if (box.width > 3) return;
         if (!(el.textContent || '').trim()) return;
         if (el.scrollWidth <= 4) return;
-        if (el.classList.contains('sr-only')) return;   // hidden on purpose
-        if (getComputedStyle(el).display === 'none') return;
+        // hidden on purpose: the sr-only pattern clips to a 1px box, and so does
+        // any visually-hidden accessible twin (e.g. .cg-mobile above 880px)
+        if (el.closest('.sr-only')) return;
+        const cs = getComputedStyle(el);
+        const clipped = el.closest ? (() => {
+          let n = el;
+          while (n && n !== document.body) {
+            const s2 = getComputedStyle(n);
+            if (s2.clip === 'rect(0px, 0px, 0px, 0px)' || s2.clipPath === 'inset(50%)') return true;
+            n = n.parentElement;
+          }
+          return false;
+        })() : false;
+        if (clipped) return;
+        if (cs.display === 'none') return;
         out.push({
           cls: (el.className || el.tagName).toString().slice(0, 34),
           w: Math.round(box.width),

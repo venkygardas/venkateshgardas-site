@@ -100,6 +100,16 @@
     nodes.appendChild(travel);
 
     ink.style.strokeDasharray = len;
+
+    /* A page shorter than the window never scrolls, so the marker would sit
+       frozen mid-rail forever with half the milestones unlit, which reads as
+       broken rather than as progress. Such a page is simply finished. */
+    if (document.documentElement.scrollHeight <= window.innerHeight + 4) {
+      ink.style.strokeDashoffset = 0;
+      milestones.forEach(function (m) { m.el.classList.add('lit'); });
+      if (travel) { travel.classList.remove('on'); halo.classList.remove('on'); }
+      return;
+    }
     draw();
   }
 
@@ -170,7 +180,8 @@
   if (!frame || reduce) return;
 
   var LAYERS = [
-    ['.shead .n', -78],          /* the ordinal, furthest back */
+    ['.shead .n', -30],          /* the ordinal, furthest back. Kept small: it sits
+                                    directly above its heading and 78 drove it into it. */
     ['.shead .pairline', -34],   /* its serif subline, just behind the heading */
     ['.pull blockquote', -26],
     ['.pull .attrib', -44],
@@ -327,11 +338,22 @@
      below where anyone was looking and was finished by the time the row reached
      a readable position. Firing it 28% of a screen higher means you actually
      watch it happen. This is why the motion looked like it was not there. */
+  function settle(row) {
+    row.classList.add('settled');
+    /* the stagger delay was inline, so hover inherited it too and a card in the
+       last position of a row waited half a second before answering */
+    Array.prototype.forEach.call(row.children, function (k) { k.style.transitionDelay = ''; });
+  }
+
   var io = new IntersectionObserver(function (entries) {
     entries.forEach(function (e) {
       if (!e.isIntersecting) return;
-      e.target.classList.add('in');
-      io.unobserve(e.target);
+      var row = e.target;
+      row.classList.add('in');
+      io.unobserve(row);
+      var kids = row.children.length;
+      /* entrance is 700ms plus the last child's stagger */
+      setTimeout(function () { settle(row); }, 760 + kids * 70);
     });
   }, { threshold: 0, rootMargin: '0px 0px -28% 0px' });
   rows.forEach(function (r) { io.observe(r); });
@@ -390,6 +412,6 @@
       countUp(e.target);
       sio.unobserve(e.target);
     });
-  }, { threshold: 0.25 });
+  }, { threshold: 0, rootMargin: '0px 0px -28% 0px' });
   stats.forEach(function (s) { sio.observe(s); });
 })();

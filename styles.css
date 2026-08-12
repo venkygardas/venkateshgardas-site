@@ -149,9 +149,6 @@ body.short .frame > .row:not(.foot):not(.crumb){margin-block:auto;}
 
 
 /* ---- arrival motion ---- */
-.js .rv > *{opacity:0;transform:translateY(14px);transition:opacity .55s var(--ease-out),transform .55s var(--ease-out);}
-.js .rv.in > *{opacity:1;transform:none;}
-@media (prefers-reduced-motion:reduce){.rv > *{opacity:1;transform:none;transition:none;}}
 
 /* ---- the product thread: one line, whole site ---- */
 .threadwrap{
@@ -331,7 +328,10 @@ body.short .frame > .row:not(.foot):not(.crumb){margin-block:auto;}
    breakpoint, so it cannot be wrong at a width nobody tested. */
 .grid4{grid-template-columns:repeat(auto-fit,minmax(15rem,1fr));}
 .row.grid3:has(> :nth-child(5):last-child){background:transparent;gap:1px;}
-.row.grid3:has(> :nth-child(5):last-child) > .cell{outline:1px solid var(--glass-line);}
+/* box-shadow, not outline. As an outline this hairline sat at the same
+   specificity as a:focus-visible and won, so the focus ring on the two work
+   cards measured 1.31:1 against the card and was effectively invisible. */
+.row.grid3:has(> :nth-child(5):last-child) > .cell{box-shadow:0 0 0 1px var(--glass-line);}
 .row.grid2,.row.grid3,.row.grid4,.row.screens{
   position:relative;gap:1px;background:var(--glass-line);background-clip:content-box;
   margin-top:.55rem;margin-bottom:0;padding-top:0;padding-bottom:0;
@@ -424,12 +424,21 @@ a.note:hover .muted-go{color:var(--muted);}
 /* ---- career graph ---- */
 .cgraph{padding:1.8rem var(--pad-x) 1rem;}
 .cgraph svg{width:100%;height:auto;display:block;}
-.cg-mobile{display:none;}
+/* Visually hidden, NOT display:none. The drawn graph is aria-hidden, so when
+   its text twin was display:none above 880px the entire career section was
+   exposed to no screen reader at all on a desktop. */
+.cg-mobile{
+  position:absolute;width:1px;height:1px;padding:0;margin:-1px;
+  overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0;
+}
 @media (max-width:880px){
   .frame{--pad-inline:1.1rem;}
   .feat::after{left:1.1rem;right:1.1rem;}
   .cgraph .cg-desktop{display:none;}
-  .cg-mobile{display:block;}
+  .cg-mobile{
+    position:static;width:auto;height:auto;margin:0;
+    overflow:visible;clip:auto;white-space:normal;
+  }
   .cg-mobile .trow{display:grid;grid-template-columns:auto 1fr;gap:.9rem;align-items:baseline;padding:.75rem 0;border-bottom:1px solid rgba(21,18,10,.12);}
   .cg-mobile .trow:last-child{border-bottom:0;}
   .cg-mobile .trow i{width:12px;height:12px;border-radius:4px;background:var(--coral);display:block;position:relative;top:1px;}
@@ -448,11 +457,9 @@ a.note:hover .muted-go{color:var(--muted);}
   .feat::after{left:1.1rem;right:1.1rem;}.row > a.job.fieldnote{grid-template-columns:1fr;}}
 
 .prose a,.feat p a,.now p a{color:var(--ink);border-bottom:1px solid var(--coral);}
-.prose a:hover,.feat p a:hover,.now p a:hover{color:var(--coral);}
+.prose a:hover,.feat p a:hover,.now p a:hover{color:var(--coral-soft);}
 
 /* ---- reveals ---- */
-.rv-d1{transition-delay:.06s;}
-.rv-d2{transition-delay:.12s;}
 
 /* ---- numbered features ---- */
 .feat{position:relative;column-gap:1.5rem;grid-template-columns:var(--gutter) 1fr;align-items:start;padding:1.2rem 2rem;margin-block:0;}
@@ -674,6 +681,25 @@ a.vent:active,a.job:active,a.note:active{--lift:-2px;}
     perspective(900px)
     rotateX(var(--rx,0deg))
     rotateY(var(--ry,0deg));
+}
+/* Once a row has arrived it must stop using the ARRIVAL timing. The entrance
+   transition is 700ms on transform, and hover, press and pointer tilt all move
+   that same transform, so every interaction inherited 700ms and the tilt only
+   caught up after the hand had already stopped. The script marks a row settled
+   when its entrance ends, and from then on the card answers at interaction
+   speed. */
+.js [data-rv].settled > *{
+  transition:transform .18s var(--ease-out),opacity .18s var(--ease-out);
+  transition-delay:0ms!important;
+}
+
+/* The parallax layers that are NOT direct children of a revealed row had
+   nothing consuming --par, so five of the seven wrote a variable into the void
+   and the depth was one number sliding on its own. */
+.js .shead .pairline,.js .pull .attrib,.js .cell.gcell .glabel,
+.js .shot figcaption,.js .cell.lbl{
+  transform:translateY(var(--par,0px));
+  will-change:transform;
 }
 
 /* Headings wipe up from behind their own edge instead of fading in. A fade of
@@ -899,7 +925,7 @@ a:hover .go::before,.go:hover::before{transform:scaleX(1);}
     transition-delay:0ms!important;
   }
   /* nothing moves and nothing wipes: every arrival becomes a fade in place */
-  .js [data-rv] > *,.js [data-hero] > *,.js [data-plate] .prow,.js .rv > *,
+  .js [data-rv] > *,.js [data-hero] > *,.js [data-plate] .prow,
   .gallery figure,.js .shotframe img{transform:none!important;}
   .js [data-rv] h2,.js [data-hero] h1,.js .shotframe img,.js .mockwin,
   .js [data-rv] .pull blockquote{clip-path:none!important;}
