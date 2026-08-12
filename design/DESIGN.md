@@ -64,6 +64,24 @@ detector or a future audit talk you out of them.
   signature of the whole system.
 - **Eyebrow + ordinal + pair line are waived in `.impeccable/config.json`**
   so detector runs stay honest about everything else.
+- **Reading pages hold a measure, not a screen width.** `.frame.reading`
+  is 780px, not 1040px. At 1040 the prose ran 157 characters a line.
+  When the measure is wrong, bring the FRAME in so the cards come with
+  it. Never cap the paragraph inside a wide card: that is the one thing
+  Venky has rejected three times, and it is what makes a block look
+  stranded. The test is `prose left == card left` and
+  `prose right == card right`, both exactly zero.
+- **Justification is gated on measure, by container query, not by a
+  component list.** `.frame p` is left-aligned; `@container (min-width:26rem)`
+  turns on justify. Below roughly 65 characters justification stops
+  tidying the right edge and opens rivers between words, which is what
+  the 3-up flow cards did the moment the frame narrowed. The threshold
+  sits in a real gap in the data: measured across the site, justified
+  paragraphs land either under 343px or over 485px and nothing is in
+  between, so no paragraph is a borderline case. Any new component that
+  holds paragraphs needs `container-type:inline-size` on the column, or
+  it will inherit the wrong container's width and justify when it should
+  not. Opt-out lists fail silently here; the container query cannot.
 - **The rupee sign is the one glyph allowed to fall back.** No shipped
   face carries U+20B9, and it appears only inside the PitStop product
   mocks, where rupee amounts are the point. Every other exotic glyph

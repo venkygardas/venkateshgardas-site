@@ -59,6 +59,27 @@ def check_required_rules():
             fail(f'{CSS} is missing the {sel[:-1]} rule')
 
 
+def check_justify_is_gated():
+    """Justification must stay gated on measure, never applied flat.
+
+    A flat `.frame p{text-align:justify}` looks correct on the long-form pages
+    and opens rivers in the 3-up cards, where a line is about 30 characters. The
+    gate is a container query, so it cannot silently miss a new component the way
+    an opt-out list does. It only works if the column declares itself a
+    container, so check both halves.
+    """
+    css = open(CSS).read()
+    if 'container-type:inline-size' not in css:
+        fail(f'{CSS} has no container-type:inline-size, so the justify gate '
+             f'measures the wrong element')
+    for m in re.finditer(r'text-align:justify', css):
+        before = css[:m.start()]
+        # the nearest enclosing at-rule must be the measure query
+        if '@container (min-width:26rem)' not in before[-400:]:
+            n = before.count('\n') + 1
+            fail(f'{CSS}:{n} justifies without the measure gate above it')
+
+
 def check_asset_versions():
     """A stylesheet edit that keeps its old ?v= is served stale from the edge."""
     versions = set()
@@ -91,6 +112,7 @@ if __name__ == '__main__':
     check_braces()
     check_orphan_keyframes()
     check_required_rules()
+    check_justify_is_gated()
     check_asset_versions()
     check_dead_references()
 
@@ -100,4 +122,5 @@ if __name__ == '__main__':
             print('  -', f)
         sys.exit(1)
     print('OK: braces balanced, no orphan keyframes, required rules present, '
-          'one stylesheet version, no dead asset references')
+          'justify gated on measure, one stylesheet version, '
+          'no dead asset references')
