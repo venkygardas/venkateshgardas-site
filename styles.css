@@ -64,16 +64,16 @@ img{max-width:100%;height:auto;}
 }
 
 /* ---- the floating canvas ---- */
-/* ONE width for the whole site. The home page used to run 1240 while the
-   reading pages ran 780, so the nav, the cards and the section heads all
-   changed size when you moved between them. Same frame everywhere now. */
-.frame{--pw:780px;width:100%;background:var(--deep);position:relative;min-height:100svh;display:flex;flex-direction:column;}
+/* ONE width for the whole site, and it is the HOME page's width. Every page
+   was brought UP to 1240, not down to 780: the pages that were narrower were
+   the ones that were wrong. */
+.frame{--pw:1240px;width:100%;background:var(--deep);position:relative;min-height:100svh;display:flex;flex-direction:column;}
 .frame > .foot{margin-top:auto;}
 /* short pages centre their content instead of stranding it at the top */
 body.short .frame > .row:not(.foot):not(.crumb){margin-block:auto;}
-/* Reading pages hold a measure, not a screen width. At 1040 the prose ran 157
-   characters a line, which is a page you scan rather than read. The frame comes
-   in instead of the paragraph, so the text still meets the card edges exactly. */
+/* Reading pages keep their own gutter, nothing more. They ran narrower than the
+   home page for a while and that was the wrong call: one width, and it is the
+   widest one. The prose block meets the card edges exactly either way. */
 .frame.reading{--gutter:5.4rem;}
 
 /* rows become spaced sections */
@@ -113,11 +113,8 @@ body.short .frame > .row:not(.foot):not(.crumb){margin-block:auto;}
   color:var(--ink);font-size:.92rem;font-weight:500;
   padding:.5rem 1rem;border-radius:999px;white-space:nowrap;
 }
-/* The reading frame is 780px, and the nav tracks it. At that width the same
-   links needed about 40px more than they had, so the name broke to two lines
-   and the pill stood 72px tall against 58px on the home page. Buy the space
-   back from the link padding rather than letting the one element that appears
-   on every page be a different height depending which page you are on. */
+/* Tighter than the original 1rem. Kept from when the frame was narrow, because
+   the nav reads better dense than sparse, and it is one height on every page. */
 .pillnav a{padding-inline:.8rem;}
 .pillnav a.cta{padding-inline:1.1rem;}
 .pillnav .who b{white-space:nowrap;}
@@ -629,12 +626,12 @@ a.note:hover .muted-go{color:var(--muted);}
 
 @media (hover:hover) and (pointer:fine){
   a.vent,a.job,a.note{transition:transform .15s var(--ease-out);}
-  a.vent:hover,a.job:hover,a.note:hover{transform:translateY(-3px);}
+  a.vent:hover,a.job:hover,a.note:hover{--lift:-5px;}
   .gallery img{transition:transform 240ms var(--ease-out);}
   .gallery figure:hover img{transform:scale(1.03);}
-  /* keep the lift while pressing, or the card drops 3px the moment it is
-     clicked and the press reads as a glitch rather than as feedback */
-  a.vent:active,a.job:active,a.note:active{transform:translateY(-3px) scale(.97);}
+  /* keep the lift while pressing, or the card drops the moment it is clicked
+     and the press reads as a glitch rather than as feedback */
+  a.vent:active,a.job:active,a.note:active{--lift:-3px;}
 }
 /* Press feedback on everything pressable, not just the buttons. A card that
    lifts on hover but does nothing on press reads as unresponsive on a phone,
@@ -643,7 +640,7 @@ a.note:hover .muted-go{color:var(--muted);}
 .btn,.pillnav a.cta,.socials a{transition:transform 160ms var(--ease-out),background-color 150ms ease,color 150ms ease;}
 a.vent,a.job,a.note,.crumb a,.pillnav a{transition:transform 160ms var(--ease-out),background-color 150ms ease,color 150ms ease;}
 .btn:active,.pillnav a.cta:active,.socials a:active,
-a.vent:active,a.job:active,a.note:active{transform:scale(.97);}
+a.vent:active,a.job:active,a.note:active{--lift:-2px;}
 .crumb a:active,.pillnav a:active{transform:scale(.94);}
 
 /* inline links keep a 24px hit area without disturbing the line rhythm */
@@ -663,10 +660,21 @@ a.vent:active,a.job:active,a.note:active{transform:scale(.97);}
    the script writes; it composes with the arrival transform instead of
    fighting it, which is why every transform below carries it. */
 .js [data-rv] > *{
-  opacity:0;transform:translateY(calc(22px + var(--par,0px)));
-  transition:opacity .62s var(--ease-out),transform .62s var(--ease-out);
+  opacity:0;transform:translateY(calc(34px + var(--par,0px)));
+  transition:opacity .7s var(--ease-out),transform .7s var(--ease-out);
 }
-.js [data-rv].in > *{opacity:1;transform:translateY(var(--par,0px));}
+/* Every moving part of a card writes its own variable and they compose here.
+   Four things want this one transform at once: the arrival, the parallax
+   drift, the hover lift and the pointer tilt. Whichever wrote it last used to
+   win and the other three vanished. */
+.js [data-rv].in > *{
+  opacity:1;
+  transform:
+    translateY(calc(var(--par,0px) + var(--lift,0px)))
+    perspective(900px)
+    rotateX(var(--rx,0deg))
+    rotateY(var(--ry,0deg));
+}
 
 /* Headings wipe up from behind their own edge instead of fading in. A fade of
    12px is invisible on a page this quiet; a wipe is the thing you actually
@@ -974,3 +982,39 @@ a{text-underline-offset:.18em;text-decoration-thickness:from-font;}
 
 /* stacked numerals line up: dates, money, stats, spec values */
 .feat .n,.plate dd,.bignum b,.mockwin .money,.cv-dates,.mono{font-variant-numeric:tabular-nums;}
+
+
+/* ---- pointer response: the page answers the cursor ----
+
+   Cards tilt a few degrees toward the pointer and carry a soft light where it
+   sits. Both are driven by variables the script writes (--rx/--ry for the tilt,
+   --mx/--my for the light), so they compose into the single transform above
+   instead of overwriting it. Four degrees, not twelve: this is an editorial
+   page, and the effect should register as the card being aware of you rather
+   than as a toy. Hover-capable pointers only, so a phone gets none of it. */
+@media (hover:hover) and (pointer:fine){
+  .lit-surface{position:relative;}
+  .lit-surface::before{
+    content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
+    border-radius:inherit;
+    background:radial-gradient(420px circle at var(--mx,50%) var(--my,50%),
+      rgba(110,123,69,.10), rgba(110,123,69,0) 60%);
+    opacity:0;transition:opacity .35s var(--ease-out);
+  }
+  .lit-surface:hover::before{opacity:1;}
+  .lit-surface > *{position:relative;z-index:1;}
+
+  /* Buttons lean toward the cursor before you reach them. The pull is a
+     quarter of the distance and caps out, so the button never leaves its own
+     footprint and the click target stays where the eye expects it. */
+  .btn,.pillnav a.cta{
+    transform:translate(var(--mag-x,0px),var(--mag-y,0px)) scale(var(--press,1));
+    transition:transform .3s var(--ease-out),background-color .15s ease,color .15s ease;
+  }
+  .btn:active,.pillnav a.cta:active{--press:.97;}
+}
+
+@media (prefers-reduced-motion:reduce){
+  .lit-surface::before{display:none;}
+  .btn,.pillnav a.cta{transform:none!important;}
+}

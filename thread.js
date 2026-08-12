@@ -170,10 +170,13 @@
   if (!frame || reduce) return;
 
   var LAYERS = [
-    ['.shead .n', -26],          /* the ordinal, furthest back */
-    ['.shead .pairline', -12],   /* its serif subline, just behind the heading */
-    ['.pull .attrib', -14],
-    ['.cell.gcell .glabel', -18]
+    ['.shead .n', -78],          /* the ordinal, furthest back */
+    ['.shead .pairline', -34],   /* its serif subline, just behind the heading */
+    ['.pull blockquote', -26],
+    ['.pull .attrib', -44],
+    ['.cell.gcell .glabel', -52],
+    ['.shot figcaption', -30],
+    ['.cell.lbl', -24]
   ];
 
   var items = [];
@@ -212,6 +215,62 @@
   window.addEventListener('scroll', onScroll, { passive: true });
   window.addEventListener('resize', onScroll, { passive: true });
   window.addEventListener('load', frameStep);
+})();
+
+/* Pointer layer: the page answers the cursor.
+
+   Cards tilt a few degrees toward the pointer and carry a soft light where it
+   sits; buttons lean toward it before you arrive. Everything is written as a
+   CSS variable, never as a transform, because the arrival and the parallax are
+   already using that property and the last writer would win.
+
+   Hover-capable, fine pointers only. A touch screen has no cursor to answer,
+   and pointermove there would just fire on every tap. */
+(function () {
+  var fine = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var frame = document.querySelector('.frame');
+  if (!frame || !fine || reduce) return;
+
+  var TILT = 4;      /* degrees at the far corner */
+  var MAGNET = 0.28; /* share of the distance a button leans */
+  var MAGNET_MAX = 7;
+
+  var cards = frame.querySelectorAll(
+    '.vent,.job,.note,.plate,.phero .lead,.shot .shotframe,.bignum,.contact,.set,.wall'
+  );
+  Array.prototype.forEach.call(cards, function (el) {
+    el.classList.add('lit-surface');
+    el.addEventListener('pointermove', function (e) {
+      var r = el.getBoundingClientRect();
+      var px = (e.clientX - r.left) / r.width;
+      var py = (e.clientY - r.top) / r.height;
+      el.style.setProperty('--mx', (px * 100).toFixed(1) + '%');
+      el.style.setProperty('--my', (py * 100).toFixed(1) + '%');
+      el.style.setProperty('--rx', ((0.5 - py) * TILT).toFixed(2) + 'deg');
+      el.style.setProperty('--ry', ((px - 0.5) * TILT).toFixed(2) + 'deg');
+    });
+    el.addEventListener('pointerleave', function () {
+      el.style.setProperty('--rx', '0deg');
+      el.style.setProperty('--ry', '0deg');
+    });
+  });
+
+  var buttons = frame.querySelectorAll('.btn,.pillnav a.cta');
+  Array.prototype.forEach.call(buttons, function (el) {
+    el.addEventListener('pointermove', function (e) {
+      var r = el.getBoundingClientRect();
+      var dx = e.clientX - (r.left + r.width / 2);
+      var dy = e.clientY - (r.top + r.height / 2);
+      var cap = function (v) { return Math.max(-MAGNET_MAX, Math.min(MAGNET_MAX, v * MAGNET)); };
+      el.style.setProperty('--mag-x', cap(dx).toFixed(1) + 'px');
+      el.style.setProperty('--mag-y', cap(dy).toFixed(1) + 'px');
+    });
+    el.addEventListener('pointerleave', function () {
+      el.style.setProperty('--mag-x', '0px');
+      el.style.setProperty('--mag-y', '0px');
+    });
+  });
 })();
 
 /* Motion layer: cards arrive as you reach them, numbers count up.
@@ -263,14 +322,32 @@
   });
   if (hero) stagger(hero, 90);
 
+  /* -28% rather than -40px. At 40px a row crossed the line while it was still
+     at the very bottom edge of the screen, so the whole 700ms entrance played
+     below where anyone was looking and was finished by the time the row reached
+     a readable position. Firing it 28% of a screen higher means you actually
+     watch it happen. This is why the motion looked like it was not there. */
   var io = new IntersectionObserver(function (entries) {
     entries.forEach(function (e) {
       if (!e.isIntersecting) return;
       e.target.classList.add('in');
       io.unobserve(e.target);
     });
-  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+  }, { threshold: 0, rootMargin: '0px 0px -28% 0px' });
   rows.forEach(function (r) { io.observe(r); });
+
+  /* The trigger line sits 28% up the screen, so anything in the last 28% of a
+     page can never reach it and would sit invisible forever. At the bottom of
+     the document, everything left over arrives. */
+  function sweepTail() {
+    if (window.innerHeight + window.scrollY < document.documentElement.scrollHeight - 4) return;
+    rows.forEach(function (r) { r.classList.add('in'); });
+    Array.prototype.forEach.call(figs, function (f) { f.classList.add('in'); });
+  }
+  window.addEventListener('scroll', sweepTail, { passive: true });
+  window.addEventListener('resize', sweepTail, { passive: true });
+  window.addEventListener('load', sweepTail);
+  sweepTail();
 
   /* the hero runs on load, not on scroll */
   if (hero) requestAnimationFrame(function () { hero.classList.add('in'); });
@@ -282,7 +359,7 @@
       e.target.classList.add('in');
       gio.unobserve(e.target);
     });
-  }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+  }, { threshold: 0, rootMargin: '0px 0px -22% 0px' });
   Array.prototype.forEach.call(figs, function (f) { gio.observe(f); });
 
   function countUp(el) {
