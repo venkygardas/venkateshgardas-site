@@ -30,7 +30,7 @@
 </script>
 
 <link rel="stylesheet" href="/fonts.css?v=2">
-<link rel="stylesheet" href="/styles.css?v=75">
+<link rel="stylesheet" href="/styles.css?v=76">
 <link rel="alternate" type="application/rss+xml" title="Field notes" href="/rss.xml">
 <script>(function(){var r=document.documentElement;r.classList.add('js');try{var t=localStorage.getItem('theme');if(t==='dark'||t==='light')r.setAttribute('data-theme',t);}catch(e){}setTimeout(function(){if(!window.__rvReady)r.classList.add('rv-fail')},2500)})()</script>
 </head>
@@ -420,11 +420,19 @@
   var nav=document.querySelectorAll('.pillnav a');
   var map={'building':'/#building','work':'/#work','path':'/#work','education':'/#work','contact':'/#contact'};
   var sections=['building','work','path','education','contact'].map(function(id){return document.getElementById(id)}).filter(Boolean);
+  var lastActive=null;
   function setActive(href){
+    /* Only touch the DOM when the section actually changes. This ran on every
+       scroll event and wrote an attribute to every nav link each time: 592
+       attribute writes over a single 300px scroll, all of them redundant.
+       And these are in-page section anchors, so the correct value is
+       aria-current="true"; "page" claims you are on a different page. */
+    if(href===lastActive)return;
+    lastActive=href;
     nav.forEach(function(a){
       var h=a.getAttribute('href');
-      if(h===href){a.setAttribute('aria-current','page');}
-      else{a.removeAttribute('aria-current');}
+      if(h===href){a.setAttribute('aria-current','true');}
+      else if(a.getAttribute('aria-current')==='true'){a.removeAttribute('aria-current');}
     });
   }
   var io=new IntersectionObserver(function(es){
@@ -437,6 +445,6 @@
   },{passive:true});
 })();
 </script>
-<script src="/thread.js?v=17" defer></script>
+<script src="/thread.js?v=18" defer></script>
 </body>
 </html>

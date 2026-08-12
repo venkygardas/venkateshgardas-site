@@ -31,16 +31,37 @@ window.__rvReady = true;
   var len = 0, H = 0;
   var travel = null, halo = null, milestones = [], top = 0;
 
-  /* How far along the path a given height sits. Bisection rather than a scan:
-     the path runs several thousand units and getPointAtLength is the expensive
-     call. The path only ever descends, so y is monotonic in length. */
-  function lengthAtY(y, total) {
-    var lo = 0, hi = total;
-    for (var i = 0; i < 18; i++) {
-      var mid = (lo + hi) / 2;
-      if (ink.getPointAtLength(mid).y < y) lo = mid; else hi = mid;
+  /* How far along the path a given height sits.
+
+     This used to bisect, which cost 18 getPointAtLength calls plus one every
+     time it was asked, and it is asked on every scroll frame: measured at 19
+     calls a frame, and 74 to 87% of all scripting done during a scroll. The
+     path is fixed between rebuilds and only ever descends, so it is sampled
+     once into a table at build time and every later question is a binary
+     search over an array plus one interpolation. Zero path calls per frame. */
+  var TABLE = [];   /* [y, length] pairs, ascending in both */
+
+  function sample(total) {
+    TABLE = [];
+    var STEPS = 256;
+    for (var i = 0; i <= STEPS; i++) {
+      var at = total * (i / STEPS);
+      TABLE.push([ink.getPointAtLength(at).y, at]);
     }
-    return (lo + hi) / 2;
+  }
+
+  function lengthAtY(y, total) {
+    if (!TABLE.length) return 0;
+    if (y <= TABLE[0][0]) return 0;
+    if (y >= TABLE[TABLE.length - 1][0]) return total;
+    var lo = 0, hi = TABLE.length - 1;
+    while (hi - lo > 1) {
+      var mid = (lo + hi) >> 1;
+      if (TABLE[mid][0] < y) lo = mid; else hi = mid;
+    }
+    var y0 = TABLE[lo][0], y1 = TABLE[hi][0];
+    var t = y1 === y0 ? 0 : (y - y0) / (y1 - y0);
+    return TABLE[lo][1] + t * (TABLE[hi][1] - TABLE[lo][1]);
   }
 
   function build() {
@@ -93,6 +114,7 @@ window.__rvReady = true;
 
     while (nodes.firstChild) nodes.removeChild(nodes.firstChild);
     len = ink.getTotalLength();
+    sample(len);
 
     milestones = pts.slice(1, -1).map(function (p) {
       var c = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
@@ -648,8 +670,11 @@ window.__rvReady = true;
     return set ? set === 'dark' : systemDark();
   }
   function label() {
+    /* A label that already names the action must not also carry aria-pressed:
+       a screen reader then says "switch to the light theme, pressed", which
+       states the opposite of what the control will do. The label alone is the
+       accessible name, so the state is dropped. */
     btn.setAttribute('aria-label', isDark() ? 'Switch to the light theme' : 'Switch to the dark theme');
-    btn.setAttribute('aria-pressed', isDark() ? 'true' : 'false');
   }
 
   btn.addEventListener('click', function () {
