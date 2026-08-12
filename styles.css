@@ -185,26 +185,19 @@ body.short .frame > .row:not(.foot):not(.crumb){margin-block:auto;}
 .loopwrap{max-width:var(--pw);margin:0 auto;padding:0 2rem 1rem;}
 .loopwrap svg{width:100%;height:auto;display:block;overflow:visible;}
 .loop-path{fill:none;stroke:rgba(21,18,10,.16);stroke-width:1.5;}
-.loop-live{
-  fill:none;stroke:var(--coral);stroke-width:1.5;
-  stroke-dasharray:150 1050;
-  animation:loopDraw 9s linear infinite;
-}
-@keyframes loopDraw{to{stroke-dashoffset:-1200;}}
 .loop-node{fill:var(--glass-bg);stroke:var(--ink);stroke-width:1.5;}
-.loop-node-fill{fill:var(--coral);stroke:none;opacity:0;animation:nodeLight 9s linear infinite;}
-.loop-node-fill.n2{animation-delay:1.8s;}
-.loop-node-fill.n3{animation-delay:3.6s;}
-.loop-node-fill.n4{animation-delay:5.4s;}
-.loop-node-fill.n5{animation-delay:7.2s;}
-@keyframes nodeLight{0%,4%{opacity:0;}8%,18%{opacity:1;}24%,100%{opacity:0;}}
+.loop-node-fill{fill:var(--coral);stroke:none;opacity:0;}
+
+
+
+
+@keyframes nodeLight{0%{opacity:0;}1.5%{opacity:1;}11%{opacity:1;}15%{opacity:0;}100%{opacity:0;}}
 .loop-label{font-family:var(--font-mono);font-size:11px;letter-spacing:.14em;fill:var(--muted);text-transform:uppercase;}
 .loop-caption{font-family:var(--font-serif);font-style:italic;font-size:19px;fill:var(--ink);}
 .loop-tick{stroke:rgba(21,18,10,.16);stroke-width:1.5;}
 
 @media (prefers-reduced-motion:reduce){
-  .loop-live{animation:none;stroke-dasharray:none;}
-  .loop-node-fill{animation:none;opacity:1;}
+    .loop-node-fill{animation:none;opacity:1;}
 }
 @media (max-width:1100px){.loop-label{font-size:15px;}}
 @media (max-width:900px){.loop-label{font-size:19px;}}
@@ -212,8 +205,7 @@ body.short .frame > .row:not(.foot):not(.crumb){margin-block:auto;}
   .loopwrap{padding:0 1.1rem 1rem;}
   .loop-label{font-size:30px;letter-spacing:.06em;}
   .loop-node{stroke-width:2.5;}
-  .loop-path,.loop-live{stroke-width:2.5;}
-}
+  .loop-path,}
 
 /* ---- animated hero (homepage) ---- */
 .vhero{position:relative;}
@@ -1339,7 +1331,7 @@ path, circle, rect, line, polyline, g, text)[stroke], path, circle, rect, line, 
 
 /* An infinite animation on a diagram that is 4,400px above you still costs the
    main thread every frame. Paused unless it is actually on screen. */
-.loopwrap.paused .loop-live,.loopwrap.paused .loop-node-fill{animation-play-state:paused;}
+.loopwrap.paused .loop-node-fill{animation-play-state:paused;}
 
 /* the nav ran out of room between 642 and 741px and wrapped to two rows,
    orphaning the CTA and the theme toggle onto a line of their own */
@@ -1394,31 +1386,85 @@ body.short .frame > main{padding-top:3.4rem;}
   .plate dd{font-size:.9rem;}
 }
 
-/* ---- the loop, ridden ----
-   A cart that runs the product loop, because the curve was already a track.
-   It follows the same path the highlight draws, on the same 9s cycle, so the
-   cart and the lit segment arrive at each stage together. offset-rotate:auto
-   banks it into the curve, which is the whole charm: it leans down the drop
-   into Build and climbs back out toward Measure.
 
-   Motion path support is not universal, so the cart only exists where it
-   works. Everywhere else the loop is exactly what it was. */
-.loop-cart{display:none;}
+/* ---- the loop, ridden ----
+   One 15s cycle, told as a sequence rather than as a set of separate effects:
+   the rider boards at Discover, the train runs the track through all five
+   stages, they get off at Ship, run the dotted return at speed, and board
+   again. The green highlight that used to draw along the track is gone; it and
+   the coaster were two answers to the same question and only one of them is a
+   roller coaster.
+
+   Three cars on the same path, offset in time rather than in space, so they
+   articulate through the curve instead of moving as one rigid block.
+   offset-rotate:auto banks each car into its own piece of track, which is why
+   the train bends over a crest.
+
+   Motion paths are not universal, so all of it lives inside @supports and the
+   diagram is otherwise exactly what it was. */
+.loop-car,.loop-runner{display:none;}
+
 @supports (offset-path: path("M0 0 L1 1")){
-  .loop-cart{
+  .loop-car{
     display:block;
-    offset-path:path("M70 140 C 150 140, 190 66, 300 66 S 420 168, 510 168 S 650 74, 760 74 S 900 150, 970 150");
+    offset-path:path("M70 150 C 110 150, 130 60, 185 58 C 240 56, 262 90, 300 90 C 345 90, 360 178, 405 178 C 435 178, 435 72, 462 72 C 490 72, 492 160, 510 160 C 545 160, 560 105, 600 102 C 645 99, 655 176, 690 176 C 725 176, 730 65, 760 65 C 800 65, 815 182, 865 180 C 915 178, 935 130, 970 130");
     offset-rotate:auto;
-    animation:cartRide 9s linear infinite;
+    animation:ride 15s linear infinite;
   }
+  /* the trailing cars are the same animation, later: the delay IS the coupling */
+  .loop-car.car2{animation-delay:.24s;}
+  .loop-car.car3{animation-delay:.48s;}
+
+  .loop-runner{
+    display:block;
+    offset-path:path("M970 130 C 1015 130, 1022 196, 985 210 L 90 210 C 50 210, 48 172, 70 150");
+    offset-rotate:0deg;
+    animation:runback 15s linear infinite;
+  }
+  .loop-runner .run-legs{animation:stride .22s steps(2,jump-none) infinite;transform-origin:0 -11px;}
+  .loop-runner .run-arms{animation:stride .22s steps(2,jump-none) infinite reverse;transform-origin:0 -17px;}
 }
-@keyframes cartRide{from{offset-distance:0%;}to{offset-distance:100%;}}
-.cart-body{fill:var(--coral);stroke:none;}
-.cart-wheel{fill:var(--glass-bg);stroke:var(--ink);stroke-width:2;}
-.cart-rider{fill:var(--ink);stroke:none;}
-.cart-arms{stroke:var(--ink);stroke-width:2.4;fill:none;stroke-linecap:round;}
-.loopwrap.paused .loop-cart{animation-play-state:paused;}
+
+/* The ride occupies the first 58% of the cycle. The cars fade out at Ship,
+   snap back to Discover while nobody can see them, and wait there. */
+@keyframes ride{
+  0%   {offset-distance:0%;   opacity:1;}
+  56%  {offset-distance:100%; opacity:1;}
+  59%  {offset-distance:100%; opacity:0;}
+  60%  {offset-distance:0%;   opacity:0;}
+  92%  {offset-distance:0%;   opacity:0;}
+  95%,100%{offset-distance:0%; opacity:1;}
+}
+
+/* The runner covers the return in a third of the time the ride takes, which is
+   what makes it read as running rather than strolling. */
+@keyframes runback{
+  0%,57%{offset-distance:0%; opacity:0;}
+  59%  {offset-distance:0%; opacity:1;}
+  93%  {offset-distance:100%; opacity:1;}
+  96%,100%{offset-distance:100%; opacity:0;}
+}
+@keyframes stride{from{transform:rotate(-16deg);}to{transform:rotate(16deg);}}
+
+.car-body{fill:var(--coral);stroke:none;}
+.car-link{stroke:var(--ink);stroke-width:1.8;stroke-linecap:round;}
+.car-wheel{fill:var(--glass-bg);stroke:var(--ink);stroke-width:1.6;}
+.car-rider,.run-head{fill:var(--ink);stroke:none;}
+.car-arms{stroke:var(--ink);stroke-width:1.7;fill:none;stroke-linecap:round;}
+.run-body,.run-arms,.run-legs{stroke:var(--ink);stroke-width:2.4;fill:none;stroke-linecap:round;}
+
+.loopwrap.paused .loop-car,.loopwrap.paused .loop-runner,
+.loopwrap.paused .run-legs,.loopwrap.paused .run-arms{animation-play-state:paused;}
+
 @media (prefers-reduced-motion:reduce){
-  /* it parks at the first stage rather than disappearing */
-  .loop-cart{animation:none;offset-distance:0%;}
+  /* the train parks at the first stage and the runner stays off the track */
+  .loop-car{animation:none;offset-distance:0%;opacity:1;}
+  .loop-runner{display:none;}
 }
+
+/* the node lights as the train reaches it, rather than on its own timer */
+.loop-node-fill{animation:nodeLight 15s linear infinite;}
+.loop-node-fill.n2{animation-delay:1.9s;}
+
+.loop-node-fill.n4{animation-delay:5.9s;}
+.loop-node-fill.n5{animation-delay:8.4s;}

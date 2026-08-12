@@ -30,7 +30,7 @@
 </script>
 
 <link rel="stylesheet" href="/fonts.css?v=2">
-<link rel="stylesheet" href="/styles.css?v=81">
+<link rel="stylesheet" href="/styles.css?v=82">
 <link rel="alternate" type="application/rss+xml" title="Field notes" href="/rss.xml">
 <script>(function(){var r=document.documentElement;r.classList.add('js');try{var t=localStorage.getItem('theme');if(t==='dark'||t==='light')r.setAttribute('data-theme',t);}catch(e){}setTimeout(function(){if(!window.__rvReady)r.classList.add('rv-fail')},2500)})()</script>
 </head>
@@ -70,29 +70,51 @@
     </div>
     <div class="loopwrap">
       <svg viewBox="0 0 1040 290" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="The product loop I run: discover, define, build, measure, ship, and back to discover.">
-        <path class="loop-path" d="M70 140 C 150 140, 190 66, 300 66 S 420 168, 510 168 S 650 74, 760 74 S 900 150, 970 150"/>
-        <path class="loop-live" d="M70 140 C 150 140, 190 66, 300 66 S 420 168, 510 168 S 650 74, 760 74 S 900 150, 970 150"/>
-        <path class="loop-path" d="M970 150 C 1015 150, 1022 196, 985 210 L 90 210 C 50 210, 48 168, 70 140" stroke-dasharray="5 6"/>
+        <path class="loop-path" d="M70 150 C 110 150, 130 60, 185 58 C 240 56, 262 90, 300 90 C 345 90, 360 178, 405 178 C 435 178, 435 72, 462 72 C 490 72, 492 160, 510 160 C 545 160, 560 105, 600 102 C 645 99, 655 176, 690 176 C 725 176, 730 65, 760 65 C 800 65, 815 182, 865 180 C 915 178, 935 130, 970 130"/>
+        <path class="loop-path loop-return" d="M970 130 C 1015 130, 1022 196, 985 210 L 90 210 C 50 210, 48 172, 70 150" stroke-dasharray="5 6"/>
         <g class="loop-tick">
-          <line x1="70" y1="140" x2="70" y2="238"/>
-          <line x1="300" y1="66" x2="300" y2="238"/>
-          <line x1="510" y1="168" x2="510" y2="238"/>
-          <line x1="760" y1="74" x2="760" y2="238"/>
-          <line x1="970" y1="150" x2="970" y2="238"/>
+          <line x1="70" y1="150" x2="70" y2="238"/>
+          <line x1="300" y1="90" x2="300" y2="238"/>
+          <line x1="510" y1="160" x2="510" y2="238"/>
+          <line x1="760" y1="65" x2="760" y2="238"/>
+          <line x1="970" y1="130" x2="970" y2="238"/>
         </g>
         <g>
-          <circle class="loop-node" cx="70" cy="140" r="7"/><circle class="loop-node-fill" cx="70" cy="140" r="3.5"/>
-          <circle class="loop-node" cx="300" cy="66" r="7"/><circle class="loop-node-fill n2" cx="300" cy="66" r="3.5"/>
-          <circle class="loop-node" cx="510" cy="168" r="7"/><circle class="loop-node-fill n3" cx="510" cy="168" r="3.5"/>
-          <circle class="loop-node" cx="760" cy="74" r="7"/><circle class="loop-node-fill n4" cx="760" cy="74" r="3.5"/>
-          <circle class="loop-node" cx="970" cy="150" r="7"/><circle class="loop-node-fill n5" cx="970" cy="150" r="3.5"/>
+          <circle class="loop-node" cx="70" cy="150" r="7"/><circle class="loop-node-fill" cx="70" cy="150" r="3.5"/>
+          <circle class="loop-node" cx="300" cy="90" r="7"/><circle class="loop-node-fill n2" cx="300" cy="90" r="3.5"/>
+          <circle class="loop-node" cx="510" cy="160" r="7"/><circle class="loop-node-fill n3" cx="510" cy="160" r="3.5"/>
+          <circle class="loop-node" cx="760" cy="65" r="7"/><circle class="loop-node-fill n4" cx="760" cy="65" r="3.5"/>
+          <circle class="loop-node" cx="970" cy="130" r="7"/><circle class="loop-node-fill n5" cx="970" cy="130" r="3.5"/>
         </g>
-        <g class="loop-cart" aria-hidden="true">
-          <path class="cart-body" d="M-17 -16 h34 a4 4 0 0 1 4 4 v9 a4 4 0 0 1 -4 4 h-34 a4 4 0 0 1 -4 -4 v-9 a4 4 0 0 1 4 -4z"/>
-          <circle class="cart-wheel" cx="-9" cy="2" r="4.5"/>
-          <circle class="cart-wheel" cx="9" cy="2" r="4.5"/>
-          <circle class="cart-rider" cx="-2" cy="-27" r="4.5"/>
-          <path class="cart-arms" d="M-2 -22 v5 M-2 -21 l-8 -8 M-2 -21 l8 -8"/>
+        <g class="loop-car car1" aria-hidden="true">
+          <path class="car-body" d="M-10 -11 h20 a3 3 0 0 1 3 3 v6 a3 3 0 0 1 -3 3 h-20 a3 3 0 0 1 -3 -3 v-6 a3 3 0 0 1 3 -3z"/>
+          <path class="car-link" d="M10 -3 h5"/>
+          <circle class="car-wheel" cx="-5.5" cy="1.5" r="2.8"/>
+          <circle class="car-wheel" cx="5.5" cy="1.5" r="2.8"/>
+          <circle class="car-rider" cx="-1" cy="-17" r="2.9"/>
+          <path class="car-arms" d="M-1 -14 v3.5 M-1 -13.5 l-5 -5 M-1 -13.5 l5 -5"/>
+        </g>
+        <g class="loop-car car2" aria-hidden="true">
+          <path class="car-body" d="M-10 -11 h20 a3 3 0 0 1 3 3 v6 a3 3 0 0 1 -3 3 h-20 a3 3 0 0 1 -3 -3 v-6 a3 3 0 0 1 3 -3z"/>
+          <path class="car-link" d="M10 -3 h5"/>
+          <circle class="car-wheel" cx="-5.5" cy="1.5" r="2.8"/>
+          <circle class="car-wheel" cx="5.5" cy="1.5" r="2.8"/>
+          <circle class="car-rider" cx="-1" cy="-17" r="2.9"/>
+          <path class="car-arms" d="M-1 -14 v3.5 M-1 -13.5 l-5 -5 M-1 -13.5 l5 -5"/>
+        </g>
+        <g class="loop-car car3" aria-hidden="true">
+          <path class="car-body" d="M-10 -11 h20 a3 3 0 0 1 3 3 v6 a3 3 0 0 1 -3 3 h-20 a3 3 0 0 1 -3 -3 v-6 a3 3 0 0 1 3 -3z"/>
+          <path class="car-link" d="M10 -3 h5"/>
+          <circle class="car-wheel" cx="-5.5" cy="1.5" r="2.8"/>
+          <circle class="car-wheel" cx="5.5" cy="1.5" r="2.8"/>
+          <circle class="car-rider" cx="-1" cy="-17" r="2.9"/>
+          <path class="car-arms" d="M-1 -14 v3.5 M-1 -13.5 l-5 -5 M-1 -13.5 l5 -5"/>
+        </g>
+        <g class="loop-runner" aria-hidden="true">
+          <circle class="run-head" cx="0" cy="-24" r="4.2"/>
+          <path class="run-body" d="M0 -20 v9"/>
+          <path class="run-arms" d="M0 -17 l-8 5 M0 -17 l8 -4"/>
+          <path class="run-legs" d="M0 -11 l-7 11 M0 -11 l7 11"/>
         </g>
         <g class="loop-label" text-anchor="middle">
           <text x="70" y="262">Discover</text>
