@@ -1412,8 +1412,8 @@ body.short .frame > main{padding-top:3.4rem;}
     animation:ride 15s linear infinite;
   }
   /* the trailing cars are the same animation, later: the delay IS the coupling */
-  .loop-car.car2{animation-delay:.24s;}
-  .loop-car.car3{animation-delay:.48s;}
+  .loop-car.car2{animation-delay:.17s;}
+  .loop-car.car3{animation-delay:.34s;}
 
   .loop-runner{
     display:block;
