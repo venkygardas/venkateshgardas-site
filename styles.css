@@ -64,14 +64,17 @@ img{max-width:100%;height:auto;}
 }
 
 /* ---- the floating canvas ---- */
-.frame{--pw:1240px;width:100%;background:var(--deep);position:relative;min-height:100svh;display:flex;flex-direction:column;}
+/* ONE width for the whole site. The home page used to run 1240 while the
+   reading pages ran 780, so the nav, the cards and the section heads all
+   changed size when you moved between them. Same frame everywhere now. */
+.frame{--pw:780px;width:100%;background:var(--deep);position:relative;min-height:100svh;display:flex;flex-direction:column;}
 .frame > .foot{margin-top:auto;}
 /* short pages centre their content instead of stranding it at the top */
 body.short .frame > .row:not(.foot):not(.crumb){margin-block:auto;}
 /* Reading pages hold a measure, not a screen width. At 1040 the prose ran 157
    characters a line, which is a page you scan rather than read. The frame comes
    in instead of the paragraph, so the text still meets the card edges exactly. */
-.frame.reading{--pw:780px;--gutter:5.4rem;}
+.frame.reading{--gutter:5.4rem;}
 
 /* rows become spaced sections */
 .row{display:grid;padding:0 2rem;width:min(var(--pw),100%);margin-inline:auto;margin-block:.55rem;}
@@ -115,8 +118,8 @@ body.short .frame > .row:not(.foot):not(.crumb){margin-block:auto;}
    and the pill stood 72px tall against 58px on the home page. Buy the space
    back from the link padding rather than letting the one element that appears
    on every page be a different height depending which page you are on. */
-.frame.reading .pillnav a{padding-inline:.8rem;}
-.frame.reading .pillnav a.cta{padding-inline:1.1rem;}
+.pillnav a{padding-inline:.8rem;}
+.pillnav a.cta{padding-inline:1.1rem;}
 .pillnav .who b{white-space:nowrap;}
 .pillnav a:hover{color:var(--ink);background:rgba(21,18,10,.05);}
 .pillnav a[aria-current="page"]{color:var(--coral);font-weight:600;background:transparent;}
@@ -175,7 +178,7 @@ body.short .frame > .row:not(.foot):not(.crumb){margin-block:auto;}
 .frame > .pillnav{position:sticky;top:14px;z-index:50;}
 
 /* ---- hero: the product loop ---- */
-.loopwrap{max-width:1040px;margin:0 auto;padding:0 2rem 1rem;}
+.loopwrap{max-width:var(--pw);margin:0 auto;padding:0 2rem 1rem;}
 .loopwrap svg{width:100%;height:auto;display:block;overflow:visible;}
 .loop-path{fill:none;stroke:rgba(21,18,10,.16);stroke-width:1.5;}
 .loop-live{
@@ -291,13 +294,18 @@ body.short .frame > .row:not(.foot):not(.crumb){margin-block:auto;}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:.25}}
 
 /* ---- action strip ---- */
-.strip{grid-template-columns:auto 1fr;align-items:center;gap:1rem;padding:1.6rem 2rem .4rem;}
+/* Centred, not left-labelled. These sit under a centred hero and a centred
+   section head, so a label pinned to the left edge read as a stray margin note. */
+/* Centre the CONTENT, never the cell. `justify-items:center` would make each
+   cell content-sized, and these cells are containers, so they collapse and the
+   buttons stack into circles. Keep the cells full width and centre inside. */
+.strip{grid-template-columns:1fr;align-items:center;gap:.7rem;padding:1.6rem 2rem .4rem;text-align:center;}
 .strip .lbl{color:var(--muted);padding:0;}
-.strip .acts{display:flex;gap:.6rem;flex-wrap:wrap;padding:0;}
+.strip .acts{display:flex;gap:.6rem;flex-wrap:wrap;padding:0;justify-content:center;}
 .strip .acts .btn{font-size:.82rem;padding:.6rem 1.1rem;}
 
 /* now line */
-.now{grid-template-columns:auto 1fr;align-items:baseline;gap:1rem;padding:1.2rem 2rem 0;}
+.now{grid-template-columns:1fr;gap:.35rem;padding:1.2rem 2rem 0;text-align:center;}
 .now .lbl{color:var(--coral-soft);font-weight:700;padding:0;}
 .now p{margin:0;padding:0;font-size:.95rem;color:var(--muted);}
 
@@ -317,7 +325,8 @@ body.short .frame > .row:not(.foot):not(.crumb){margin-block:auto;}
 
 /* ---- card grids ---- */
 .grid2{grid-template-columns:1fr 1fr;}
-.grid3{grid-template-columns:repeat(3,1fr);}
+/* fits what the row can hold, rather than promising three and starving them */
+.grid3{grid-template-columns:repeat(auto-fit,minmax(13.5rem,1fr));}
 /* Fits as many tiles as the row can actually hold, rather than promising four
    and then starving them. The old rule dropped to 2-up below a 1200px VIEWPORT,
    so once the frame came in a 1440px screen showed the most cramped tiles on
@@ -643,18 +652,56 @@ a.vent:active,a.job:active,a.note:active{transform:scale(.97);}
 }
 .plate dd a,.now p a,.say a{display:inline-block;padding-block:3px;margin-block:-3px;overflow-wrap:break-word;}
 
-/* ---- motion: one entrance vocabulary, applied to every page by script ---- */
+/* ---- motion: one entrance vocabulary, applied to every page by script ----
+
+   Depth comes from things moving at different rates, which is the whole trick
+   on rleonardi.com: clouds, mountains and sea all answer the same scroll at
+   different speeds, so you read it as a world rather than a document. There is
+   no illustration here to layer, so the layers are typographic: the ordinal
+   drifts against its heading, the heading wipes rather than fades, the pull
+   quote lags, and the marker rides the thread. `--par` is the parallax offset
+   the script writes; it composes with the arrival transform instead of
+   fighting it, which is why every transform below carries it. */
 .js [data-rv] > *{
-  opacity:0;transform:translateY(12px);
-  transition:opacity .45s var(--ease-out),transform .45s var(--ease-out);
+  opacity:0;transform:translateY(calc(22px + var(--par,0px)));
+  transition:opacity .62s var(--ease-out),transform .62s var(--ease-out);
 }
-.js [data-rv].in > *{opacity:1;transform:none;}
+.js [data-rv].in > *{opacity:1;transform:translateY(var(--par,0px));}
+
+/* Headings wipe up from behind their own edge instead of fading in. A fade of
+   12px is invisible on a page this quiet; a wipe is the thing you actually
+   notice, and it costs one property. */
+.js [data-rv] h2,.js [data-rv] .pull blockquote{
+  clip-path:inset(0 0 108% 0);
+  transition:clip-path .85s var(--ease-out);
+}
+.js [data-rv].in h2,.js [data-rv].in .pull blockquote{clip-path:inset(0 0 -25% 0);}
 
 /* the hero states its name, then its line, then its buttons */
-.js [data-hero] > *{opacity:0;transform:translateY(14px);}
+.js [data-hero] > *{opacity:0;transform:translateY(20px);}
 .js [data-hero].in > *{
   opacity:1;transform:none;
-  transition:opacity .5s var(--ease-out),transform .5s var(--ease-out);
+  transition:opacity .7s var(--ease-out),transform .7s var(--ease-out);
+}
+.js [data-hero] h1{clip-path:inset(0 0 108% 0);transition:clip-path .95s var(--ease-out);}
+.js [data-hero].in h1{clip-path:inset(0 0 -25% 0);}
+
+/* Screens arrive the way a photograph develops: a wipe down the frame with the
+   image sitting slightly large behind it, settling to true as the wipe lands. */
+.js .shotframe img,.js .mockwin{
+  clip-path:inset(0 0 100% 0);
+  transition:clip-path .95s var(--ease-out),transform .95s var(--ease-out);
+}
+.js .shotframe img{transform:scale(1.05);}
+.js [data-rv].in .shotframe img,.js [data-rv].in .mockwin{clip-path:inset(0 0 0 0);}
+.js [data-rv].in .shotframe img{transform:scale(1);}
+
+/* how far down the page you are, on the one element that is always in view */
+.pillnav nav{position:relative;overflow:hidden;}
+.pillnav nav::after{
+  content:"";position:absolute;left:0;bottom:0;height:2px;
+  width:var(--progress,0%);background:var(--coral);opacity:.55;
+  pointer-events:none;
 }
 
 /* spec plates fill in like a readout */
@@ -843,9 +890,12 @@ a:hover .go::before,.go:hover::before{transform:scaleX(1);}
     transition-duration:140ms!important;
     transition-delay:0ms!important;
   }
-  /* nothing moves: every arrival becomes a fade in place */
+  /* nothing moves and nothing wipes: every arrival becomes a fade in place */
   .js [data-rv] > *,.js [data-hero] > *,.js [data-plate] .prow,.js .rv > *,
-  .gallery figure{transform:none!important;}
+  .gallery figure,.js .shotframe img{transform:none!important;}
+  .js [data-rv] h2,.js [data-hero] h1,.js .shotframe img,.js .mockwin,
+  .js [data-rv] .pull blockquote{clip-path:none!important;}
+  .pillnav nav::after{display:none;}
   a.vent:hover,a.job:hover,a.note:hover,.gallery figure:hover img{transform:none!important;}
   .thread-travel,.thread-halo{display:none;}
   .blinkdot{opacity:1;}

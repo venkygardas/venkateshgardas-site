@@ -153,6 +153,67 @@
   if (window.ResizeObserver) new ResizeObserver(build).observe(frame);
 })();
 
+/* Depth layer: things move at different rates against the scroll.
+
+   This is the one idea taken from rleonardi.com. There, clouds, mountains and
+   sea answer the same scroll at different speeds and the page reads as a world
+   you travel through. There is no illustration here, so the layers are the
+   typography: the big section ordinal drifts against its heading, the serif
+   subline lags it, the pull quote floats. Small numbers on purpose. The point
+   is that the page has depth, not that anything is flying around.
+
+   Writes `--par`, which the stylesheet composes into the arrival transform, so
+   parallax and the reveal never fight over `transform`. */
+(function () {
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var frame = document.querySelector('.frame');
+  if (!frame || reduce) return;
+
+  var LAYERS = [
+    ['.shead .n', -26],          /* the ordinal, furthest back */
+    ['.shead .pairline', -12],   /* its serif subline, just behind the heading */
+    ['.pull .attrib', -14],
+    ['.cell.gcell .glabel', -18]
+  ];
+
+  var items = [];
+  LAYERS.forEach(function (pair) {
+    Array.prototype.forEach.call(frame.querySelectorAll(pair[0]), function (el) {
+      items.push({ el: el, rate: pair[1] });
+    });
+  });
+
+  var nav = document.querySelector('.pillnav nav');
+  if (!items.length && !nav) return;
+
+  var ticking = false;
+  function frameStep() {
+    var vh = window.innerHeight;
+    items.forEach(function (it) {
+      var r = it.el.getBoundingClientRect();
+      if (r.bottom < -200 || r.top > vh + 200) return;   /* offscreen, skip the write */
+      var d = (r.top + r.height / 2 - vh / 2) / vh;       /* -0.5 at top, +0.5 at bottom */
+      it.el.style.setProperty('--par', (d * it.rate).toFixed(1) + 'px');
+    });
+    if (nav) {
+      var max = document.documentElement.scrollHeight - vh;
+      var p = max > 0 ? Math.max(0, Math.min(1, window.scrollY / max)) : 0;
+      nav.style.setProperty('--progress', (p * 100).toFixed(2) + '%');
+    }
+    ticking = false;
+  }
+  function onScroll() {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(frameStep);
+  }
+
+  frameStep();
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll, { passive: true });
+  window.addEventListener('load', frameStep);
+})();
+
 /* Motion layer: cards arrive as you reach them, numbers count up.
    Everything here is opt-out under prefers-reduced-motion. */
 (function () {
