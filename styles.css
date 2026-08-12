@@ -1447,10 +1447,20 @@ body.short .frame > main{padding-top:3.4rem;}
 @keyframes stride{from{transform:rotate(-16deg);}to{transform:rotate(16deg);}}
 
 .car-body{fill:var(--coral);stroke:none;}
-.car-link{stroke:var(--ink);stroke-width:1.8;stroke-linecap:round;}
 .car-wheel{fill:var(--glass-bg);stroke:var(--ink);stroke-width:1.6;}
 .car-rider,.run-head{fill:var(--ink);stroke:none;}
-.car-arms{stroke:var(--ink);stroke-width:1.7;fill:none;stroke-linecap:round;}
+/* The rider sits IN the car: a head and the curve of shoulders rising off the
+   rim, and nothing else. Drawn as a separate torso stroke it read as a black
+   lollipop stuck to the side rather than a person in a seat. */
+
+/* Sleepers. One wide stroke broken into short dashes: each dash paints as a
+   rectangle square to the direction of travel, which is exactly a tie, and it
+   follows the curve for free because it is the same path. */
+.loop-ties{
+  fill:none;stroke:color-mix(in srgb, var(--ink) 26%, transparent);
+  stroke-width:9;stroke-dasharray:1.8 9;stroke-linecap:butt;
+}
+.loop-rail{stroke:color-mix(in srgb, var(--ink) 42%, transparent);}
 .run-body,.run-arms,.run-legs{stroke:var(--ink);stroke-width:2.4;fill:none;stroke-linecap:round;}
 
 .loopwrap.paused .loop-car,.loopwrap.paused .loop-runner,
