@@ -234,7 +234,7 @@ to{transform:scale(1.06);}}
   font-family:var(--font-body);font-weight:700;
   font-size:clamp(2rem,4vw,2.9rem);line-height:1.05;letter-spacing:-.02em;margin:0 0 1rem;
 }
-.phero .say{font-size:clamp(1rem,1.6vw,1.15rem);line-height:1.4;max-width:30ch;margin:0;}
+.phero .say{font-size:clamp(1rem,1.6vw,1.15rem);line-height:1.4;margin:0;}
 
 /* coloured panels: product accents */
 .on-blue .mono,.on-yellow .mono,
@@ -269,7 +269,7 @@ to{transform:scale(1.06);}}
 /* now line */
 .now{grid-template-columns:auto 1fr;align-items:baseline;gap:1rem;padding:1.2rem 2rem 0;}
 .now .lbl{color:var(--coral-soft);font-weight:700;padding:0;}
-.now p{margin:0;padding:0;font-size:.95rem;color:var(--muted);max-width:70ch;}
+.now p{margin:0;padding:0;font-size:.95rem;color:var(--muted);}
 
 /* ---- section headers ---- */
 .shead{display:block;text-align:center;margin-block:0;padding:4rem 2rem .6rem;width:min(var(--pw),100%);margin-inline:auto;}
@@ -395,10 +395,10 @@ a.note:hover .muted-go{color:var(--muted);}
   .cg-mobile .trow span{font-family:var(--font-mono);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);}
 }
 
-.cgraph .why{margin:.6rem 0 0;font-size:.92rem;color:var(--muted);max-width:70ch;}
+.cgraph .why{margin:.6rem 0 0;font-size:.92rem;color:var(--muted);}
 
 /* ---- wide feature card ---- */
-.row > a.job.fieldnote{display:grid;grid-template-columns:1fr auto;align-items:center;column-gap:2.5rem;}
+.row > a.job.fieldnote{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;column-gap:2.5rem;}
 .fieldnote .muted-go{color:var(--muted);}
 .go{white-space:nowrap;font-size:.82rem;}
 @media (max-width:880px){
@@ -563,9 +563,9 @@ a.note:hover .muted-go{color:var(--muted);}
 }
 
 /* ---- one measure per content block: heading and body end on the same edge ---- */
-.feat .body{max-width:74ch;}
+.feat .body{max-width:none;}
 .row > a.job,.row > .cell.job{max-width:none;}
-.row > a.job > *,.row > .cell.job > *{max-width:78ch;}
+
 
 @media (hover:hover) and (pointer:fine){
   a.vent,a.job,a.note{transition:transform .15s cubic-bezier(.2,.6,.2,1);}
