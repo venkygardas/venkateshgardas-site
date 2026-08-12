@@ -14,10 +14,10 @@
     <description>What churn actually costs, measured on the smallest codebase I own. What each reskin invalidated, and the six things that survived all four.</description>
   </item>
   <item>
-    <title>The feature I measured, walked back and shipped smaller</title>
+    <title>The Feature I Measured, Walked Back and Shipped Smaller</title>
     <link>https://venkateshgardas.com/notes/pitstop-realtime</link>
     <guid>https://venkateshgardas.com/notes/pitstop-realtime</guid>
-    <pubDate>Sat, 09 Aug 2026 00:00:00 GMT</pubDate>
+    <pubDate>Sat, 08 Aug 2026 00:00:00 GMT</pubDate>
     <description>The realtime design that failed its own probe, and the smaller one that shipped the same day. A case study in naming a risk before building on it.</description>
   </item>
 </channel>

@@ -5,6 +5,16 @@
    has not appeared within 2.5s, which forces it all open. */
 window.__rvReady = true;
 
+/* Pause the hero loop when it is not on screen. It is an infinite animation, so
+   it went on costing the main thread every frame from thousands of pixels away. */
+(function () {
+  var wrap = document.querySelector('.loopwrap');
+  if (!wrap || !('IntersectionObserver' in window)) return;
+  new IntersectionObserver(function (es) {
+    es.forEach(function (e) { wrap.classList.toggle('paused', !e.isIntersecting); });
+  }, { rootMargin: '120px' }).observe(wrap);
+})();
+
 /* The product thread: one continuous line down every page.
    Waypoints land on section heads, so the line literally passes through
    the numbers. Drawn progressively as you scroll. */
@@ -134,6 +144,15 @@ window.__rvReady = true;
        below the fold on long pages. Ask the path which length is at this
        height instead, and the line is then drawn to exactly that point. */
     var eye = window.scrollY + window.innerHeight * 0.55 - top;
+    var maxY = document.documentElement.scrollHeight - window.innerHeight;
+    /* At the very bottom the eye line still sits 45% of a screen above the end
+       of the document, so the last stretch of thread and its final milestone
+       could never be reached: the journey never completed on any long page.
+       Over the last screenful, walk the eye the rest of the way down. */
+    if (maxY > 0 && window.scrollY > maxY - window.innerHeight) {
+      var t = Math.min(1, (window.scrollY - (maxY - window.innerHeight)) / window.innerHeight);
+      eye += t * window.innerHeight * 0.45;
+    }
     var head = Math.max(0, Math.min(len, lengthAtY(eye, len)));
     var p = head / len;
     ink.style.strokeDashoffset = len - head;
@@ -213,7 +232,11 @@ window.__rvReady = true;
     items.forEach(function (it) {
       var r = it.el.getBoundingClientRect();
       if (r.bottom < -200 || r.top > vh + 200) return;   /* offscreen, skip the write */
-      var d = (r.top + r.height / 2 - vh / 2) / vh;       /* -0.5 at top, +0.5 at bottom */
+      /* clamped: an element taller than the viewport, or one measured while the
+         page is still settling, drove d past +-0.5 and overshot the designed
+         amplitude by up to 89%, pushing the italic subline up into the
+         heading's clip and slicing its descenders */
+      var d = Math.max(-0.5, Math.min(0.5, (r.top + r.height / 2 - vh / 2) / vh));
       it.el.style.setProperty('--par', (d * it.rate).toFixed(1) + 'px');
     });
     if (nav) {
@@ -280,9 +303,15 @@ window.__rvReady = true;
       var r = el.getBoundingClientRect();
       var dx = e.clientX - (r.left + r.width / 2);
       var dy = e.clientY - (r.top + r.height / 2);
-      var cap = function (v) { return Math.max(-MAGNET_MAX, Math.min(MAGNET_MAX, v * MAGNET)); };
-      el.style.setProperty('--mag-x', cap(dx).toFixed(1) + 'px');
-      el.style.setProperty('--mag-y', cap(dy).toFixed(1) + 'px');
+      /* eased rather than clipped: a hard cap meant the button sat at its
+         maximum offset across two thirds of its own area, which reads as a
+         shove rather than a lean */
+      var cap = function (v, half) {
+        var n = Math.max(-1, Math.min(1, v / Math.max(1, half)));
+        return MAGNET_MAX * n * (1 - Math.abs(n) / 3);
+      };
+      el.style.setProperty('--mag-x', cap(dx, r.width / 2).toFixed(1) + 'px');
+      el.style.setProperty('--mag-y', cap(dy, r.height / 2).toFixed(1) + 'px');
     });
     el.addEventListener('pointerleave', function () {
       el.style.setProperty('--mag-x', '0px');

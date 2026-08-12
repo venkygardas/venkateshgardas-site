@@ -478,8 +478,13 @@ a.note:hover .muted-go{color:var(--muted);}
 .gcell{position:absolute;left:-5.2rem;top:1.9rem;width:4.4rem;border-right:0;}
 .gcell .glabel{padding:0;text-align:right;}
 .gcell-r{display:none;}
-/* the narrower frame leaves margin to spare, so the label survives further down */
-@media (max-width:1000px){.gcell{display:none;}}
+/* The label is absolutely positioned at -5.2rem from the row's border box, so
+   it needs 83.2px of left margin before it clears the window edge, which at
+   --pw 1240 means a layout width of 1406px. Add the scrollbar and it is 1420.
+   Below that it rendered off the left edge and left its hairline behind as a
+   stray mark down the side of the page. Measured, not guessed: at 1400 its
+   left edge sat at -3px. */
+@media (max-width:1420px){.gcell{display:none;}}
 .gcell{border-right:1px solid rgba(21,18,10,.12);}
 .gcell:empty{border-right:0;}
 .gcell .glabel{
@@ -1325,3 +1330,60 @@ a{text-underline-offset:.18em;text-decoration-thickness:from-font;}
 /* the mockup scope pins the light palette, so it must pin every token it uses */
 :root[data-theme="dark"] .mockwin,
 :root:not([data-theme="light"]) .mockwin{--steel:#375A74;--deep:#F4F3F0;--deep2:#ECEBE7;}
+
+
+/* ---- audit fixes ----
+   The hero loop diagram was drawn in a literal sampled from the light palette,
+   so in dark it painted 1.00:1: the curve and all five ticks simply vanished.
+   Tokenised, with the dark side lifted because 16% of anything over a
+   near-black ground is not a line. */
+.loop-path,.loop-tick{stroke:color-mix(in srgb, var(--ink) 18%, transparent);}
+:root[data-theme="dark"] .loop-path,:root[data-theme="dark"] .loop-tick,
+:root[data-theme="dark"] .cgraph .cg-step,:root[data-theme="dark"] .cgraph .cg-dash{
+  stroke:color-mix(in srgb, var(--ink) 42%, transparent);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]) .loop-path,
+  :root:not([data-theme="light"]) .loop-tick{stroke:color-mix(in srgb, var(--ink) 42%, transparent);}
+}
+/* the career chart's step line and dashed founder link, same problem */
+.cgraph svg [stroke^="rgba(21,18,10"]{stroke:color-mix(in srgb, var(--ink) 55%, transparent);}
+/* mobile career table lost its row separators in dark */
+.cg-mobile .trow{border-bottom-color:color-mix(in srgb, var(--ink) 14%, transparent);}
+
+/* An infinite animation on a diagram that is 4,400px above you still costs the
+   main thread every frame. Paused unless it is actually on screen. */
+.loopwrap.paused .loop-live,.loopwrap.paused .loop-node-fill{animation-play-state:paused;}
+
+/* the nav ran out of room between 642 and 741px and wrapped to two rows,
+   orphaning the CTA and the theme toggle onto a line of their own */
+@media (max-width:800px){
+  .pillnav a.m-hide-sm{display:none;}
+}
+@media (max-width:760px){
+  .pillnav a.m-hide{display:none;}
+  .cmdk-hint{display:none;}
+}
+
+/* the nav progress line was 2.11:1 against the pill it sits on */
+.pillnav nav::after{opacity:.85;}
+
+/* On a 390px phone the nav's contents summed to 369px inside a 326px pill, so
+   it wrapped to two rows and the CTA and the theme toggle were orphaned onto a
+   line of their own. Tighten the spacing rather than drop a destination: at
+   this width every link is already one of only four. */
+@media (max-width:560px){
+  .pillnav nav{gap:.05rem;padding-inline:.35rem;}
+  .pillnav a{padding-inline:.5rem;font-size:.88rem;}
+  .pillnav a.cta{padding-inline:.8rem;margin-left:.2rem;}
+  .pillnav .who{padding-inline:.2rem;gap:.4rem;}
+  .themetog{margin-left:.2rem;width:28px;height:28px;}
+}
+
+/* Below about 470px the link text alone overflows the pill, so tightening
+   stops helping and a destination has to go. Now goes first and Notes second,
+   both still reachable from the footer on every page and from the command
+   palette on anything bigger. Home, Photos and Contact survive to 320px. */
+@media (max-width:470px){.pillnav a[href="/now"]{display:none;}}
+@media (max-width:430px){.pillnav a[href="/notes/"]{display:none;}}
+@media (max-width:350px){.pillnav a[href="/photos"]{display:none;}}

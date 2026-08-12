@@ -1,6 +1,10 @@
-@font-face{font-family:"Inter Tight";font-style:normal;font-weight:400;font-display:swap;src:url(/fonts/inter-tight-400.woff2) format("woff2");}
-@font-face{font-family:"Inter Tight";font-style:normal;font-weight:500;font-display:swap;src:url(/fonts/inter-tight-500.woff2) format("woff2");}
-@font-face{font-family:"Inter Tight";font-style:normal;font-weight:600;font-display:swap;src:url(/fonts/inter-tight-600.woff2) format("woff2");}
+/* Inter Tight 400 to 600 is ONE variable file. It used to be declared three
+   times against three byte-identical copies (md5 239e3c12... on all three), so
+   every page downloaded the same 44.9 KB three times: 88 KB of pure waste on
+   every single visit. One face with a weight range renders identically,
+   because the browser was interpolating the axis anyway. 700 is a separate
+   static cut and stays its own file. */
+@font-face{font-family:"Inter Tight";font-style:normal;font-weight:400 600;font-display:swap;src:url(/fonts/inter-tight-400.woff2) format("woff2");}
 @font-face{font-family:"Inter Tight";font-style:normal;font-weight:700;font-display:swap;src:url(/fonts/inter-tight-700.woff2) format("woff2");}
 @font-face{font-family:"Instrument Serif";font-style:italic;font-weight:400;font-display:swap;src:url(/fonts/instrument-serif-italic.woff2) format("woff2");}
 @font-face{font-family:"Space Mono";font-style:normal;font-weight:400;font-display:swap;src:url(/fonts/space-mono-400.woff2) format("woff2");}
