@@ -110,6 +110,14 @@ body.short .frame > .row:not(.foot):not(.crumb){margin-block:auto;}
   color:var(--ink);font-size:.92rem;font-weight:500;
   padding:.5rem 1rem;border-radius:999px;white-space:nowrap;
 }
+/* The reading frame is 780px, and the nav tracks it. At that width the same
+   links needed about 40px more than they had, so the name broke to two lines
+   and the pill stood 72px tall against 58px on the home page. Buy the space
+   back from the link padding rather than letting the one element that appears
+   on every page be a different height depending which page you are on. */
+.frame.reading .pillnav a{padding-inline:.8rem;}
+.frame.reading .pillnav a.cta{padding-inline:1.1rem;}
+.pillnav .who b{white-space:nowrap;}
 .pillnav a:hover{color:var(--ink);background:rgba(21,18,10,.05);}
 .pillnav a[aria-current="page"]{color:var(--coral);font-weight:600;background:transparent;}
 .pillnav a.cta{background:var(--coral);color:#fff;padding:.6rem 1.3rem;margin-left:.4rem;}
