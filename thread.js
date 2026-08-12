@@ -12,6 +12,19 @@
   var nodes = wrap.querySelector('.thread-nodes');
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var len = 0, H = 0;
+  var travel = null, halo = null, milestones = [], top = 0;
+
+  /* How far along the path a given height sits. Bisection rather than a scan:
+     the path runs several thousand units and getPointAtLength is the expensive
+     call. The path only ever descends, so y is monotonic in length. */
+  function lengthAtY(y, total) {
+    var lo = 0, hi = total;
+    for (var i = 0; i < 18; i++) {
+      var mid = (lo + hi) / 2;
+      if (ink.getPointAtLength(mid).y < y) lo = mid; else hi = mid;
+    }
+    return (lo + hi) / 2;
+  }
 
   function build() {
     H = frame.scrollHeight;
@@ -23,6 +36,7 @@
     svg.setAttribute('preserveAspectRatio', 'none');
 
     var frameTop = frame.getBoundingClientRect().top + window.scrollY;
+    top = frameTop;
     var marks = Array.prototype.slice.call(frame.querySelectorAll('.shead, .cell.contact'));
     if (marks.length < 3) {
       var rows = Array.prototype.slice.call(frame.querySelectorAll('.row')).filter(function (r) {
@@ -61,26 +75,64 @@
     ink.setAttribute('d', d);
 
     while (nodes.firstChild) nodes.removeChild(nodes.firstChild);
-    pts.slice(1, -1).forEach(function (p) {
+    len = ink.getTotalLength();
+
+    milestones = pts.slice(1, -1).map(function (p) {
       var c = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
       c.setAttribute('cx', p[0]);
       c.setAttribute('cy', p[1]);
       c.setAttribute('r', 3.5);
       c.setAttribute('class', 'thread-node');
       nodes.appendChild(c);
+      return { el: c, at: lengthAtY(p[1], len) };
     });
 
-    len = ink.getTotalLength();
+    /* the marker rides the head of the line */
+    if (!travel) {
+      halo = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+      halo.setAttribute('r', 11);
+      halo.setAttribute('class', 'thread-halo');
+      travel = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+      travel.setAttribute('r', 4);
+      travel.setAttribute('class', 'thread-travel');
+    }
+    nodes.appendChild(halo);
+    nodes.appendChild(travel);
+
     ink.style.strokeDasharray = len;
     draw();
   }
 
   function draw() {
     if (!len) return;
-    if (reduce) { ink.style.strokeDashoffset = 0; return; }
-    var span = Math.max(1, H - window.innerHeight * 0.38);
-    var p = Math.max(0, Math.min(1, (window.scrollY + window.innerHeight * 0.62) / span));
-    ink.style.strokeDashoffset = len * (1 - p);
+    if (reduce) {
+      /* the line is the map, so it stays. Only the travelling does not. */
+      ink.style.strokeDashoffset = 0;
+      milestones.forEach(function (m) { m.el.classList.add('lit'); });
+      return;
+    }
+    /* The head sits where the reader is looking, not at a fraction of the
+       scrollbar. Length along the path and height down the page are not the
+       same measure, so deriving one from the other left the marker drifting
+       below the fold on long pages. Ask the path which length is at this
+       height instead, and the line is then drawn to exactly that point. */
+    var eye = window.scrollY + window.innerHeight * 0.55 - top;
+    var head = Math.max(0, Math.min(len, lengthAtY(eye, len)));
+    var p = head / len;
+    ink.style.strokeDashoffset = len - head;
+
+    if (travel) {
+      var pt = ink.getPointAtLength(head);
+      travel.setAttribute('cx', pt.x); travel.setAttribute('cy', pt.y);
+      halo.setAttribute('cx', pt.x); halo.setAttribute('cy', pt.y);
+      /* it only shows once the journey has actually started, and it stops
+         being interesting once the line is fully drawn */
+      var on = p > 0.01 && p < 0.995;
+      travel.classList.toggle('on', on);
+      halo.classList.toggle('on', on);
+    }
+    /* milestones behind the marker are done, the ones ahead are still open */
+    milestones.forEach(function (m) { m.el.classList.toggle('lit', m.at <= head); });
   }
 
   var ticking = false;

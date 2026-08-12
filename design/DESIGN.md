@@ -82,6 +82,23 @@ detector or a future audit talk you out of them.
   holds paragraphs needs `container-type:inline-size` on the column, or
   it will inherit the wrong container's width and justify when it should
   not. Opt-out lists fail silently here; the container query cannot.
+- **Two easing curves, and they are tokens.** `--ease-out` for anything
+  entering or leaving, `--ease-in-out` for anything moving on screen.
+  Never `ease-in` on UI: it starts slow, at exactly the moment being
+  watched. The site had grown three hand-rolled beziers all trying to
+  be the same curve; do not add a fourth. Values come from Emil
+  Kowalski's animation standards, not from taste.
+- **The thread carries a marker, and it stays with the reader.** The
+  line is drawn to a point at 55% of the viewport, the marker sits on
+  that point, milestones behind it fill and the ones ahead stay open.
+  It is derived from the path's own geometry, NOT from a scrollbar
+  fraction: length along a curve and height down a page are different
+  measures, and deriving one from the other left the marker drifting
+  below the fold on long pages.
+- **Reduced motion means gentler, not dead.** Transforms go, a short
+  fade stays. The blanket `transition:none!important` that used to be
+  here also killed hover and focus feedback, which is a usability loss
+  for exactly the people who asked for the setting.
 - **The rupee sign is the one glyph allowed to fall back.** No shipped
   face carries U+20B9, and it appears only inside the PitStop product
   mocks, where rupee amounts are the point. Every other exotic glyph
