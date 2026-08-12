@@ -703,3 +703,136 @@ window.__rvReady = true;
   label();
   nav.appendChild(btn);
 })();
+
+/* Photo viewer. The grid is a contact sheet; this shows the print.
+
+   Progressive enhancement: with no script the gallery is exactly what it was,
+   a grid of images. Nothing here changes the markup the page ships with, so
+   there is no state to get wrong before the script runs. */
+(function () {
+  var grid = document.querySelector('.gallery .cols');
+  if (!grid) return;
+  var figures = Array.prototype.slice.call(grid.querySelectorAll('figure'));
+  if (!figures.length) return;
+
+  /* Each frame becomes operable: clickable, tabbable, and answering Enter and
+     Space the way a button does, because a div that only listens for click is
+     invisible to anyone not using a mouse. */
+  figures.forEach(function (fig, i) {
+    fig.setAttribute('role', 'button');
+    fig.setAttribute('tabindex', '0');
+    var img = fig.querySelector('img');
+    fig.setAttribute('aria-label', 'View photograph' + (img && img.alt ? ': ' + img.alt : ''));
+    fig.addEventListener('click', function () { open(i); });
+    fig.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(i); }
+    });
+  });
+
+  var box = document.createElement('div');
+  box.className = 'lightbox';
+  box.setAttribute('role', 'dialog');
+  box.setAttribute('aria-modal', 'true');
+  box.setAttribute('aria-label', 'Photograph viewer');
+  box.innerHTML =
+    '<figure><img alt=""><figcaption></figcaption></figure>' +
+    '<button class="lb-btn lb-close" type="button" aria-label="Close viewer">' +
+      '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>' +
+    '<button class="lb-btn lb-prev" type="button" aria-label="Previous photograph">' +
+      '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>' +
+    '<button class="lb-btn lb-next" type="button" aria-label="Next photograph">' +
+      '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>' +
+    '<div class="lb-count" aria-hidden="true"></div>';
+  document.body.appendChild(box);
+
+  var lbImg = box.querySelector('img');
+  var lbCap = box.querySelector('figcaption');
+  var lbCount = box.querySelector('.lb-count');
+  var btnClose = box.querySelector('.lb-close');
+  var btnPrev = box.querySelector('.lb-prev');
+  var btnNext = box.querySelector('.lb-next');
+  var at = 0, lastFocus = null, scrollY = 0;
+
+  /* The grid deliberately serves a small file for a small slot. The viewer is
+     the one place the full-resolution photograph is the right answer, so take
+     the widest candidate from the srcset rather than reusing the thumbnail. */
+  function fullSrc(fig) {
+    var source = fig.querySelector('source[srcset]');
+    var img = fig.querySelector('img');
+    if (source) {
+      var best = null, bestW = 0;
+      source.getAttribute('srcset').split(',').forEach(function (part) {
+        var bits = part.trim().split(/\s+/);
+        var w = parseInt(bits[1] || '0', 10);
+        if (w >= bestW) { bestW = w; best = bits[0]; }
+      });
+      if (best) return best;
+    }
+    return img ? img.currentSrc || img.src : '';
+  }
+
+  function show(i) {
+    at = (i + figures.length) % figures.length;
+    var fig = figures[at];
+    var img = fig.querySelector('img');
+    lbImg.src = fullSrc(fig);
+    lbImg.alt = img ? img.alt : '';
+    lbCap.textContent = img ? img.alt : '';
+    lbCount.textContent = (at + 1) + ' / ' + figures.length;
+  }
+
+  function open(i) {
+    lastFocus = document.activeElement;
+    if (lastFocus === document.body) lastFocus = null;
+    /* hold the page still behind the viewer without losing the reader's place */
+    scrollY = window.scrollY;
+    document.body.style.position = 'fixed';
+    document.body.style.top = -scrollY + 'px';
+    document.body.style.width = '100%';
+    show(i);
+    box.classList.add('on');
+    btnClose.focus();
+  }
+
+  function close() {
+    box.classList.remove('on');
+    document.body.style.position = '';
+    document.body.style.top = '';
+    document.body.style.width = '';
+    window.scrollTo(0, scrollY);
+    /* Focus lands on the photograph you were actually looking at, not the one
+       you opened: after arrowing through nine frames, being returned to the
+       first is disorienting and loses your place in the grid. */
+    var back = figures[at] || lastFocus;
+    if (back && back.focus) back.focus({ preventScroll: true });
+  }
+
+  btnClose.addEventListener('click', close);
+  btnPrev.addEventListener('click', function () { show(at - 1); });
+  btnNext.addEventListener('click', function () { show(at + 1); });
+  box.addEventListener('mousedown', function (e) { if (e.target === box) close(); });
+
+  document.addEventListener('keydown', function (e) {
+    if (!box.classList.contains('on')) return;
+    if (e.key === 'Escape') { e.preventDefault(); close(); }
+    else if (e.key === 'ArrowLeft') { e.preventDefault(); show(at - 1); }
+    else if (e.key === 'ArrowRight') { e.preventDefault(); show(at + 1); }
+    else if (e.key === 'Tab') {
+      /* a modal must not hand focus back to the page behind it */
+      var stops = [btnClose, btnPrev, btnNext];
+      var i = stops.indexOf(document.activeElement);
+      e.preventDefault();
+      stops[(i + (e.shiftKey ? -1 : 1) + stops.length) % stops.length].focus();
+    }
+  });
+
+  /* swipe, because this is a photo gallery and phones are how it gets read */
+  var x0 = null;
+  box.addEventListener('touchstart', function (e) { x0 = e.touches[0].clientX; }, { passive: true });
+  box.addEventListener('touchend', function (e) {
+    if (x0 === null) return;
+    var dx = e.changedTouches[0].clientX - x0;
+    if (Math.abs(dx) > 45) show(at + (dx < 0 ? 1 : -1));
+    x0 = null;
+  }, { passive: true });
+})();
