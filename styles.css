@@ -16,6 +16,9 @@
   --glass-bg:#FFFFFF;
   /* what sits on an accent fill. Flips in dark, where the accent is light. */
   --on-accent:#FFFFFF;
+  /* the big section ordinal: scenery, but it still carries the section number,
+     so it holds 3:1 as large text rather than dissolving into the ground */
+  --ordinal:#8C8A80;
   --glass-line:#E3E1DC;
   /* One curve for arrivals, one for things moving on screen. The built-in CSS
      easings are too weak to read as intentional, and the site had grown three
@@ -1159,6 +1162,7 @@ a{text-underline-offset:.18em;text-decoration-thickness:from-font;}
     --coral:#A9BC72; --coral-soft:#C2D391;
     --on-accent:#12140E;
     --steel:#8FB6D6; --sand:#23261C; --gold:#C7AE93;
+    --ordinal:#666A5B;
   }
 }
 :root[data-theme="dark"]{
@@ -1168,6 +1172,7 @@ a{text-underline-offset:.18em;text-decoration-thickness:from-font;}
   --coral:#A9BC72; --coral-soft:#C2D391;
   --on-accent:#12140E;
   --steel:#8FB6D6; --sand:#23261C; --gold:#C7AE93;
+  --ordinal:#666A5B;
 }
 /* the pieces that were painted, not tokenised */
 @media (prefers-color-scheme:dark){
@@ -1220,4 +1225,53 @@ a{text-underline-offset:.18em;text-decoration-thickness:from-font;}
   --ink:#15120A; --text:#15120A; --muted:#6E6C64;
   --coral:#6E7B45; --coral-soft:#5C6839; --on-accent:#FFFFFF;
   background:#FBFAF8;color:#15120A;border-color:#E3E1DC;
+}
+
+/* ---- editorial push ----
+   Same palette, same three faces. What changes is scale and axis.
+
+   The section head was a centred stack: small ordinal, heading, serif subline,
+   all on the same middle line. At 1240px that reads as a slide title. It is now
+   asymmetric: the ordinal sits out in the left margin at display size where it
+   works as a landmark rather than a caption, and the heading and its subline
+   run from a hard left edge. Nothing is invented, the parts are the pinned
+   ones, but they are arranged rather than stacked. */
+@media (min-width:1100px){
+  .shead{
+    display:grid;grid-template-columns:7.5rem minmax(0,1fr);
+    align-items:start;column-gap:2.2rem;
+    text-align:left;padding:6rem 2rem 1rem;
+  }
+  .shead .n{
+    font-size:clamp(3.2rem,5vw,4.6rem);line-height:.82;
+    letter-spacing:-.02em;margin:0;
+    color:var(--ordinal);
+    font-variant-numeric:tabular-nums;
+    /* the ordinal is scenery, so it must never be read before the heading */
+    -webkit-user-select:none;user-select:none;
+  }
+  .shead h2{
+    font-size:clamp(2.6rem,5.2vw,4.1rem);
+    letter-spacing:-.03em;line-height:1.02;
+  }
+  .shead .pairline{margin-top:.55rem;}
+
+  /* the hero heading carries the page, so it gets the most room */
+  .phero h1{font-size:clamp(3rem,6.4vw,5.2rem);letter-spacing:-.035em;line-height:.98;}
+
+  /* a pull quote set at the same size as a heading is not a pull quote */
+  .pull{padding:5rem 2rem;}
+  .pull blockquote{font-size:clamp(2.2rem,4.6vw,3.4rem);max-width:22ch;line-height:1.16;}
+
+  /* the row that names a section of the page, given its own weight */
+  .feat h3{font-size:1.18rem;}
+}
+
+/* The subline stops being a caption under the heading and becomes a second
+   voice beside it: hung to the right on wide screens, where there is room. */
+@media (min-width:1100px){
+  .shead .pairline{
+    display:block;font-family:var(--font-serif);font-style:italic;
+    font-size:clamp(1.15rem,1.8vw,1.55rem);color:var(--muted);
+  }
 }
