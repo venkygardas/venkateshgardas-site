@@ -566,10 +566,19 @@ a.note:hover .muted-go{color:var(--muted);}
 .fx.in{opacity:1;transform:none;}
 
 @media (min-width:881px){
-  .prose p,.feat p,.job p,.note p,.vent p{
+  /* every body paragraph on every page, no component list to fall out of */
+  .frame p{
     text-align:justify;hyphens:auto;-webkit-hyphens:auto;
     hyphenate-limit-chars:7 4 4;text-wrap:pretty;
   }
+  /* opt-outs: centred blocks, short labels and captions must never justify */
+  .frame .contact p,.frame .vhead p,.frame .vhead .sub,
+  .frame figcaption,.frame .cap,.frame .mono,.frame .glabel,
+  .frame .pairline,.frame .bignum span,.frame .role{
+    text-align:inherit;hyphens:none;
+  }
+  .frame .contact p{text-align:center;}
+  .frame .vhead .sub{text-align:center;}
 }
 
 /* ---- product mini animations ---- */
@@ -630,7 +639,7 @@ a.note:hover .muted-go{color:var(--muted);}
 
 /* mobile overrides: MUST stay last in file to win the cascade */
 @media (max-width:880px){
-  .prose p,.feat p,.job p,.note p,.vent p{text-align:left;hyphens:none;}
+  .frame p{text-align:left;hyphens:none;}
 }
 @media (max-width:640px){
   .contact .mail{font-size:.82rem;display:inline-block;max-width:100%;}
