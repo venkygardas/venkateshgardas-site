@@ -60,6 +60,8 @@ img{max-width:100%;height:auto;}
 /* ---- the floating canvas ---- */
 .frame{--pw:1240px;width:100%;background:var(--deep);position:relative;min-height:100svh;display:flex;flex-direction:column;}
 .frame > .foot{margin-top:auto;}
+/* short pages centre their content instead of stranding it at the top */
+body.short .frame > .row:not(.foot):not(.crumb){margin-block:auto;}
 .frame.reading{--pw:1040px;--gutter:5.4rem;}
 
 /* rows become spaced sections */
@@ -181,10 +183,7 @@ img{max-width:100%;height:auto;}
 /* ---- animated hero (homepage) ---- */
 .vhero{position:relative;}
 
-to{transform:scale(1.06);}}
 .vhero svg.scene{width:100%;height:auto;display:block;}
-85%,100%{transform:scale(1.7);opacity:0;}}
-2%,31%{opacity:1;transform:none;}34%,100%{opacity:0;transform:translateY(10px);}}
 .vhead{max-width:880px;margin:0 auto;text-align:center;padding:7rem 2rem 1.6rem;}
 .vhead .eyebrow{
   display:inline-block;background:#FFFFFF;border:1px solid var(--glass-line);
@@ -204,26 +203,13 @@ to{transform:scale(1.06);}}
   font-size:clamp(1.2rem,2.1vw,1.7rem);line-height:1.35;color:var(--ink);
 }
 .vhead .ctas{display:flex;gap:.7rem;justify-content:center;}
-.vhero .herocard{
-  position:absolute;right:3%;bottom:6%;width:min(360px,86vw);padding:1.4rem 1.5rem;z-index:4;
-  background:#FFFFFF;
-  border:1px solid var(--glass-line);border-radius:var(--radius);
-  font-size:1rem;line-height:1.5;color:#fff;
-}
-50%{transform:translateY(-8px);}}
-45%,75%{transform:translateY(-110px);}95%,100%{transform:translateY(0);}}
-100%{transform:translateX(1700px);}}
 
 /* buttons */
-.btn{
-  display:inline-flex;gap:.6rem;align-items:center;
-  background:#fff;color:var(--ink);border-radius:999px;
-  padding:.75rem 1.4rem;font-size:.92rem;font-weight:600;border:0;cursor:pointer;
-}
+.btn{display:inline-flex;gap:.6rem;align-items:center;background:var(--ink);color:#fff;border:1px solid var(--ink);border-radius:999px;padding:.75rem 1.4rem;font-size:.9rem;font-weight:600;cursor:pointer;}
 .btn b{width:22px;height:22px;border-radius:50%;background:var(--coral);display:inline-block;flex:none;}
-.btn:hover{background:var(--coral);color:#fff;}
+.btn:hover{background:var(--coral);border-color:var(--coral);color:#fff;}
 .btn.ghost{background:#FFFFFF;color:var(--ink);border:1px solid var(--glass-line);}
-.btn.ghost:hover{border-color:var(--ink);}
+.btn.ghost:hover{border-color:var(--ink);background:#FFFFFF;color:var(--ink);}
 
 
 /* ---- detail-page hero ---- */
@@ -254,7 +240,7 @@ to{transform:scale(1.06);}}
 }
 .plate .prow:last-child{border-bottom:0;}
 .plate dt{color:var(--muted);}
-.plate dd{margin:0;font-size:.95rem;font-weight:500;overflow-wrap:anywhere;}
+.plate dd{margin:0;font-size:.95rem;font-weight:500;overflow-wrap:break-word;word-break:normal;}
 .plate dd a{text-decoration:underline;text-decoration-color:var(--coral);text-underline-offset:3px;padding:.5rem .15rem;margin:-.5rem -.15rem;}
 .on{display:inline-flex;align-items:flex-start;gap:.45rem;color:var(--coral-soft);font-weight:500;}
 .on::before{content:"";width:8px;height:8px;flex:none;margin-top:.42em;border-radius:50%;background:currentColor;animation:blink 2.6s ease-in-out infinite;}
@@ -411,10 +397,6 @@ a.note:hover .muted-go{color:var(--muted);}
 /* ---- reveals ---- */
 .rv-d1{transition-delay:.06s;}
 .rv-d2{transition-delay:.12s;}
-}
-}
-
-/* ---- tinted card variants ---- */
 
 /* ---- numbered features ---- */
 .feat{position:relative;column-gap:1.5rem;grid-template-columns:var(--gutter) 1fr;align-items:start;padding:1.2rem 2rem;margin-block:0;}
@@ -439,7 +421,9 @@ a.note:hover .muted-go{color:var(--muted);}
 .prose strong{color:var(--coral-soft);font-weight:600;}
 
 /* ---- product mock windows (PitStop screens) ---- */
-.screens{grid-template-columns:repeat(3,1fr);}
+.screens{grid-template-columns:repeat(3,1fr);align-items:stretch;}
+.row.screens .shot{height:100%;}
+.row.screens .mockwin{flex:1;}
 .screens.two{grid-template-columns:repeat(2,1fr);}
 .shot{padding:0;display:flex;flex-direction:column;gap:.9rem;margin:0;}
 .shot .cap{color:var(--muted);margin-top:auto;padding:0 .2rem .4rem;}
@@ -575,6 +559,11 @@ a.note:hover .muted-go{color:var(--muted);}
 }
 .btn,.pillnav a.cta,.socials a{transition:transform 160ms ease-out,background-color 150ms ease,color 150ms ease;}
 .btn:active,.pillnav a.cta:active,.socials a:active{transform:scale(.97);}
+
+/* inline links keep a 24px hit area without disturbing the line rhythm */
+.feat p a,.prose p a,.plate dd a,.job p a{
+  display:inline-block;padding-block:3px;margin-block:-3px;
+}
 
 /* ---- motion: one entrance vocabulary, applied to every page by script ---- */
 .js [data-rv] > *{

@@ -7,11 +7,11 @@
   <language>en</language>
   <atom:link href="https://venkateshgardas.com/rss.xml" rel="self" type="application/rss+xml"/>
   <item>
-    <title>Three design systems in five days</title>
+    <title>Four Design Systems in Five Days</title>
     <link>https://venkateshgardas.com/notes/three-design-systems</link>
     <guid>https://venkateshgardas.com/notes/three-design-systems</guid>
     <pubDate>Sun, 09 Aug 2026 00:00:00 GMT</pubDate>
-    <description>What churn actually costs, measured on the smallest codebase I own. What each reskin invalidated, and the six things that survived all three.</description>
+    <description>What churn actually costs, measured on the smallest codebase I own. What each reskin invalidated, and the six things that survived all four.</description>
   </item>
   <item>
     <title>The feature I measured, walked back and shipped smaller</title>
