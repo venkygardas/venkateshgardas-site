@@ -18,7 +18,7 @@
 import p from 'puppeteer-core';
 
 const CHROME = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
-const PAGES = ['404', 'colophon', 'cv', 'expenzing', 'kpmg', 'now', 'pitstop', 'roko',
+const PAGES = ['404', 'ai', 'colophon', 'cv', 'expenzing', 'kpmg', 'now', 'pitstop', 'roko',
   'saathi', 'index', 'photos', 'notes/index', 'notes/pitstop-realtime',
   'notes/three-design-systems'];
 const WIDTHS = [1440, 1180, 1024, 881, 375];

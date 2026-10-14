@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Building With AI · Venkatesh Gardas</title>
+<meta name="description" content="How I use AI to ship products rather than documents: six model surfaces in production, the document reader, the agent loop, and the sixty probes that check them.">
+<meta property="og:title" content="Building With AI · Venkatesh Gardas">
+<meta property="og:description" content="Six model surfaces in production, the reader that turns a photographed bill into rows, and the sixty probes that decide whether any of it is true.">
+<meta property="og:url" content="https://venkateshgardas.com/ai">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://venkateshgardas.com/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://venkateshgardas.com/ai">
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="stylesheet" href="/fonts.css?v=2">
+<link rel="stylesheet" href="/styles.css?v=86">
+<script>(function(){var r=document.documentElement;r.classList.add('js');try{var t=localStorage.getItem('theme');if(t==='dark'||t==='light')r.setAttribute('data-theme',t);}catch(e){}setTimeout(function(){if(!window.__rvReady)r.classList.add('rv-fail')},2500)})()</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<div class="frame reading">
+  <div class="threadwrap" aria-hidden="true">
+    <svg xmlns="http://www.w3.org/2000/svg"><path class="thread-bed"/><path class="thread-ink"/><g class="thread-nodes"></g></svg>
+  </div>
+
+
+  <header class="pillnav">
+    <nav aria-label="Main">
+      <span class="who"><img src="/avatar.jpg?r=2" alt="" width="34" height="34"><b>Venkatesh Gardas</b></span>
+      <a href="/">Home</a>
+      <a class="m-hide-sm" href="/#building">Products</a>
+      <a href="/ai" aria-current="page">AI</a>
+      <a class="m-hide-sm" href="/#work">Work</a>
+      <a href="/photos">Photos</a>
+      <a href="/notes/">Notes</a>
+      <a class="m-hide" href="/now">Now</a>
+      <a class="m-hide" href="/cv">CV</a>
+      <a class="cta" href="/#contact">Contact</a>
+    </nav>
+  </header>
+
+  <div class="row crumb"><a href="/">Back to home</a></div>
+
+  <main id="main" tabindex="-1">
+
+  <section class="row phero">
+    <div class="cell lead">
+      <span class="mono">How I build</span>
+      <h1>Building With AI</h1>
+      <p class="say">Most people use a model to write documents faster. I use one to ship software, and then I spend most of my time proving it works. This is what that actually looks like.</p>
+    </div>
+    <div class="cell plate">
+      <div class="phead mono">Counted, not estimated</div>
+      <dl>
+        <div class="prow"><dt class="mono">Model surfaces live</dt><dd>6 in PitStop</dd></div>
+        <div class="prow"><dt class="mono">Probes guarding them</dt><dd>60</dd></div>
+        <div class="prow"><dt class="mono">Lines of checks</dt><dd>17,117</dd></div>
+        <div class="prow"><dt class="mono">Commits, four products</dt><dd>632</dd></div>
+        <div class="prow"><dt class="mono">Spend ceiling</dt><dd>4 dollars a garage, in code</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <div class="row">
+    <div class="cell chiprow">
+      <span class="lbl mono">Stack</span>
+      <span class="tchip">Claude Code</span>
+      <span class="tchip">Anthropic API</span>
+      <span class="tchip">Tool use</span>
+      <span class="tchip">Agent loops</span>
+      <span class="tchip">Document extraction</span>
+      <span class="tchip">Postgres RLS</span>
+      <span class="tchip">Next.js</span>
+      <span class="tchip">Supabase</span>
+    </div>
+  </div>
+
+  <div class="row shead">
+    <div class="cell n mono">01</div>
+    <div class="cell"><h2>The Thesis<span class="pairline">generation is the cheap half</span></h2></div>
+  </div>
+
+  <section class="row gutter">
+    <div class="cell gcell" aria-hidden="true"></div>
+    <div class="cell prose">
+      <p>When a model writes the code, the bottleneck stops being how fast you can type and becomes how fast you can tell whether what came back is right. That is not an engineering problem. It is the product manager's problem, and it is the whole job now.</p>
+      <p>So the discipline I built is not about prompting. It is about what gets checked, how, and by whom. Four products later the rule has not changed: the model does the one job only a model can do, and code does everything that has to be correct. Where those two meet, something counts it.</p>
+    </div>
+      <div class="cell gcell-r" aria-hidden="true"></div>
+  </section>
+
+  <div class="row shead">
+    <div class="cell n mono">02</div>
+    <div class="cell"><h2>The Build Log<span class="pairline">four products, counted this morning</span></h2></div>
+  </div>
+
+  <div class="row">
+    <div class="cell lgraph">
+      <span class="lbl mono">Total lines written, by product</span>
+      <ul class="bars">
+        <li><span class="bl">PitStop</span><span class="bt"><i style="--v:100"></i></span><span class="bv mono">94,129</span></li>
+        <li><span class="bl">Cashew</span><span class="bt"><i style="--v:24.9"></i></span><span class="bv mono">23,462</span></li>
+        <li><span class="bl">Hey Saathi</span><span class="bt"><i style="--v:14.8"></i></span><span class="bv mono">13,899</span></li>
+        <li><span class="bl">This site</span><span class="bt"><i style="--v:5.4"></i></span><span class="bv mono">5,085</span></li>
+      </ul>
+      <p class="why">Nights and weekends, alongside a full time product role and a master's degree. PitStop went from an empty folder to a working garage counter in forty five days.</p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="cell lgraph">
+      <span class="lbl mono">Where PitStop's 94,129 lines actually went</span>
+      <div class="splitbar" role="img" aria-label="Product code 67.7 percent, database schema 14.1 percent, checks 18.2 percent.">
+        <i class="s1" style="--v:67.7"></i><i class="s2" style="--v:14.1"></i><i class="s3" style="--v:18.2"></i>
+      </div>
+      <ul class="splitkey">
+        <li><b class="k1"></b><span>Product code</span> 63,716</li>
+        <li><b class="k2"></b><span>Schema</span> 13,296</li>
+        <li><b class="k3"></b><span>Checks</span> 17,117</li>
+      </ul>
+      <p class="why">Nearly one line in five exists only to check the other four. That ratio is the single thing I would point at if someone asked what building with a model changed about how I work.</p>
+    </div>
+  </div>
+
+  <div class="row shead">
+    <div class="cell n mono">03</div>
+    <div class="cell"><h2>Six Places a Model Runs<span class="pairline">in production, doing real work</span></h2></div>
+  </div>
+
+  <div class="row feat"><div class="cell n">01</div><div class="cell body">
+    <h3>Reads a Bill a Customer Photographs</h3>
+    <p>A customer uploads an old invoice from any other garage. One model call turns the photograph into rows. Nothing downstream asks a model anything about it again.</p>
+  </div></div>
+  <div class="row feat"><div class="cell n">02</div><div class="cell body">
+    <h3>Reads a Supplier's Quote</h3>
+    <p>Suppliers reply to an enquiry with a PDF, a spreadsheet or a photo of a letterhead. The reader returns the raw figure, the raw unit, the evidence it saw and a confidence, for every line.</p>
+  </div></div>
+  <div class="row feat"><div class="cell n">03</div><div class="cell body">
+    <h3>Drafts the Enquiry</h3>
+    <p>The co-pilot behind the enquiry editor. A buyer describes what they need in a sentence; it proposes the lines, the units and the questions worth asking suppliers.</p>
+  </div></div>
+  <div class="row feat"><div class="cell n">04</div><div class="cell body">
+    <h3>Writes the Clarification Email</h3>
+    <p>When the reader cannot resolve something, it drafts the message that asks the supplier. The buyer edits and sends. The system never sends on its own.</p>
+  </div></div>
+  <div class="row feat"><div class="cell n">05</div><div class="cell body">
+    <h3>Answers Questions About a Comparison</h3>
+    <p>A tool loop over one enquiry. Nine tools, and every number it says comes out of one of them, which is the same code the comparison screen's own footer uses.</p>
+  </div></div>
+  <div class="row feat"><div class="cell n">06</div><div class="cell body">
+    <h3>The Shop Assistant</h3>
+    <p>A conversation loop over the garage's own data. It can look things up and draft work. It cannot approve an estimate, issue an invoice or mark a car delivered, and the next section explains why that is not a matter of asking it nicely.</p>
+  </div></div>
+
+  <div class="row shead">
+    <div class="cell n mono">04</div>
+    <div class="cell"><h2>How the Reading Works<span class="pairline">a creased photo becomes a row</span></h2></div>
+  </div>
+
+  <section class="row gutter">
+    <div class="cell gcell" aria-hidden="true"></div>
+    <div class="cell prose">
+      <p>There is no template, no field map and no integration with the garage that issued the bill. That is the point. The documents are carbon copies, handwriting, phone photos at an angle, half English and half not, with no layout two shops agree on. A rules engine cannot read those. A model can, and that is the one job it is given.</p>
+      <p>What it hands back is deliberately unfinished. It is asked for the figure as printed, the unit as printed, the text it read that figure from, and how sure it is. It is explicitly told not to tidy anything: a line that says "Brk pad set fr" stays "Brk pad set fr", because a description cleaned up into what the model thinks it meant is a description nobody can audit.</p>
+      <p>Then the model is done, and arithmetic takes over. Two thousand two hundred and seventy five rupees per five litre can becomes four hundred and fifty five per litre in plain code, which writes down what it divided and by what. Every assumption it leaned on, a pack size the supplier never stated, an exchange rate the buyer set, leaves a flag that caps the cell at "check" however confident the reader was.</p>
+    </div>
+      <div class="cell gcell-r" aria-hidden="true"></div>
+  </section>
+
+  <div class="row">
+    <div class="cell flush">
+      <div class="flow">
+        <div class="step"><span class="n">01</span><h3>Shrink</h3><p>The browser resizes the photo to 1600px before it leaves the phone. A real test file went from 12.3 MB to 682 KB.</p></div>
+        <div class="step"><span class="n">02</span><h3>Resolve</h3><p>The route resolves the share token and derives the storage path from what it matched. The client never names a destination.</p></div>
+        <div class="step"><span class="n">03</span><h3>Read</h3><p>One model call. No tools, no database, no network beyond the reply. It returns JSON and nothing else.</p></div>
+        <div class="step"><span class="n">04</span><h3>Validate</h3><p>Shape, types and ranges are checked in code. Anything unreadable comes back null, never a guess.</p></div>
+        <div class="step"><span class="n">05</span><h3>Convert</h3><p>Units, packs and currency in plain arithmetic, each conversion recording what it did so a person can audit it.</p></div>
+        <div class="step"><span class="n">06</span><h3>Match</h3><p>When that car returns, trigram SQL matches the complaint against this and the shop's own history. No model in this path.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <section class="row">
+    <div class="cell pull">
+      <blockquote>Recency is half the ranking. Pads three weeks ago is why the car is back. Pads three years ago is wear.</blockquote>
+      <span class="attrib">What the matcher is actually for</span>
+    </div>
+  </section>
+
+  <section class="row gutter">
+    <div class="cell gcell" aria-hidden="true"></div>
+    <div class="cell prose">
+      <p>The last step is the one that took two tries. The matcher first used Postgres <code>similarity()</code>, which scores a whole sentence against a short phrase and gave a real customer complaint 0.21 against a threshold of 0.30. The panel simply never appeared, and the probe passed, because the probe had asked with a tidy keyword rather than the sentence a person types. <code>word_similarity()</code> is the right function and the probe now asks the way a human does.</p>
+      <p>One more thing happens on the way past. The odometer reading off the bill is checked against the shop's own readings: how far the car has travelled since, and whether the number goes backwards, which an odometer cannot do and which means a wrong car, a misread digit or a clock that has been tampered with. The screen states it. It never judges it.</p>
+    </div>
+      <div class="cell gcell-r" aria-hidden="true"></div>
+  </section>
+
+  <div class="row shead">
+    <div class="cell n mono">05</div>
+    <div class="cell"><h2>Why None of It Can Be Steered<span class="pairline">absence of capability, not clever wording</span></h2></div>
+  </div>
+
+  <section class="row gutter">
+    <div class="cell gcell" aria-hidden="true"></div>
+    <div class="cell prose">
+      <p>Every document in this system is chosen by somebody outside it. A customer holding a share link can photograph any piece of paper, including one with instructions to the model written on it. A supplier can put anything in a PDF. So the design assumes prompt injection rather than trying to word its way out of it.</p>
+      <p>The reader has no tools, no database handle and no ability to do anything except return JSON that code then validates. The worst a hostile page achieves is a wrong row in a list captioned "from a bill the customer uploaded". Nothing it extracts ever creates a job card, a price or an invoice; every screen that shows it says it is a claim, not a fact.</p>
+      <p>The assistant is the same idea applied to a loop with tools. It opens on a channel where approving work, issuing invoices and marking a vehicle delivered are not refused, they are absent from the tool list entirely. And it queries through the signed-in human's own database client, so every query runs under the same row security that human has. If an injection talks it into asking for another garage's data, the database returns nothing. There is no prompt that can argue with that, because there is nothing there to argue with.</p>
+    </div>
+      <div class="cell gcell-r" aria-hidden="true"></div>
+  </section>
+
+  <div class="row">
+    <div class="cell flush">
+      <div class="tradeoff">
+        <div class="chose">
+          <span class="k">Chose</span>
+          <h3>SQL matching over the extracted text</h3>
+          <p class="over">over <b>letting a model read and act on it</b></p>
+        </div>
+        <div class="why"><p>The matcher runs on every keystroke of a complaint, against text a stranger uploaded. A model there would be slow, expensive, non-deterministic and reachable by anyone who can write words on paper and photograph them. Trigram similarity in Postgres is none of those four things.</p></div>
+      </div>
+      <div class="tradeoff">
+        <div class="chose">
+          <span class="k">Chose</span>
+          <h3>Arithmetic in code</h3>
+          <p class="over">over <b>asking the model for the converted number</b></p>
+        </div>
+        <div class="why"><p>A model that divides is a model you have to audit on every answer. Asking it only for what the page says, and dividing afterwards, means the same inputs give the same output twice and a buyer can see exactly which assumption produced which price.</p></div>
+      </div>
+      <div class="tradeoff">
+        <div class="chose">
+          <span class="k">Chose</span>
+          <h3>A metered hard stop</h3>
+          <p class="over">over <b>trusting usage to stay reasonable</b></p>
+        </div>
+        <div class="why"><p>Every call is priced from its tokens and written down. Past the cap the next call is refused with a sentence the screen shows as it is, so the reading waits until somebody raises the limit. Four dollars by default, set in the environment, not in code.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row shead">
+    <div class="cell n mono">06</div>
+    <div class="cell"><h2>The Checking System<span class="pairline">sixty probes and a doc that is a test</span></h2></div>
+  </div>
+
+  <section class="row gutter">
+    <div class="cell gcell" aria-hidden="true"></div>
+    <div class="cell prose">
+      <p>These are not unit tests. They are programs that drive real HTTP, real websockets and real sessions against a real database, because the things that have gone wrong were never logic errors in a function. They were a policy that passes in SQL and is refused by the realtime layer, a signed URL that returns 200 into an iframe that stays blank, a design where a delete broadcasts one tenant's row to every other tenant subscribed.</p>
+      <p>Three of them are worth describing, because each exists for a specific morning that went badly.</p>
+    </div>
+      <div class="cell gcell-r" aria-hidden="true"></div>
+  </section>
+
+  <div class="row feat"><div class="cell n">01</div><div class="cell body">
+    <h3>The One That Checks the Documentation</h3>
+    <p>The project's own context file makes countable claims: which functions an anonymous visitor may call, which tables carry a tenant id, what is published to the realtime layer. A probe settles every one of them against the live database and fails if the file and the database disagree. Nearly every serious problem found in the last few months was a claim written down once and never checked again, not a missing feature.</p>
+  </div></div>
+  <div class="row feat"><div class="cell n">02</div><div class="cell body">
+    <h3>The One That Measures Painted Pixels</h3>
+    <p>A token probe reported forty one colour pairs out of forty one passing. Meanwhile a duplicate rule was putting a near black label on a near black fill at a contrast ratio of 1.02 to 1, across eighty eight places in the app. A probe that reads tokens cannot see two CSS rules colliding, so a second one drives a real browser and measures what is actually on the screen.</p>
+  </div></div>
+  <div class="row feat"><div class="cell n">03</div><div class="cell body">
+    <h3>The One That Opens a Websocket</h3>
+    <p>A row security policy that passes under a direct database role can still be refused by the realtime layer's own evaluation, and was: a nested call came back false there while working perfectly in SQL. Anything that depends on realtime enforcing a policy has to be tested over a real socket, so that is what this one does.</p>
+  </div></div>
+
+  <section class="row gutter">
+    <div class="cell gcell" aria-hidden="true"></div>
+    <div class="cell prose">
+      <p>One rule underneath all of it: the environment variable that chooses which database a script talks to has no default. It used to default to production, which meant the safe path required remembering a prefix and the unsafe path required nothing. Every written probe carried its own guard and so was always fine. An ad hoc one line command carries no guard, and one of mine wrote a row into the live customer table. It was caught and removed inside a minute, but the hole was the default, not the command.</p>
+    </div>
+      <div class="cell gcell-r" aria-hidden="true"></div>
+  </section>
+
+  <div class="row shead">
+    <div class="cell n mono">07</div>
+    <div class="cell"><h2>What Is Not Proven<span class="pairline">the part a case study usually leaves out</span></h2></div>
+  </div>
+
+  <div class="row">
+    <div class="cell flush">
+      <div class="gaps">
+        <div class="gap">
+          <span class="k">Unproven</span>
+          <p>Bill reading is deployed and the key is set, but the live garage has uploaded nothing, so extraction has not been asked to read a real customer's paper yet. It works on test documents. That is a different sentence.</p>
+        </div>
+        <div class="gap">
+          <span class="k">Misreadable</span>
+          <p>Its probe suite reports forty six assertions passing. They prove the storage, the shape constraints, the row security and the SQL matcher, by inserting rows already marked as extracted. Extraction is the one step they never exercise, and it is exactly the step the API key turns on. Quoting the pass rate as evidence the feature works would be true and misleading.</p>
+        </div>
+        <div class="gap">
+          <span class="k">Untested</span>
+          <p>Neither AI feature has an end to end test. The assistant and the reader share a client and a key, so the reader is probably fine. Probably is not a measurement, and I would rather write that here than imply otherwise.</p>
+        </div>
+        <div class="gap">
+          <span class="k">One tenant</span>
+          <p>Everything above is proven at the scale of one garage that I can walk into. None of it has met a second tenant with different habits, and I expect that to teach me something expensive.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <a class="cell job fieldnote" href="/pitstop">
+      <div>
+        <span class="mono">The product</span>
+        <h3>PitStop, Where All of This Runs</h3>
+        <p>Job cards, approvals by link, GST invoicing and UPI collection, live at a working garage. There is a demo you can click.</p>
+      </div>
+      <span class="go">See inside</span>
+    </a>
+  </div>
+
+  <section class="row" id="contact">
+    <div class="cell contact">
+      <span class="mono">Want the long version?</span>
+      <h2>Ask Me Anything.</h2>
+      <p>Happy to walk through any of this in detail: the extraction prompts, the tool schemas, the probe suite, or the parts that did not work.</p>
+      <!--email_off--><a class="mail" href="mailto:venkatesh@venkateshgardas.com">venkatesh@venkateshgardas.com</a><!--/email_off-->
+    </div>
+  </section>
+
+  </main>
+
+  <footer class="row foot">
+    <span class="who mono">Venkatesh Gardas · 2026</span>
+    <div class="links mono">
+      <a href="/">Home</a>
+      <a href="/pitstop">PitStop</a>
+      <a href="/saathi">Saathi</a>
+    </div>
+  </footer>
+
+</div>
+
+
+<script src="/thread.js?v=21" defer></script>
+</body>
+</html>

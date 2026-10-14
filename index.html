@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Venkatesh Gardas · Product Manager</title>
-<meta name="description" content="Product manager working on risk analytics, fintech workflows and vertical SaaS. Building PitStop, Saathi and Roko.">
+<meta name="description" content="Product manager working on risk analytics, fintech workflows and vertical SaaS. Ships AI products: document extraction, agent loops and the probes that check them. Building PitStop, Saathi and Roko.">
 <meta property="og:title" content="Venkatesh Gardas · Product Manager">
 <meta property="og:description" content="I turn messy operational work into software people open on a Monday morning.">
 <meta property="og:url" content="https://venkateshgardas.com">
@@ -25,12 +25,12 @@
     {"@type":"CollegeOrUniversity","name":"George Mason University"},
     {"@type":"CollegeOrUniversity","name":"IBS Mumbai"},
     {"@type":"CollegeOrUniversity","name":"Bhavna Trust College"}
-  ],"knowsAbout": ["Product management","Vertical SaaS","Fintech","Risk analytics","GST invoicing","Accessibility","SQL","Python","Product analytics"]
+  ],"knowsAbout": ["Product management","Vertical SaaS","Fintech","Expense management","Procure to pay","Risk analytics","GST invoicing","AI product development","Large language models","Agentic workflows","Document extraction","Accessibility","SQL","Python","Product analytics"]
 }
 </script>
 
 <link rel="stylesheet" href="/fonts.css?v=2">
-<link rel="stylesheet" href="/styles.css?v=85">
+<link rel="stylesheet" href="/styles.css?v=86">
 <link rel="alternate" type="application/rss+xml" title="Field notes" href="/rss.xml">
 <script>(function(){var r=document.documentElement;r.classList.add('js');try{var t=localStorage.getItem('theme');if(t==='dark'||t==='light')r.setAttribute('data-theme',t);}catch(e){}setTimeout(function(){if(!window.__rvReady)r.classList.add('rv-fail')},2500)})()</script>
 </head>
@@ -48,10 +48,11 @@
       <span class="who"><img src="/avatar.jpg?r=2" alt="" width="34" height="34"><b>Venkatesh Gardas</b></span>
       <a href="/" aria-current="page">Home</a>
       <a class="m-hide-sm" href="/#building">Products</a>
+      <a href="/ai">AI</a>
       <a class="m-hide-sm" href="/#work">Work</a>
       <a href="/photos">Photos</a>
       <a href="/notes/">Notes</a>
-      <a href="/now">Now</a>
+      <a class="m-hide" href="/now">Now</a>
       <a class="m-hide" href="/cv">CV</a>
       <a class="cta" href="/#contact">Contact</a>
     </nav>
@@ -195,11 +196,54 @@
   <section class="row grid3">
     <div class="cell bignum"><b>6</b><span>years across product and data roles</span></div>
     <div class="cell bignum"><b>3</b><span>products built nights and weekends</span></div>
-    <div class="cell bignum"><b>40+</b><span>risk decision flows live at KPMG</span></div>
+    <div class="cell bignum"><b>60</b><span>probes guarding six AI surfaces</span></div>
   </section>
 
-  <div class="row shead" id="work">
+  <div class="row shead" id="ai">
     <div class="cell n mono">02</div>
+    <div class="cell"><h2>Building With AI<span class="pairline">shipped products, not documents</span></h2></div>
+  </div>
+
+  <div class="row now">
+    <span class="cell lbl mono">The short version</span>
+    <p class="cell">I use AI to build and ship real products, not to write faster documents. Six model surfaces run in production inside PitStop, and sixty probes decide whether any of them is telling the truth.</p>
+  </div>
+
+  <section class="row grid3">
+    <div class="cell note">
+      <span class="mono">Extraction</span>
+      <h3>Reads Any Document</h3>
+      <p>A customer photographs a creased bill from another garage. A supplier answers an enquiry with a PDF. No template and no field map: the model turns the page into rows, and plain code does every number that has to be right.</p>
+    </div>
+    <div class="cell note">
+      <span class="mono">Agent loops</span>
+      <h3>Tools, Not Prompts</h3>
+      <p>Two conversation loops with tool use. The dangerous tools are not refused, they are absent, and every query runs under the signed-in human's own row security rather than the model's good intentions.</p>
+    </div>
+    <div class="cell note">
+      <span class="mono">Verification</span>
+      <h3>One Line in Five Is a Check</h3>
+      <p>Sixty probes driving real HTTP, real websockets and real sessions. One of them reads the project's own documentation and fails when the database disagrees with it.</p>
+    </div>
+  </section>
+
+  <div class="row">
+    <div class="cell lgraph">
+      <span class="lbl mono">Where PitStop&rsquo;s 94,129 lines went</span>
+      <div class="splitbar" role="img" aria-label="Product code 67.7 percent, database schema 14.1 percent, checks 18.2 percent.">
+        <i class="s1" style="--v:67.7"></i><i class="s2" style="--v:14.1"></i><i class="s3" style="--v:18.2"></i>
+      </div>
+      <ul class="splitkey">
+        <li><b class="k1"></b><span>Product code</span> 63,716</li>
+        <li><b class="k2"></b><span>Schema</span> 13,296</li>
+        <li><b class="k3"></b><span>Checks</span> 17,117</li>
+      </ul>
+      <p class="why">Counted this morning, not estimated. <a href="/ai">The whole technical story</a> is its own page: the six model surfaces, how a photographed bill becomes a row, why none of it can be steered by what is written on the page, and the four things I cannot yet prove.</p>
+    </div>
+  </div>
+
+  <div class="row shead" id="work">
+    <div class="cell n mono">03</div>
     <div class="cell"><h2>Where I Have Worked<span class="pairline">six years, five companies</span></h2></div>
   </div>
 
@@ -244,7 +288,7 @@
   </section>
 
   <div class="row shead" id="path">
-    <div class="cell n mono">03</div>
+    <div class="cell n mono">04</div>
     <div class="cell"><h2>From Code to Product<span class="pairline">one deliberate staircase</span></h2></div>
   </div>
 
@@ -296,7 +340,7 @@
   </div>
 
   <div class="row shead" id="education">
-    <div class="cell n mono">04</div>
+    <div class="cell n mono">05</div>
     <div class="cell"><h2>Education and Credentials<span class="pairline">three degrees, earned while shipping</span></h2></div>
   </div>
 
@@ -323,7 +367,7 @@
 
 
   <div class="row shead">
-    <div class="cell n mono">05</div>
+    <div class="cell n mono">06</div>
     <div class="cell"><h2>How I Work<span class="pairline">three rules from the counter</span></h2></div>
   </div>
 
@@ -356,6 +400,17 @@
     </a>
   </div>
 
+  <div class="row">
+    <a class="cell job fieldnote" href="/notes/three-design-systems">
+      <div>
+        <span class="mono">Field note</span>
+        <h3>Four Design Systems in Five Days</h3>
+        <p>Hands on design, not a handoff: building a system, throwing it away, and what each rebuild taught me about why the first three did not survive contact with the product.</p>
+      </div>
+      <span class="go">Read the note</span>
+    </a>
+  </div>
+
   <div class="row tools">
     <div class="cell set">
       <span class="lbl mono">The toolkit</span>
@@ -370,16 +425,18 @@
       <span class="tchip">Dynamics 365</span>
       <span class="tchip">Azure DevOps</span>
       <span class="tchip">Lucidchart</span>
-      <span class="tchip">Claude</span>
+      <span class="tchip">Claude Code</span>
+      <span class="tchip">Anthropic API</span>
       <span class="tchip">Cursor</span>
       <span class="tchip">Next.js</span>
       <span class="tchip">Supabase</span>
+      <span class="tchip">Playwright</span>
       </div>
     </div>
   </div>
 
   <div class="row shead" id="offclock">
-    <div class="cell n mono">06</div>
+    <div class="cell n mono">07</div>
     <div class="cell"><h2>Off the Clock<span class="pairline">a camera, grease and a homelab</span></h2></div>
   </div>
 
@@ -403,7 +460,7 @@
   </section>
 
   <div class="row shead">
-    <div class="cell n mono">07</div>
+    <div class="cell n mono">08</div>
     <div class="cell"><h2>Contact<span class="pairline">one email, answered fast</span></h2></div>
   </div>
 
@@ -442,7 +499,7 @@
 (function(){
   var nav=document.querySelectorAll('.pillnav a');
   var map={'building':'/#building','work':'/#work','path':'/#work','education':'/#work','contact':'/#contact'};
-  var sections=['building','work','path','education','contact'].map(function(id){return document.getElementById(id)}).filter(Boolean);
+  var sections=['building','ai','work','path','education','contact'].map(function(id){return document.getElementById(id)}).filter(Boolean);
   var lastActive=null;
   function setActive(href){
     /* Only touch the DOM when the section actually changes. This ran on every
@@ -468,6 +525,6 @@
   },{passive:true});
 })();
 </script>
-<script src="/thread.js?v=20" defer></script>
+<script src="/thread.js?v=21" defer></script>
 </body>
 </html>

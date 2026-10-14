@@ -510,6 +510,7 @@ window.__rvReady = true;
 
   var ITEMS = [
     { k: 'Page',    t: 'Home',                    u: '/' },
+    { k: 'Page',    t: 'Building with AI',        u: '/ai', s: 'claude agent loop extraction ocr probes verification llm model prompt injection' },
     { k: 'Page',    t: 'Photos',                  u: '/photos' },
     { k: 'Page',    t: 'Field notes',             u: '/notes/' },
     { k: 'Page',    t: 'Now',                     u: '/now' },
@@ -523,6 +524,7 @@ window.__rvReady = true;
     { k: 'Note',    t: 'Four Design Systems in Five Days', u: '/notes/three-design-systems', s: 'churn redesign' },
     { k: 'Note',    t: 'The Feature I Measured, Walked Back and Shipped Smaller', u: '/notes/pitstop-realtime', s: 'realtime' },
     { k: 'Section', t: 'Things I am building',     u: '/#building' },
+    { k: 'Section', t: 'Building with AI',        u: '/#ai' },
     { k: 'Section', t: 'Where I have worked',      u: '/#work' },
     { k: 'Contact', t: 'Email me',                 u: 'mailto:venkatesh@venkateshgardas.com' },
     { k: 'Contact', t: 'Book a call',              u: 'https://cal.com/venky1104' },

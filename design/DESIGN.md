@@ -25,6 +25,7 @@ structure:
   cards: contiguous white cells sharing single 1px hairlines inside grid rows, corner registration dots at intersections, radius 2px outside grids and 0 inside. No tints anywhere; olive only on interaction
   nav: white full pill with VG avatar and name left, links center with olive active, olive Contact button right
 build:
+  guards: "Four, and each catches a class the others cannot see. `python3 check.py` is static. The other three need `python3 -m http.server 8190 &` and a real browser: `node scripts/collapse-check.mjs 8190` (zero-width boxes, parsed-rule floor), `node scripts/chart-check.mjs` (nav fits on one row, bars paint their declared widths, reading frame invariant), `node scripts/contrast-check.mjs 8190` (painted contrast, both themes). puppeteer-core is not committed: `npm install --no-save puppeteer-core` first."
   rule: "Run `python3 check.py` before every push. It exists because a regex that deleted @keyframes stopped at the first closing brace, leaving orphan fragments whose stray braces made the CSS parser swallow the next rule. .vhead and .btn vanished, the hero lost its centring and every button lost its shape, and nothing in the repo complained. The check proves braces balance, no keyframe body is loose at the top level, the load-bearing rules exist, every page agrees on the stylesheet version, and no page references a missing asset."
 cache:
   edge_race: "An edge can cache STALE content under a NEW ?v= key if it fetches mid-deploy. After every push, assert a sentinel from the new CSS via its versioned URL; if stale, re-key and push again"
@@ -119,3 +120,33 @@ detector or a future audit talk you out of them.
   chevron, the hero star, and the Greek alpha in the camera name, so
   the rest of the site renders in exactly three typefaces. Verified
   with CSS.getPlatformFontsForNode.
+
+- **Charts are HTML and CSS, not SVG.** A bar chart is a list of labelled
+  numbers, so it is a list: it reflows at any width, it reads correctly to a
+  screen reader without the parallel text description `.cgraph` needs, and it
+  themes from the same tokens as everything else. The fill width is `--v`, a
+  percentage of the largest value in the set, worked out when the page is
+  written. Nothing measures anything at runtime, so there is no layout read to
+  go wrong and no second source of truth to drift from the numbers in the
+  caption. `scripts/chart-check.mjs` asserts the painted width matches the
+  declared one.
+- **A bar track cannot use `--deep2` on a card.** In dark they are the same
+  value, so the unfilled part of the track vanishes and the bars read as
+  floating segments with no scale behind them. Tracks mix from the ink
+  instead: `color-mix(in srgb, var(--ink) 14%, transparent)` is visible on
+  white and on the dark card without adding a token.
+- **Adding one nav item moves two breakpoints, and only measurement finds
+  them.** The AI link made nine. The pill then overflowed from 960px down to
+  890px, and there was a separate four pixel window at 352px where four links
+  no longer fit but Photos had not yet been dropped. Both were invisible in the
+  source and neither produced horizontal scroll. The `.m-hide-sm` step went
+  from 800 to 980 and the Photos step from 350 to 380, each set above the last
+  width that measured clean rather than at it. Sweep with `chart-check` before
+  touching the nav.
+- **A contrast probe must composite alpha.** A `color-mix(... 8%, transparent)`
+  background computes to the full strength ink with an alpha. Drop the alpha
+  and the probe concludes near-black text on a near-black fill and fails
+  something that is fine: the inline version of this check reported `code` at
+  1.12:1 when it is comfortably over the floor. `scripts/contrast-check.mjs`
+  walks the ancestor chain compositing src-over until it reaches an opaque
+  layer.
