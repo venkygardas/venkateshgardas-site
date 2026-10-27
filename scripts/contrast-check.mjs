@@ -16,7 +16,7 @@
 import p from 'puppeteer-core';
 
 const CHROME = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
-const PAGES = ['index', 'ai', 'cv', 'expenzing', 'pitstop', 'saathi', 'roko', 'kpmg',
+const PAGES = ['index', 'ai', 'cv', 'expenzing', 'pitstop', 'saathi', 'roko', 'technet',
   'now', 'colophon', 'photos', '404', 'notes/index'];
 const port = process.argv[2] || 8190;
 

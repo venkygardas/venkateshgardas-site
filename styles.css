@@ -567,7 +567,7 @@ a.note:hover .muted-go{color:var(--muted);}
   display:inline-flex;align-items:center;gap:.55rem;
 }
 .wm::before{content:"";width:10px;height:10px;border-radius:50%;background:var(--muted);flex:none;}
-.wm.kpmg::before{background:#4D7FE0;}
+.wm.technet::before{background:#4D7FE0;}
 .wm.bajaj::before{background:#3E9BE0;}
 .wm.akasa::before{background:#FF6300;}
 .wm.hira::before{background:#C9973B;}

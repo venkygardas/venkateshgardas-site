@@ -519,7 +519,7 @@ window.__rvReady = true;
     { k: 'Product', t: 'PitStop',                 u: '/pitstop', s: 'garage management gst upi india' },
     { k: 'Product', t: 'Hey Saathi',              u: '/saathi',  s: 'voice companion elderly malayalam telugu' },
     { k: 'Product', t: 'Roko',                    u: '/roko',    s: 'home security hardware' },
-    { k: 'Work',    t: 'KPMG',                    u: '/kpmg',    s: 'risk analytics product manager' },
+    { k: 'Work',    t: 'Technet LLC',             u: '/technet', s: 'risk analytics product manager' },
     { k: 'Work',    t: 'Expenzing',               u: '/expenzing', s: 'procurement loan origination product owner' },
     { k: 'Note',    t: 'Four Design Systems in Five Days', u: '/notes/three-design-systems', s: 'churn redesign' },
     { k: 'Note',    t: 'The Feature I Measured, Walked Back and Shipped Smaller', u: '/notes/pitstop-realtime', s: 'realtime' },
