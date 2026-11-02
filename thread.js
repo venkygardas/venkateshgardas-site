@@ -530,7 +530,7 @@ window.__rvReady = true;
     { k: 'Contact', t: 'Book a call',              u: 'https://cal.com/venky1104' },
     { k: 'Contact', t: 'LinkedIn',                 u: 'https://www.linkedin.com/in/venkateshgardas' },
     { k: 'Contact', t: 'GitHub',                   u: 'https://github.com/venkygardas' },
-    { k: 'Contact', t: 'Download the CV as a PDF', u: '/venkatesh-gardas-cv.pdf' }
+    { k: 'Contact', t: 'Download the CV as a PDF', u: '/venkatesh-gardas-cv.pdf?r=3' }
   ];
 
   var mac = /Mac|iPhone|iPad/.test(navigator.platform || '');
